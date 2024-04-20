@@ -14,7 +14,7 @@ const buttonVariants = cva(
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         filled: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+        outline: 'border border-input bg-transparent hover:bg-accent hover:text-accent-foreground',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
@@ -27,7 +27,7 @@ const buttonVariants = cva(
       },
       size: {
         md: 'h-11 px-5 py-2',
-        sm: 'h-9 px-6 text-sm',
+        sm: 'h-9 px-4 text-sm',
         xs: 'h-8 px-3 text-xs',
         lg: 'h-12 px-3 text-sm',
         mixin: 'p-0',
@@ -59,7 +59,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <Comp
-        disabled={props.disabled ?? loading}
+        disabled={props.disabled || loading}
         className={cn(fullWidth && 'w-full', buttonVariants({ variant, rounded, size, className }))}
         ref={ref}
         type={type}

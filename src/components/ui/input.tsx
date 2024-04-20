@@ -38,17 +38,20 @@ export interface InputProps
   errorClassName?: string;
   suffix?: any;
   fullWidth?: boolean;
+  isError?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, variant = 'default', fullWidth, size, type, suffix, id, ...props }, ref) => {
+  ({ className, variant = 'default', fullWidth, isError, size, type = 'text', suffix, id, ...props }, ref) => {
     const [show, setShow] = React.useState(false);
     return (
       <div className={cn('relative', fullWidth && 'w-full')}>
         <input
           id={id}
           type={type === 'password' ? (show ? 'text' : 'password') : type}
-          className={cn(inputVariants({ variant, size, className }))}
+          className={cn(inputVariants({ variant, size, className }), {
+            'border-destructive text-destructive': isError,
+          })}
           ref={ref}
           {...props}
         />
@@ -57,7 +60,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         </Show>
         <Show when={type === 'password'}>
           <div onClick={() => setShow(!show)} className="absolute right-[10px] top-1/2 -translate-y-1/2 cursor-pointer">
-            {show ? <Icons.eye /> : <Icons.eyeHidden />}
+            {show ? (
+              <Icons.eye color={isError ? '#FF0000' : '#000'} />
+            ) : (
+              <Icons.eyeHidden fill={isError ? '#FF0000' : '#000'} />
+            )}
           </div>
         </Show>
       </div>

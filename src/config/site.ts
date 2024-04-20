@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: 'NextJs-shadcn-boilderplate',
-  description: 'NextJs-shadcn-boilderplate',
+  name: 'Book Store - PHQT',
+  description: 'Book-store-DATN-Phan-Hoang-Quoc-Tu',
   url: 'http://localhost:3000',
   ogImage: 'http://localhost:3000/opengraph-image.jpg',
 };
