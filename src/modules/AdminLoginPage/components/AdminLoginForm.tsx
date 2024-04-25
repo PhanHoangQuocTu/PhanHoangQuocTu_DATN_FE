@@ -1,26 +1,28 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { loginRequest } from '@/api/auth';
+import { isAdminRequest } from '@/api/user';
 import { Button } from '@/components/ui/button';
 import { FormWrapper } from '@/components/ui/form';
 import { TextField } from '@/components/ui/FormField';
 import { VStack } from '@/components/ui/Utilities';
+import { onMutateError } from '@/lib/common';
 import { useUserStore } from '@/stores';
 import { ROUTE } from '@/types';
 
 import { LOGIN_FORM_DEFAULT_DATA } from '../types/const';
 import { signInSchema, type SignInType } from '../types/schema';
 
-const LoginForm: React.FC = () => {
+const AdminLoginForm: React.FC = () => {
   const setAccessToken = useUserStore.use.setAccessToken();
   const setRefreshToken = useUserStore.use.setRefreshToken();
   const setUser = useUserStore.use.setUser();
+  const logout = useUserStore.use.logout();
   const router = useRouter();
 
   const form = useForm<SignInType>({
@@ -36,15 +38,31 @@ const LoginForm: React.FC = () => {
 
   const [email, password] = watch(['email', 'password']);
 
+  const { mutate: checkIsAdmin } = useMutation(isAdminRequest);
+
   const { mutate: login } = useMutation(loginRequest, {
     onSuccess: ({ user, token }) => {
-      toast.success('Login successfully!');
-      setUser(user);
-      setAccessToken(token.accessToken);
-      setRefreshToken(token.refreshToken);
-      form.reset(LOGIN_FORM_DEFAULT_DATA);
-      router.push(ROUTE.HOME);
+      checkIsAdmin(
+        { token: token.accessToken },
+        {
+          onSuccess: ({ data }) => {
+            if (!data) {
+              toast.error('You dont have permission');
+              logout();
+              return;
+            }
+
+            toast.success('Login successfully!');
+            setUser(user);
+            setAccessToken(token.accessToken);
+            setRefreshToken(token.refreshToken);
+            form.reset(LOGIN_FORM_DEFAULT_DATA);
+            router.push(ROUTE.HOME);
+          },
+        }
+      );
     },
+    onError: onMutateError,
   });
 
   const handleSubmit: SubmitHandler<SignInType> = async (formData) => {
@@ -89,16 +107,9 @@ const LoginForm: React.FC = () => {
             Login
           </Button>
         </VStack>
-
-        <VStack align={'center'} spacing={4}>
-          <span className="text-base font-medium text-gray-400">Or Sign Up Using</span>
-          <Link href={ROUTE.REGISTER} className="text-sm font-medium hover:text-gray-300">
-            SIGN UP
-          </Link>
-        </VStack>
       </VStack>
     </FormWrapper>
   );
 };
 
-export default LoginForm;
+export default AdminLoginForm;

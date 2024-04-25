@@ -61,7 +61,7 @@ const RegisterForm: React.FC = () => {
         <span className="text-2xl font-semibold lg:text-3xl">Register your account</span>
       </VStack>
 
-      <VStack justify={'between'} className="h-full">
+      <VStack justify={'between'} className="gap-8">
         <VStack spacing={20}>
           <TextField
             size={'sm'}
@@ -108,7 +108,7 @@ const RegisterForm: React.FC = () => {
 
         <VStack align={'center'} spacing={4}>
           <span className="text-base font-medium text-gray-400">Already have an account</span>
-          <Link href={ROUTE.REGISTER} className="text-sm font-medium hover:text-gray-300">
+          <Link href={ROUTE.LOGIN} className="text-sm font-medium hover:text-gray-300">
             Login
           </Link>
         </VStack>
