@@ -27,7 +27,7 @@
 
     /* CUSTOM TOKEN */
 
-    --header-h: 6.375rem;
+    --header-h: 3.4375rem;
 
     --success: 165, 100%, 37%;
     --success-light: 166, 58%, 90%;
@@ -42,6 +42,11 @@
     --info-light: 227, 56%, 94%;
 
     --divider: 240, 85%, 90%;
+
+    /** SIDEBAR SIZE */
+
+    --w-sidebar: 80px;
+    --w-sidebar-expand: 300px;
   }
 
   .dark {
@@ -75,6 +80,14 @@
   html,
   body {
     @apply bg-background text-foreground scroll-smooth font-sans font-normal;
+    @apply text-sm lg:text-base;
+    
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 }
 

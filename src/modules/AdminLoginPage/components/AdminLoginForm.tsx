@@ -57,7 +57,7 @@ const AdminLoginForm: React.FC = () => {
             setAccessToken(token.accessToken);
             setRefreshToken(token.refreshToken);
             form.reset(LOGIN_FORM_DEFAULT_DATA);
-            router.push(ROUTE.HOME);
+            router.push(ROUTE.DASHBOARD);
           },
         }
       );

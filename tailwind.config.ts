@@ -29,14 +29,22 @@ module.exports = {
       flex: {
         full: '0 0 100%',
       },
+      minWidth: {
+        sidebar: 'var(--w-sidebar)',
+        'sidebar-expand': 'var(--w-sidebar-expand)',
+      },
       maxWidth: {
         dashboard: 'var(--dashboard-container)',
+        sidebar: 'var(--w-sidebar)',
+        'sidebar-expand': 'var(--w-sidebar-expand)',
       },
       width: {
         sidebar: 'var(--w-sidebar)',
+        'sidebar-expand': 'var(--w-sidebar-expand)',
       },
       height: {
         header: 'var(--header-h)',
+        screen: ['100vh /* fallback for Opera, IE and etc. */', '100dvh'],
       },
       zIndex: {
         header: 999,
