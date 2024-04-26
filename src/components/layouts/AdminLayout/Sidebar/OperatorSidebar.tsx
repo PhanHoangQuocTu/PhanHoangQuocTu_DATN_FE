@@ -5,12 +5,10 @@ import * as React from 'react';
 
 import { ROUTE } from '@/types';
 
-import { SidebarItem } from './SidebarItem';
-
 const SIDEBAR_LIST = [
   {
     name: 'Book Management',
-    href: ROUTE.DASHBOARD,
+    href: ROUTE.HOME,
     icon: ArrowUpFromDotIcon,
   },
 ];
@@ -26,7 +24,8 @@ export const OperatorSidebar = ({ opened }: Props) => {
       {SIDEBAR_LIST.map(({ href, name, icon }) => {
         const isActive = pathname.includes(href);
 
-        return <SidebarItem key={href} href={href} name={name} opened={opened} icon={icon} isActive={isActive} />;
+        return <></>;
+        // return <SidebarItem key={href} href={href} name={name} opened={opened} icon={icon} isActive={isActive} />;
       })}
     </>
   );

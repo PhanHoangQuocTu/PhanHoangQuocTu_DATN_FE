@@ -4,7 +4,7 @@ import type { FCC } from '@/types';
 
 import { Sidebar } from './Sidebar';
 
-const AuthLayout: FCC = ({ children }) => {
+const AdminLayout: FCC = ({ children }) => {
   return (
     <div className="flex">
       <Sidebar />
@@ -18,4 +18,4 @@ const AuthLayout: FCC = ({ children }) => {
   );
 };
 
-export default AuthLayout;
+export default AdminLayout;

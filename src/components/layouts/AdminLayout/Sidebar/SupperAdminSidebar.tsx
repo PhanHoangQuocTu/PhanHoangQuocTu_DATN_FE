@@ -10,7 +10,7 @@ import { SidebarItem } from './SidebarItem';
 const SIDEBAR_SUPPER_ADMIN_LIST = [
   {
     name: 'Admin Management',
-    href: ROUTE.DASHBOARD,
+    href: ROUTE.LOGIN,
     icon: UserCog,
   },
 ];

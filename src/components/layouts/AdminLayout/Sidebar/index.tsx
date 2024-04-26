@@ -13,7 +13,6 @@ import { useUserStore } from '@/stores';
 import { ROUTE } from '@/types';
 
 import { AdminSidebar } from './AdminSidebar';
-import { OperatorSidebar } from './OperatorSidebar';
 import { SidebarLayout } from './SidebarLayout';
 import { SupperAdminSidebar } from './SupperAdminSidebar';
 
@@ -50,10 +49,6 @@ const Sidebar = () => {
           <>
             <div className="flex flex-1 flex-col gap-4">
               <AdminSidebar opened={opened} />
-
-              <Separator />
-
-              <OperatorSidebar opened={opened} />
             </div>
 
             <>

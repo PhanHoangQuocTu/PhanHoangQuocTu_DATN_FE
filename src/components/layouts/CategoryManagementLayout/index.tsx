@@ -5,10 +5,10 @@ import { type FCC } from '@/types';
 
 import { AdminLayout } from '../AdminLayout';
 
-const DashboardLayout: FCC = ({ children }) => {
+const CategoryManagementLayout: FCC = ({ children }) => {
   return (
     <AdminLayout>
-      <TitlePage title="Dashboard" />
+      <TitlePage title="Category Management" />
 
       <div className="space-y-4">
         <section>{children}</section>
@@ -17,4 +17,4 @@ const DashboardLayout: FCC = ({ children }) => {
   );
 };
 
-export { DashboardLayout };
+export { CategoryManagementLayout };
