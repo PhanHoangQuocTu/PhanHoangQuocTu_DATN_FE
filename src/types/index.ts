@@ -14,6 +14,12 @@ export interface ErrorMutate {
   dynamic_data?: {};
 }
 
+export interface IPaging {
+  page: number;
+  limit: number;
+  total?: number;
+}
+
 export { ROUTE } from './routes';
 
 export type ElementProps<ElementType extends React.ElementType, PropsToOmit extends string = never> = Omit<
