@@ -1,8 +1,13 @@
 import type { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
+import Router from 'next/router';
+import { toast } from 'sonner';
 
 import { env } from '@/lib/const';
 import { useUserStore } from '@/stores';
+import { ROUTE } from '@/types';
+
+import { refreshTokenRequest } from './auth';
 
 export const request = axios.create({
   baseURL: env.API_URL,
@@ -12,23 +17,23 @@ const onRefreshToken = async () => {
   const store = useUserStore.getState();
   const refreshToken = store?.refreshToken;
 
-  // TODO: Implement refresh token
-  // if (refreshToken) {
-  //   try {
-  //     const { accessToken } = await refreshTokenRequest(refreshToken);
-  //     store.setAccessToken(accessToken);
-  //     return accessToken;
-  //   } catch (e) {
-  //     Router.replace(ROUTE.HOME);
-  //     store.logout();
-  //   }
-  // } else {
-  //   if (Router.pathname !== ROUTE.HOME) {
-  //     // toast.error('Your session is expired, please try to login again');
-  //     Router.replace(ROUTE.HOME);
-  //   }
-  //   store.logout();
-  // }
+  if (refreshToken) {
+    try {
+      const { accessToken: newAccessToken } = await refreshTokenRequest({ refreshToken });
+      store?.setAccessToken(newAccessToken);
+
+      return newAccessToken;
+    } catch (e) {
+      Router.replace(ROUTE.HOME);
+      store?.logout();
+    }
+  } else {
+    if (Router.pathname !== ROUTE.HOME) {
+      toast.error('Your session is expired, please try to login again');
+      Router.replace(ROUTE.HOME);
+    }
+    store?.logout();
+  }
 
   return null;
 };
@@ -40,8 +45,11 @@ const handleSuccess = (res: AxiosResponse) => {
 const handleError = async (error: any) => {
   const originalRequest = error.config!;
   const data = error?.response?.data as any;
+  const store = useUserStore.getState();
+  const refreshToken = store?.refreshToken;
+  const isLoggedIn = !!refreshToken;
 
-  if (data?.statusCode === 401 && !originalRequest?._retry) {
+  if (data?.statusCode === 403 && !originalRequest?._retry && isLoggedIn) {
     originalRequest._retry = true;
     const token = await onRefreshToken();
     axios.defaults.headers.Authorization = `Bearer ${token}`;

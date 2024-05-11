@@ -44,3 +44,10 @@ export interface ISelectOption<T extends any = any> {
 export interface IdType {
   id: any;
 }
+
+export interface IMetaPagination {
+  limit: number;
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+}

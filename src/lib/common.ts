@@ -123,3 +123,7 @@ export const range = (start: number, end: number) => {
   */
   return Array.from({ length }, (_, idx) => idx + start);
 };
+
+export const currentNo = (no: number, page: number, limit: number) => {
+  return no + 1 + (Number(page) - 1) * Number(limit);
+};

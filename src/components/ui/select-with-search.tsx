@@ -40,7 +40,7 @@ const SelectWithSearch = forwardRef<HTMLInputElement, SelectWithSearchProps>(
               {...props}
               className={cn(className)}
               ref={ref}
-              suffix={<Icons.arrowDown />}
+              suffix={<Icons.chevronDown />}
             />
           </div>
         </PopoverTrigger>

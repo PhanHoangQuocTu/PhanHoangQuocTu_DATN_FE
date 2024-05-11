@@ -15,7 +15,7 @@ const Sidebar = () => {
     <>
       <HStack spacing={24}>
         <Button variant="ghost" size="mixin" onClick={toggle}>
-          <Icons.menu />
+          <Icons.alignJustify />
         </Button>
       </HStack>
       <Sheet open={opened} onOpenChange={toggle}>

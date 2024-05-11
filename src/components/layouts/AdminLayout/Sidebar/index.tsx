@@ -39,7 +39,7 @@ const Sidebar = () => {
             </Link>
           )}
           <Button variant="ghost" className="hover:bg-transparent" size="mixin" onClick={toggle}>
-            <Icons.menu className="text-white hover:text-accent" />
+            <Icons.alignJustify className="text-white hover:text-accent" />
           </Button>
         </HStack>
 

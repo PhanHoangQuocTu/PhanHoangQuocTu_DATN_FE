@@ -32,7 +32,7 @@ interface TooltipProps {
 
 const Tooltip = ({ children, label }: TooltipProps) => (
   <TooltipProvider>
-    <TooltipRoot>
+    <TooltipRoot delayDuration={100}>
       <TooltipTrigger>{children}</TooltipTrigger>
       <TooltipContent>{label}</TooltipContent>
     </TooltipRoot>

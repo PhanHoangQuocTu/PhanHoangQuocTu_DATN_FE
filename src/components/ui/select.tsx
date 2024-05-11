@@ -60,7 +60,7 @@ const SelectTrigger = React.forwardRef<React.ElementRef<typeof SelectPrimitive.T
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <Icons.arrowDown className="min-w-[24px]" />
+        <Icons.chevronDown className="min-w-[24px]" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   )

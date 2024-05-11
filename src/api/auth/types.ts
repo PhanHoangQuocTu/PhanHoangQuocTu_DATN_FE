@@ -41,3 +41,11 @@ export interface IRegisterRequest {
 export interface IRegisterResponse {
   user: IUser;
 }
+
+export interface IRefreshTokenRequest {
+  refreshToken: string;
+}
+
+export interface IRefreshTokenResponse {
+  accessToken: string;
+}

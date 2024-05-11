@@ -121,7 +121,7 @@ export const AutoComplete = ({
           wrapperClassName="border-input rounded-sm ring-offset-background peer border h-14 px-3 text-sm rounded-sm bg-transparent placeholder:font-light"
           {...props}
         />
-        <div className="absolute right-[10px] top-1/2 -translate-y-1/2">{suffix || <Icons.arrowDown />}</div>
+        <div className="absolute right-[10px] top-1/2 -translate-y-1/2">{suffix || <Icons.chevronDown />}</div>
       </div>
       <div className="relative mt-1">
         <div
