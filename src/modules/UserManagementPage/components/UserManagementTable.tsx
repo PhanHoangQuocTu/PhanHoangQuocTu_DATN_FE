@@ -29,7 +29,7 @@ interface Props {
 const UserManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageChange }) => {
   return (
     <VStack>
-      <div className="min-h-[34.375rem]">
+      <div className="min-h-[35.25rem]">
         <Table className="relative w-full">
           <TableHeader>
             <TableRow>
