@@ -36,3 +36,12 @@ export interface IGetAllUserResponse {
   users: IUserGetAllDetail[];
   meta: IMetaPagination;
 }
+
+export interface IDeleteUserParams {
+  id: number;
+}
+
+export interface IDeleteUserResponse {
+  status: number;
+  message: string;
+}

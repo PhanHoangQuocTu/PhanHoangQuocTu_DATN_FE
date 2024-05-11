@@ -18,15 +18,25 @@ import {
 import { Tooltip } from '@/components/ui/tooltip';
 import { HStack, Show, VStack } from '@/components/ui/Utilities';
 import { currentNo } from '@/lib/common';
+import { useUserManagementStore } from '@/stores/UserManagementStore';
 import { type IPaging } from '@/types';
+
+import DeleteUserDialog from './DeleteUserDialog';
 
 interface Props {
   data: IUserGetAllDetail[];
   paging: IPaging;
   isLoading: boolean;
   onPageChange: (page: number) => void;
+  refetch: () => void;
 }
-const UserManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageChange }) => {
+const UserManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageChange, refetch }) => {
+  const setUserDeleteId = useUserManagementStore.use.setUserDeleteId();
+
+  const handleDeleteUser = (id: number) => {
+    setUserDeleteId(String(id));
+  };
+
   return (
     <VStack>
       <div className="min-h-[35.25rem]">
@@ -93,11 +103,13 @@ const UserManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
                           </button>
                         </Tooltip>
 
-                        <Tooltip label="Delete">
-                          <button>
-                            <Icons.x size={16} />
-                          </button>
-                        </Tooltip>
+                        <DeleteUserDialog userId={user?.id} refetch={refetch}>
+                          <Tooltip label="Delete">
+                            <button onClick={() => handleDeleteUser(user?.id)}>
+                              <Icons.x size={16} />
+                            </button>
+                          </Tooltip>
+                        </DeleteUserDialog>
                       </HStack>
                     </TableCell>
                   </TableRow>
