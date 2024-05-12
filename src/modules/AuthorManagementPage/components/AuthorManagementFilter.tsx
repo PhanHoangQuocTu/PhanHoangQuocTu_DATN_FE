@@ -6,21 +6,21 @@ import { Button } from '@/components/ui/button';
 import { FormWrapper } from '@/components/ui/form';
 import { TextField } from '@/components/ui/FormField';
 import { HStack } from '@/components/ui/Utilities';
-import { useCategoryManagementStore } from '@/stores/CategoryManagementStore';
+import { useAuthorManagementStore } from '@/stores/AuthorManagementStore';
 
-import { categoryManagementFilterSchema, type CategoryManagementFilterType } from '../types/schema';
+import { type AuthorManagementFilterType, handleAuthorManagementSchema } from '../types/schema';
 
 interface Props {
-  handleSearchChange: (formData: CategoryManagementFilterType) => void;
+  handleSearchChange: (formData: AuthorManagementFilterType) => void;
 }
 
-const CategoryManagementFilter: React.FC<Props> = ({ handleSearchChange }) => {
-  const setIsEdit = useCategoryManagementStore.use.setIsEdit();
-  const setIsCreate = useCategoryManagementStore.use.setIsCreate();
-  const setCategoryEditId = useCategoryManagementStore.use.setCategoryEditId();
+const AuthorManagementFilter: React.FC<Props> = ({ handleSearchChange }) => {
+  const setIsEdit = useAuthorManagementStore.use.setIsEdit();
+  const setIsCreate = useAuthorManagementStore.use.setIsCreate();
+  const setAuthorEditId = useAuthorManagementStore.use.setAuthorEditId();
 
-  const form = useForm<CategoryManagementFilterType>({
-    resolver: zodResolver(categoryManagementFilterSchema),
+  const form = useForm<AuthorManagementFilterType>({
+    resolver: zodResolver(handleAuthorManagementSchema),
     defaultValues: {
       search: '',
     },
@@ -33,14 +33,14 @@ const CategoryManagementFilter: React.FC<Props> = ({ handleSearchChange }) => {
     handleSubmit({ ...form.getValues() });
   };
 
-  const handleSubmit: SubmitHandler<CategoryManagementFilterType> = async (formData) => {
+  const handleSubmit: SubmitHandler<AuthorManagementFilterType> = async (formData) => {
     handleSearchChange(formData);
   };
 
   const handleCreateCategory = () => {
     setIsEdit(false);
     setIsCreate(true);
-    setCategoryEditId('');
+    setAuthorEditId('');
   };
 
   return (
@@ -51,8 +51,9 @@ const CategoryManagementFilter: React.FC<Props> = ({ handleSearchChange }) => {
 
           <HStack noWrap spacing={12}>
             <Button type="button" variant={'secondary'} onClick={handleCreateCategory}>
-              Create Category
+              Create Author
             </Button>
+
             <Button type="button" variant="outline" onClick={handleResetForm}>
               Clear Filter
             </Button>
@@ -65,4 +66,4 @@ const CategoryManagementFilter: React.FC<Props> = ({ handleSearchChange }) => {
   );
 };
 
-export default CategoryManagementFilter;
+export default AuthorManagementFilter;
