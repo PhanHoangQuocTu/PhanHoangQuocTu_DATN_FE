@@ -36,6 +36,12 @@ export const useGetAllCategory = (limit = 10) => {
     onPageChange(1);
   };
 
+  const categorySelectOptions = React.useMemo(() => {
+    if (!data?.categories) return [];
+
+    return data?.categories.map((item) => ({ label: item.title, value: String(item.id) }));
+  }, [data?.categories]);
+
   return {
     data,
     categoryList: data?.categories ?? [],
@@ -46,6 +52,7 @@ export const useGetAllCategory = (limit = 10) => {
     handleFilterChange,
     handleSearchChange,
     filter,
+    categorySelectOptions,
     ...rest,
   };
 };

@@ -2,6 +2,7 @@ import { differenceInCalendarDays } from 'date-fns';
 import dayjs from 'dayjs';
 import { toast } from 'sonner';
 
+import { FILE_FORMAT } from './const';
 import { getMutateError } from './getMutateError';
 import { REGEX_EMOJI, REGEX_NO_SPECIAL_CHARACTERS } from './regex';
 
@@ -126,4 +127,19 @@ export const range = (start: number, end: number) => {
 
 export const currentNo = (no: number, page: number, limit: number) => {
   return no + 1 + (Number(page) - 1) * Number(limit);
+};
+
+export const defaultArray = (array: any[]) => {
+  return [
+    {
+      label: 'All',
+      value: '',
+    },
+    ...array,
+  ];
+};
+
+export const validateFileFormat = (file: File, formatFile: string[] = FILE_FORMAT): boolean => {
+  if (!file || typeof file === 'string') return true;
+  return formatFile.includes(file.type);
 };

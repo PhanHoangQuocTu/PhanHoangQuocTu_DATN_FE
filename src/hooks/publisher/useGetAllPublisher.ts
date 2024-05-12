@@ -36,6 +36,15 @@ export const useGetAllPublisher = (limit = 10) => {
     onPageChange(1);
   };
 
+  const publisherSelectOptions = React.useMemo(() => {
+    if (!data?.publishers) return [];
+
+    return data?.publishers?.map((publisher) => ({
+      label: publisher.name,
+      value: String(publisher.id),
+    }));
+  }, [data?.publishers]);
+
   return {
     data,
     publisherList: data?.publishers ?? [],
@@ -46,6 +55,7 @@ export const useGetAllPublisher = (limit = 10) => {
     handleFilterChange,
     handleSearchChange,
     filter,
+    publisherSelectOptions,
     ...rest,
   };
 };

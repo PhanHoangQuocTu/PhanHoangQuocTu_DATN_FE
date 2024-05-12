@@ -36,6 +36,12 @@ export const useGetAllAuthor = (limit = 10) => {
     onPageChange(1);
   };
 
+  const authorSelectOptions = React.useMemo(() => {
+    if (!data?.authors) return [];
+
+    return data?.authors?.map((author) => ({ value: String(author.id), label: author.name })) ?? [];
+  }, [data?.authors]);
+
   return {
     data,
     authorList: data?.authors ?? [],
@@ -45,6 +51,7 @@ export const useGetAllAuthor = (limit = 10) => {
     onPageChange,
     handleFilterChange,
     handleSearchChange,
+    authorSelectOptions,
     filter,
     ...rest,
   };

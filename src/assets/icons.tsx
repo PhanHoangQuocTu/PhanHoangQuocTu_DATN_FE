@@ -12,6 +12,7 @@ import {
   Eye,
   EyeOff,
   HelpCircle,
+  ImagePlus,
   Loader2,
   LogOut,
   Pencil,
@@ -19,6 +20,7 @@ import {
   RotateCw,
   Search,
   Star,
+  Trash,
   Upload,
   User,
   X,
@@ -49,6 +51,8 @@ const IconList = {
   eye: Eye,
   eyeHidden: EyeOff,
   star: Star,
+  trash: Trash,
+  imagePlus: ImagePlus,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;
