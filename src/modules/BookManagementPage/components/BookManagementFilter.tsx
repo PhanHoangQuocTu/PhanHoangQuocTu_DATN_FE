@@ -113,7 +113,7 @@ const BookManagementFilter: React.FC<Props> = ({ handleSearchChange }) => {
         <HStack spacing={16} pos={'right'} align={'end'}>
           <HStack noWrap spacing={12}>
             <Button type="button" variant={'secondary'} onClick={handleCreateBook}>
-              Create Category
+              Create Book
             </Button>
             <Button type="button" variant="outline" onClick={handleResetForm}>
               Clear Filter

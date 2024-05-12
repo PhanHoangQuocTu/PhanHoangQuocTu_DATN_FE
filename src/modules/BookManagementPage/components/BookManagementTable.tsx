@@ -17,7 +17,11 @@ import {
 import { Tooltip } from '@/components/ui/tooltip';
 import { HStack, Show, VStack } from '@/components/ui/Utilities';
 import { currentNo } from '@/lib/common';
+import { useBookManagementStore } from '@/stores/BookManagementStore';
 import { type IPaging } from '@/types';
+
+import DeleteBookDialog from './DeleteBookDialog';
+import EditBookDialog from './EditBookDialog';
 
 interface Props {
   data: IGetAllProductDetail[];
@@ -27,6 +31,21 @@ interface Props {
   refetch: () => void;
 }
 const BookManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageChange, refetch }) => {
+  const setBookEditId = useBookManagementStore.use.setBookEditId();
+  const setIsEdit = useBookManagementStore.use.setIsEdit();
+  const setProductImg = useBookManagementStore.use.setProductImg();
+  const setBookDeleteId = useBookManagementStore.use.setBookDeleteId();
+
+  const handleEditBook = (id: number) => {
+    setBookEditId(String(id));
+    setIsEdit(true);
+    setProductImg(null);
+  };
+
+  const handleDeleteBook = (id: number) => {
+    setBookDeleteId(String(id));
+  };
+
   return (
     <VStack>
       <div className="min-h-[35.25rem]">
@@ -73,17 +92,21 @@ const BookManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
 
                     <TableCell className="sticky right-0 whitespace-nowrap text-center">
                       <HStack noWrap spacing={8} pos={'center'}>
-                        <Tooltip label="Detail">
-                          <button>
-                            <Icons.pencil size={16} />
-                          </button>
-                        </Tooltip>
+                        <EditBookDialog bookId={book.id} refetch={refetch}>
+                          <Tooltip label="Edit">
+                            <button onClick={() => handleEditBook(book.id)}>
+                              <Icons.pencil size={16} />
+                            </button>
+                          </Tooltip>
+                        </EditBookDialog>
 
-                        <Tooltip label="Delete">
-                          <button>
-                            <Icons.x size={16} />
-                          </button>
-                        </Tooltip>
+                        <DeleteBookDialog bookId={book.id} refetch={refetch}>
+                          <Tooltip label="Delete">
+                            <button onClick={() => handleDeleteBook(book.id)}>
+                              <Icons.x size={16} />
+                            </button>
+                          </Tooltip>
+                        </DeleteBookDialog>
                       </HStack>
                     </TableCell>
                   </TableRow>
