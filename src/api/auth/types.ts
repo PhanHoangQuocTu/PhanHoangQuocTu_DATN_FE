@@ -17,7 +17,7 @@ export interface IUser {
   phoneNumber: string;
   address: string | null;
   gender: string | null;
-  DateOfBirth: string | null;
+  dateOfBirth: string | null;
   roles: string[];
   createdAt: string;
   updatedAt: string;

@@ -23,7 +23,7 @@ export interface IUserGetAllDetail {
   phoneNumber: string;
   address: string | null;
   gender: string | null;
-  DateOfBirth: string | null;
+  dateOfBirth: string | null;
   roles: string[];
   createdAt: string;
   updatedAt: string;
@@ -45,3 +45,6 @@ export interface IDeleteUserResponse {
   status: number;
   message: string;
 }
+
+export interface IUserDetailResponse extends IUserGetAllDetail {}
+export interface IUserDetailParams extends IDeleteUserParams {}

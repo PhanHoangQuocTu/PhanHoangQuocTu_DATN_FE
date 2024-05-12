@@ -22,6 +22,7 @@ import { useUserManagementStore } from '@/stores/UserManagementStore';
 import { type IPaging } from '@/types';
 
 import DeleteUserDialog from './DeleteUserDialog';
+import DetailUserDialog from './DetailUserDialog';
 
 interface Props {
   data: IUserGetAllDetail[];
@@ -32,9 +33,14 @@ interface Props {
 }
 const UserManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageChange, refetch }) => {
   const setUserDeleteId = useUserManagementStore.use.setUserDeleteId();
+  const setUserDetailId = useUserManagementStore.use.setUserDetailId();
 
   const handleDeleteUser = (id: number) => {
     setUserDeleteId(String(id));
+  };
+
+  const handleDetailUser = (id: number) => {
+    setUserDetailId(String(id));
   };
 
   return (
@@ -86,7 +92,7 @@ const UserManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
                     <TableCell className="whitespace-nowrap text-center">{user?.gender}</TableCell>
 
                     <TableCell className="whitespace-nowrap text-center">
-                      {user?.DateOfBirth && format(new Date(user?.DateOfBirth), 'dd/MM/yyyy')}
+                      {user?.dateOfBirth && format(new Date(user?.dateOfBirth), 'dd/MM/yyyy')}
                     </TableCell>
 
                     <TableCell className="whitespace-nowrap text-center">
@@ -97,11 +103,13 @@ const UserManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
 
                     <TableCell className="sticky right-0 whitespace-nowrap text-center">
                       <HStack noWrap spacing={8}>
-                        <Tooltip label="Edit">
-                          <button>
-                            <Icons.pencil size={16} />
-                          </button>
-                        </Tooltip>
+                        <DetailUserDialog userId={user?.id}>
+                          <Tooltip label="Detail">
+                            <button onClick={() => handleDetailUser(user?.id)}>
+                              <Icons.pencil size={16} />
+                            </button>
+                          </Tooltip>
+                        </DetailUserDialog>
 
                         <DeleteUserDialog userId={user?.id} refetch={refetch}>
                           <Tooltip label="Delete">

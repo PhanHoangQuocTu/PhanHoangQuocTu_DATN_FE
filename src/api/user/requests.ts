@@ -10,6 +10,8 @@ import type {
   IGetAllUserResponse,
   IIsAdminParams,
   IIsAdminResponse,
+  IUserDetailParams,
+  IUserDetailResponse,
 } from './types';
 
 export const isAdminRequest = async (params: IIsAdminParams): Promise<IIsAdminResponse> => {
@@ -36,6 +38,16 @@ export const deleteUserRequest = async (params: IDeleteUserParams): Promise<IDel
   const { data } = await request({
     url: `/api/v1/user/${params.id}`,
     method: 'DELETE',
+    params,
+  });
+
+  return data;
+};
+
+export const getUserDetailRequest = async (params: IUserDetailParams): Promise<IUserDetailResponse> => {
+  const { data } = await request({
+    url: `/api/v1/user/${params.id}`,
+    method: 'GET',
     params,
   });
 
