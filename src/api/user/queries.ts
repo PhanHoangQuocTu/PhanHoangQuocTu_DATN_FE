@@ -21,6 +21,6 @@ export const useGetAllUserQuery = createQuery<IGetAllUserResponse, IGetAllUserPa
 });
 
 export const useGetUserDetailQuery = createQuery<IUserDetailResponse, IUserDetailParams>({
-  primaryKey: '/api/v1/user',
+  primaryKey: '/api/v1/user/:id',
   queryFn: ({ queryKey: [, params] }) => getUserDetailRequest(params),
 });

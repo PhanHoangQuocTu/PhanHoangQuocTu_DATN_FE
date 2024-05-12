@@ -67,7 +67,7 @@ const DetailUserDialog: FCC<Props> = ({ children, userId }) => {
       <DialogContent className="max-w-[35rem]">
         <AlertDialogHeader className="text-2xl font-semibold">User Detail</AlertDialogHeader>
 
-        <FormWrapper form={form} onSubmit={handleSubmit}>
+        <FormWrapper form={form} onSubmit={handleSubmit} className="space-y-2">
           <TextField
             disabled
             control={form.control}
