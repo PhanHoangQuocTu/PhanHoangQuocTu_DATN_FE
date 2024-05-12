@@ -1,6 +1,7 @@
 import { useDisclosure } from '@mantine/hooks';
 import { AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 import { Icons } from '@/assets/icons';
@@ -19,10 +20,11 @@ import { SupperAdminSidebar } from './SupperAdminSidebar';
 const Sidebar = () => {
   const [opened, { toggle }] = useDisclosure(true);
   const logout = useUserStore.use.logout();
-
+  const router = useRouter();
   const handleLogout = () => {
     logout();
     toast.success('Logout successfully!');
+    router.replace(ROUTE.ADMIN_LOGIN);
   };
 
   return (

@@ -6,21 +6,21 @@ import { Button } from '@/components/ui/button';
 import { FormWrapper } from '@/components/ui/form';
 import { TextField } from '@/components/ui/FormField';
 import { HStack } from '@/components/ui/Utilities';
-import { useAuthorManagementStore } from '@/stores/AuthorManagementStore';
+import { usePublisherManagementStore } from '@/stores/PublisherManagementStore';
 
-import { type AuthorManagementFilterType, handleAuthorManagementSchema } from '../types/schema';
+import { publisherManagementFilterSchema, type PublisherManagementFilterType } from '../types/schema';
 
 interface Props {
-  handleSearchChange: (formData: AuthorManagementFilterType) => void;
+  handleSearchChange: (formData: PublisherManagementFilterType) => void;
 }
 
-const AuthorManagementFilter: React.FC<Props> = ({ handleSearchChange }) => {
-  const setIsEdit = useAuthorManagementStore.use.setIsEdit();
-  const setIsCreate = useAuthorManagementStore.use.setIsCreate();
-  const setAuthorEditId = useAuthorManagementStore.use.setAuthorEditId();
+const PublisherManagementFilter: React.FC<Props> = ({ handleSearchChange }) => {
+  const setIsEdit = usePublisherManagementStore.use.setIsEdit();
+  const setIsCreate = usePublisherManagementStore.use.setIsCreate();
+  const setPublisherEditId = usePublisherManagementStore.use.setPublisherEditId();
 
-  const form = useForm<AuthorManagementFilterType>({
-    resolver: zodResolver(handleAuthorManagementSchema),
+  const form = useForm<PublisherManagementFilterType>({
+    resolver: zodResolver(publisherManagementFilterSchema),
     defaultValues: {
       search: '',
     },
@@ -33,18 +33,14 @@ const AuthorManagementFilter: React.FC<Props> = ({ handleSearchChange }) => {
     handleSubmit({ ...form.getValues() });
   };
 
-  const handleSubmit: SubmitHandler<AuthorManagementFilterType> = async (formData) => {
+  const handleSubmit: SubmitHandler<PublisherManagementFilterType> = async (formData) => {
     handleSearchChange(formData);
   };
 
   const handleCreateCategory = () => {
     setIsEdit(false);
     setIsCreate(true);
-    setAuthorEditId('');
-  };
-
-  const handleApply = () => {
-    handleSubmit({ ...form.getValues() });
+    setPublisherEditId('');
   };
 
   return (
@@ -55,16 +51,13 @@ const AuthorManagementFilter: React.FC<Props> = ({ handleSearchChange }) => {
 
           <HStack noWrap spacing={12}>
             <Button type="button" variant={'secondary'} onClick={handleCreateCategory}>
-              Create Author
+              Create Publisher
             </Button>
-
             <Button type="button" variant="outline" onClick={handleResetForm}>
               Clear Filter
             </Button>
 
-            <Button type="button" onClick={handleApply}>
-              Apply Filter
-            </Button>
+            <Button type="submit">Apply Filter</Button>
           </HStack>
         </HStack>
       </div>
@@ -72,4 +65,4 @@ const AuthorManagementFilter: React.FC<Props> = ({ handleSearchChange }) => {
   );
 };
 
-export default AuthorManagementFilter;
+export default PublisherManagementFilter;
