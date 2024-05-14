@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import {
   AlignJustify,
+  ArrowRight,
   Calendar,
   Camera,
   Check,
@@ -57,6 +58,7 @@ const IconList = {
   imagePlus: ImagePlus,
   contact: Contact,
   shoppingCart: ShoppingCart,
+  arrowRight: ArrowRight,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;
