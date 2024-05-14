@@ -17,6 +17,7 @@ export const handleBookManagementSchema = z.object({
   title: z.string().trim().max(100),
   description: z.string().trim().max(100),
   price: numberRequired,
+  discount: numberRequired,
   stock: numberRequired,
   categoryId: numberRequired,
   authorId: numberRequired,

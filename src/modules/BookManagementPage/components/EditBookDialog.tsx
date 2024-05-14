@@ -78,6 +78,7 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
       title: formData.title,
       description: formData.description,
       price: +formData.price,
+      discount: +formData.discount,
       stock: +formData.stock,
       authorId: +formData.authorId,
       publisherId: +formData.publisherId,
@@ -101,6 +102,7 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
         title: data?.title,
         description: data?.description,
         price: Number(data?.price),
+        discount: Number(data?.discount),
         stock: data?.stock,
         authorId: data?.author?.id,
         publisherId: data?.publisher?.id,
@@ -135,6 +137,15 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
           />
 
           <TextField size={'sm'} control={form.control} name="price" label="Price" placeholder="Price" fullWidth />
+
+          <TextField
+            size={'sm'}
+            control={form.control}
+            name="discount"
+            label="Discount"
+            placeholder="Discount"
+            fullWidth
+          />
 
           <TextField size={'sm'} control={form.control} name="stock" label="Stock" placeholder="Stock" fullWidth />
 

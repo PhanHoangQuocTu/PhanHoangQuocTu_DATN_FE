@@ -73,6 +73,7 @@ export interface ICreateProductRequest {
   title: string;
   description: string;
   price: number;
+  discount: number;
   stock: number;
   images: string[];
   categoryId: number;
@@ -89,6 +90,7 @@ export interface IGetDetailBookResponse {
   title: string;
   description: string;
   price: string;
+  discount: string;
   stock: number;
   images: any[];
   createdAt: string;

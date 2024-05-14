@@ -64,6 +64,7 @@ const CreateBookDialog: FCC<Props> = ({ children, refetch }) => {
       title: formData.title,
       description: formData.description,
       price: +formData.price,
+      discount: +formData.discount,
       stock: +formData.stock,
       authorId: +formData.authorId,
       publisherId: +formData.publisherId,
@@ -100,6 +101,15 @@ const CreateBookDialog: FCC<Props> = ({ children, refetch }) => {
           />
 
           <TextField size={'sm'} control={form.control} name="price" label="Price" placeholder="Price" fullWidth />
+
+          <TextField
+            size={'sm'}
+            control={form.control}
+            name="discount"
+            label="Discount"
+            placeholder="Discount"
+            fullWidth
+          />
 
           <TextField size={'sm'} control={form.control} name="stock" label="Stock" placeholder="Stock" fullWidth />
 
