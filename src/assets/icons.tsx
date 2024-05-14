@@ -8,6 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronUp,
+  Contact,
   Copy,
   Eye,
   EyeOff,
@@ -19,6 +20,7 @@ import {
   Plus,
   RotateCw,
   Search,
+  ShoppingCart,
   Star,
   Trash,
   Upload,
@@ -53,6 +55,8 @@ const IconList = {
   star: Star,
   trash: Trash,
   imagePlus: ImagePlus,
+  contact: Contact,
+  shoppingCart: ShoppingCart,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;

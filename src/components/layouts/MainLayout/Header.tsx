@@ -1,13 +1,16 @@
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React from 'react';
 
 import Logo from '@/components/Logo';
+import { HStack } from '@/components/ui/Utilities';
 import { useMobile } from '@/hooks/breakpoint';
 import { cn } from '@/lib/utils';
 import { ROUTE } from '@/types';
 
-import Navbar from './Navbar';
 import Sidebar from './Sidebar';
+
+const Navbar = dynamic(() => import('./Navbar'), { ssr: false });
 
 const Header = () => {
   const isMobile = useMobile();
@@ -19,9 +22,18 @@ const Header = () => {
       )}
     >
       <div className={'container flex items-center justify-between'}>
-        <Link href={ROUTE.HOME}>
-          <Logo />
-        </Link>
+        <HStack noWrap spacing={16}>
+          <Link href={ROUTE.HOME}>
+            <Logo />
+          </Link>
+
+          <Link className="text-primary text-lg font-medium hover:opacity-70" href={ROUTE.HOME}>
+            Home
+          </Link>
+          <Link className="text-primary text-lg font-medium hover:opacity-70" href={ROUTE.BOOKS}>
+            Books
+          </Link>
+        </HStack>
         <div className="">{isMobile ? <Sidebar /> : <Navbar />}</div>
       </div>
     </header>

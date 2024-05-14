@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { FormWrapper } from '@/components/ui/form';
 import { TextField } from '@/components/ui/FormField';
 import { VStack } from '@/components/ui/Utilities';
+import { onMutateError } from '@/lib/common';
 import { useUserStore } from '@/stores';
 import { ROUTE } from '@/types';
 
@@ -45,6 +46,7 @@ const LoginForm: React.FC = () => {
       form.reset(LOGIN_FORM_DEFAULT_DATA);
       router.push(ROUTE.HOME);
     },
+    onError: onMutateError,
   });
 
   const handleSubmit: SubmitHandler<SignInType> = async (formData) => {
