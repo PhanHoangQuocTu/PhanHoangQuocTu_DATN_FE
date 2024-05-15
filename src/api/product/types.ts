@@ -22,6 +22,7 @@ export interface IGetAllProductDetail {
   title: string;
   description: string;
   price: string;
+  discount: string;
   stock: number;
   images: string[];
   createdAt: string;

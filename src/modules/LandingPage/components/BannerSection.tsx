@@ -18,7 +18,7 @@ const BannerSection = () => {
           </span>
 
           <Link href={ROUTE.BOOKS}>
-            <Button variant={'outline'} className="w-fit border-primary">
+            <Button variant={'outline'} className="w-fit border-primary flex gap-3 items-center">
               <span>Read More</span>
               <Icons.arrowRight size={16} />
             </Button>

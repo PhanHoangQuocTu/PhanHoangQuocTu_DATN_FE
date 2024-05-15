@@ -1,5 +1,6 @@
 import { differenceInCalendarDays } from 'date-fns';
 import dayjs from 'dayjs';
+import bigDecimal from 'js-big-decimal';
 import { toast } from 'sonner';
 
 import { FILE_FORMAT } from './const';
@@ -143,3 +144,9 @@ export const validateFileFormat = (file: File, formatFile: string[] = FILE_FORMA
   if (!file || typeof file === 'string') return true;
   return formatFile.includes(file.type);
 };
+
+export const prettyNumber = (number: number | string, digits = 3, separator = ',') =>
+  bigDecimal.getPrettyValue(number, digits, separator);
+
+export const roundNumber = (number: string, round = 2, roundingMode = bigDecimal.RoundingModes.DOWN) =>
+  bigDecimal.round(number, round, roundingMode);
