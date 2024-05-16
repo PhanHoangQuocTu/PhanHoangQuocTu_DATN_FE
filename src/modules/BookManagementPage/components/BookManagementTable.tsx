@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/table';
 import { Tooltip } from '@/components/ui/tooltip';
 import { HStack, Show, VStack } from '@/components/ui/Utilities';
-import { currentNo } from '@/lib/common';
+import { currentNo, prettyNumber, roundNumber } from '@/lib/common';
 import { useBookManagementStore } from '@/stores/BookManagementStore';
 import { type IPaging } from '@/types';
 
@@ -78,8 +78,10 @@ const BookManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
 
                     <TableCell className="whitespace-nowrap">{book?.title}</TableCell>
 
-                    <TableCell className="whitespace-nowrap">{book?.description}</TableCell>
-                    <TableCell className="whitespace-nowrap">{book?.price}</TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      <p className="max-w-96 truncate">{book?.description}</p>
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap">{prettyNumber(roundNumber(book?.price))} đ</TableCell>
                     <TableCell className="whitespace-nowrap text-center">{book?.stock}</TableCell>
                     <TableCell className="whitespace-nowrap">{book?.author && book?.author?.name}</TableCell>
                     <TableCell className="whitespace-nowrap">{book?.category && book?.category?.title}</TableCell>

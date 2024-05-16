@@ -72,7 +72,9 @@ const PublisherManagementTable: React.FC<Props> = ({ data, paging, isLoading, on
 
                     <TableCell className="whitespace-nowrap">{publisher?.name}</TableCell>
 
-                    <TableCell className="whitespace-nowrap">{publisher?.description}</TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      <p className="max-w-96 truncate">{publisher?.description}</p>
+                    </TableCell>
 
                     <TableCell className="whitespace-nowrap text-center">
                       {format(new Date(publisher?.createdAt), 'dd/MM/yyyy')}

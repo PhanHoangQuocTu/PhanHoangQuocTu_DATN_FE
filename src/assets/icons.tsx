@@ -17,6 +17,7 @@ import {
   ImagePlus,
   Loader2,
   LogOut,
+  Minus,
   Pencil,
   Plus,
   RotateCw,
@@ -59,6 +60,7 @@ const IconList = {
   contact: Contact,
   shoppingCart: ShoppingCart,
   arrowRight: ArrowRight,
+  minus: Minus,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;

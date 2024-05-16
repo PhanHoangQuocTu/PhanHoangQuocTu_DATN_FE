@@ -28,13 +28,14 @@ const TooltipContent = React.forwardRef<
 interface TooltipProps {
   children: React.ReactNode;
   label: React.ReactNode;
+  className?: string;
 }
 
-const Tooltip = ({ children, label }: TooltipProps) => (
+const Tooltip = ({ children, label, className }: TooltipProps) => (
   <TooltipProvider>
     <TooltipRoot delayDuration={100}>
       <TooltipTrigger>{children}</TooltipTrigger>
-      <TooltipContent>{label}</TooltipContent>
+      <TooltipContent className={className}>{label}</TooltipContent>
     </TooltipRoot>
   </TooltipProvider>
 );

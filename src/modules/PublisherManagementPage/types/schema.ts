@@ -6,7 +6,7 @@ export const publisherManagementFilterSchema = z.object({
 
 export const handlePublisherManagementSchema = z.object({
   name: z.string().trim().max(100),
-  description: z.string().trim().max(100),
+  description: z.string().trim().max(500),
 });
 
 export type PublisherManagementFilterType = z.infer<typeof publisherManagementFilterSchema>;

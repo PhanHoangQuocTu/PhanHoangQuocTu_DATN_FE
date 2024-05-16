@@ -6,7 +6,7 @@ import { prettyNumber, roundNumber } from '@/lib/common';
 import { cn } from '@/lib/utils';
 import { ROUTE } from '@/types';
 
-import { HStack, VStack } from './ui/Utilities';
+import { VStack } from './ui/Utilities';
 
 interface Props {
   id: number;
@@ -41,21 +41,19 @@ const BookCard: React.FC<Props> = ({ id, image, name, desc, price, discount, cla
         <Image src={image} alt={name} fill unoptimized />
       </div>
 
-      <VStack spacing={2} align={'center'}>
-        <span className="text-primary text-lg font-medium">{name}</span>
+      <VStack spacing={4} align={'center'}>
+        <span className="text-primary text-lg font-medium text-center">{name}</span>
 
-        <span className="text-base text-gray-400 font-medium">{desc}</span>
+        <p className="text-base text-gray-400 font-medium line-clamp-1	">{desc}</p>
 
-        <HStack noWrap>
+        <VStack spacing={0}>
           {!!discount && (
             <span className="text-lg text-gray-400 line-through font-medium">
-              {prettyNumber(roundNumber(String(price)))} VND
+              {prettyNumber(roundNumber(String(price)))} đ
             </span>
           )}
-          <span className="text-lg text-[#ED553B] font-medium">
-            {prettyNumber(roundNumber(String(priveValue)))} VND
-          </span>
-        </HStack>
+          <span className="text-lg text-[#ED553B] font-medium">{prettyNumber(roundNumber(String(priveValue)))} đ</span>
+        </VStack>
       </VStack>
     </VStack>
   );

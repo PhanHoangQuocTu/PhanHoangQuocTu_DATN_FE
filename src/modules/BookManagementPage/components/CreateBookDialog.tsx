@@ -87,7 +87,7 @@ const CreateBookDialog: FCC<Props> = ({ children, refetch }) => {
 
         <FormWrapper form={form} onSubmit={handleSubmit} className="space-y-2">
           <VStack spacing={4}>
-            <InputFile className="w-full h-20" onChange={handleChangeProductImg} preview={productImg} />
+            <InputFile className="w-full h-60" onChange={handleChangeProductImg} preview={productImg} />
             <label className="text-sm font-medium">Book Image</label>
           </VStack>
           <TextField size={'sm'} control={form.control} name="title" label="Title" placeholder="Title" fullWidth />

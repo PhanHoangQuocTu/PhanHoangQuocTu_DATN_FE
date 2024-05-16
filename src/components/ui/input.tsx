@@ -39,13 +39,28 @@ export interface InputProps
   suffix?: any;
   fullWidth?: boolean;
   isError?: boolean;
+  containerClassName?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, variant = 'default', fullWidth, isError, size, type = 'text', suffix, id, ...props }, ref) => {
+  (
+    {
+      className,
+      variant = 'default',
+      fullWidth,
+      isError,
+      size,
+      type = 'text',
+      suffix,
+      id,
+      containerClassName,
+      ...props
+    },
+    ref
+  ) => {
     const [show, setShow] = React.useState(false);
     return (
-      <div className={cn('relative', fullWidth && 'w-full')}>
+      <div className={cn('relative', fullWidth && 'w-full', containerClassName)}>
         <input
           id={id}
           type={type === 'password' ? (show ? 'text' : 'password') : type}

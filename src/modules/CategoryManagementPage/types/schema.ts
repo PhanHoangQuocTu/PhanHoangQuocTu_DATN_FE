@@ -6,7 +6,7 @@ export const categoryManagementFilterSchema = z.object({
 
 export const handleCategoryManagementSchema = z.object({
   title: z.string().trim().max(100),
-  description: z.string().trim().max(100),
+  description: z.string().trim().max(500),
 });
 
 export type CategoryManagementFilterType = z.infer<typeof categoryManagementFilterSchema>;

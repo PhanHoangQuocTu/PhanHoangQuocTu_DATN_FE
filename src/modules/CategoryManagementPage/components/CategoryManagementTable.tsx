@@ -72,7 +72,9 @@ const CategoryManagementTable: React.FC<Props> = ({ data, paging, isLoading, onP
 
                     <TableCell className="whitespace-nowrap">{category?.title}</TableCell>
 
-                    <TableCell className="whitespace-nowrap">{category?.description}</TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      <p className="max-w-96 truncate">{category?.description}</p>
+                    </TableCell>
 
                     <TableCell className="whitespace-nowrap text-center">
                       {format(new Date(category?.createdAt), 'dd/MM/yyyy')}
