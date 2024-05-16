@@ -22,7 +22,7 @@ const BookDescription: React.FC<Props> = ({ data }) => {
           <span>Description</span>
         </VStack>
 
-        <VStack className="col-span-3 text-base font-medium text-justify">
+        <VStack className="col-span-3 text-sm font-medium text-justify">
           <span>{data?.id}</span>
           <span>{data?.title}</span>
           <span>{data?.author?.name}</span>
