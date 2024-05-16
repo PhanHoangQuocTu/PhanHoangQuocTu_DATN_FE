@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 
 import { FILE_FORMAT } from './const';
 import { getMutateError } from './getMutateError';
-import { REGEX_EMOJI, REGEX_NO_SPECIAL_CHARACTERS } from './regex';
+import { REGEX_NO_SPECIAL_CHARACTERS } from './regex';
 
 export function capitalizeFirstLetter(str = '') {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -104,10 +104,6 @@ export const isSameAddress = (addrA?: string | null, addrB?: string | null) => {
 export const parseDate = (timestamp: number) => dayjs.unix(timestamp).format('YYYY-MM-DD HH:mm:ss');
 
 export const requiredMessage = (field?: string) => (field ? `${field} field is required` : 'This field is required');
-
-export const validateEmoji = (text: string): boolean => {
-  return REGEX_EMOJI.test(text);
-};
 
 export const validateCharacterSpecial = (text: string) => {
   return !REGEX_NO_SPECIAL_CHARACTERS.test(text);
