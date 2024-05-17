@@ -8,6 +8,7 @@ import ReviewNoData from './ReviewNoData';
 
 const RatingList = () => {
   const { reviewList } = useGetReviewByBookId();
+  const [reviewDeleteId, setReviewDeleteId] = React.useState('');
 
   return (
     <VStack spacing={16} className="max-h-96 overflow-auto">
@@ -15,7 +16,13 @@ const RatingList = () => {
         <ReviewNoData emptyText="No review" />
       </Show>
       {reviewList?.map((review) => (
-        <RatingItem key={review.id} user={review.user} review={review} />
+        <RatingItem
+          key={review.id}
+          user={review.user}
+          review={review}
+          reviewDeleteId={reviewDeleteId}
+          setReviewDeleteId={setReviewDeleteId}
+        />
       ))}
     </VStack>
   );

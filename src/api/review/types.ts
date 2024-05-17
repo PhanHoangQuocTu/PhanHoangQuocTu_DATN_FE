@@ -76,3 +76,12 @@ export interface ICreateReviewResponse {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface IDeleteReviewParams {
+  id: string;
+}
+
+export interface IDeleteReviewResponse {
+  status: number;
+  message: string;
+}

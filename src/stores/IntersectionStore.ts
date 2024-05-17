@@ -1,9 +1,11 @@
 import { createSelectorFunctions } from 'auto-zustand-selectors-hook';
 import { create } from 'zustand';
 
+export type ITargetInView = '' | 'createReview';
+
 export interface IModalStore {
-  targetInView: string;
-  setTargetInView: (target: string) => void;
+  targetInView: ITargetInView;
+  setTargetInView: (target: ITargetInView) => void;
 }
 
 const useBaseIntersectionStore = create<IModalStore>((set) => ({

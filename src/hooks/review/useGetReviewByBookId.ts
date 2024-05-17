@@ -17,7 +17,7 @@ export const useGetReviewByBookId = () => {
 
   return {
     data,
-    reviewList: data?.reviews,
+    reviewList: data?.reviews || [],
     ...rest,
   };
 };

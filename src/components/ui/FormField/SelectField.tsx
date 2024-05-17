@@ -13,7 +13,7 @@ import { Show } from '../Utilities';
 interface IData {
   label: string;
   value: string;
-  image?: string;
+  image?: string | React.ReactNode;
   group?: string;
 }
 
@@ -78,7 +78,9 @@ const SelectField = <T extends FieldValues>({
                     <SelectItem key={x.value} value={x.value}>
                       {x.image ? (
                         <div className="flex items-center space-x-2">
-                          {x.image && <img src={x.image!} alt="" className="h-6 w-6" />}
+                          {x.image && typeof x.image === 'string' && <img src={x.image!} alt="" className="h-6 w-6" />}
+
+                          {x.image && typeof x.image !== 'string' && x.image}
                           <p>{x.label}</p>
                         </div>
                       ) : (
