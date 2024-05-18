@@ -6,6 +6,7 @@ import { VStack } from '@/components/ui/Utilities';
 import { useGetCart } from '@/hooks/cart/useGetCart';
 
 import CartItem from './components/CartItem';
+import CartSummary from './components/CartSummary';
 
 const CartPage = () => {
   const { cart, refetch } = useGetCart();
@@ -15,11 +16,10 @@ const CartPage = () => {
   }, [refetch]);
 
   return (
-    <div className="container py-8 space-y-5">
-      <span className="text-xl font-semibold">Cart</span>
-
+    <div className="container py-8">
       <div className="grid grid-cols-5 gap-5">
-        <ShadowContainer className="col-span-3 min-h-[100vh]">
+        <ShadowContainer className="col-span-3 min-h-[100vh] space-y-5">
+          <span className="text-xl font-semibold">Cart</span>
           <ScrollArea className="max-h-[100vh]">
             <VStack className="">
               {cart?.map((item) => (
@@ -29,9 +29,7 @@ const CartPage = () => {
           </ScrollArea>
         </ShadowContainer>
 
-        <ShadowContainer className="col-span-2 h-fit">
-          <VStack></VStack>
-        </ShadowContainer>
+        <CartSummary className="col-span-2 h-fit space-y-5" />
       </div>
     </div>
   );
