@@ -16,9 +16,16 @@ export const useAuth = () => {
     return `${user?.firstName} ${user?.lastName}`;
   }, [user]);
 
+  const firstLetterName = React.useMemo(() => {
+    if (!user) return '';
+
+    return user?.email.charAt(0).toLocaleUpperCase();
+  }, [user]);
+
   return {
     isLoggedIn: !!accessToken,
     user,
     fullName,
+    firstLetterName,
   };
 };

@@ -11,7 +11,7 @@ import { ROUTE } from '@/types';
 import AvatarDropdown from './components/AvatarDropdown';
 
 const Navbar = () => {
-  const { isLoggedIn, fullName } = useAuth();
+  const { isLoggedIn, firstLetterName } = useAuth();
 
   const renderNavbar = React.useMemo(() => {
     if (!isLoggedIn)
@@ -33,7 +33,7 @@ const Navbar = () => {
           <Button className="flex items-center gap-2">
             <Icons.user size={16} />
 
-            <span className="text-lg font-medium">{fullName.slice(0, 1).toUpperCase()}</span>
+            <span className="text-lg font-medium">{firstLetterName}</span>
           </Button>
         </AvatarDropdown>
 
@@ -46,7 +46,7 @@ const Navbar = () => {
         </Link>
       </HStack>
     );
-  }, [fullName, isLoggedIn]);
+  }, [firstLetterName, isLoggedIn]);
 
   return (
     <HStack spacing={16} noWrap>

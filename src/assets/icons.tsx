@@ -20,6 +20,7 @@ import {
   Minus,
   Pencil,
   Plus,
+  Receipt,
   RotateCw,
   Search,
   ShoppingCart,
@@ -61,6 +62,7 @@ const IconList = {
   shoppingCart: ShoppingCart,
   arrowRight: ArrowRight,
   minus: Minus,
+  receipt: Receipt,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;

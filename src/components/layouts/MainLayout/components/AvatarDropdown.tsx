@@ -17,7 +17,7 @@ import { useUserStore } from '@/stores';
 import { type FCC, ROUTE } from '@/types';
 
 const AvatarDropdown: FCC = ({ children }) => {
-  const { fullName } = useAuth();
+  const { user } = useAuth();
   const logout = useUserStore.use.logout();
 
   const handleLogout = () => {
@@ -31,7 +31,7 @@ const AvatarDropdown: FCC = ({ children }) => {
         <DropdownMenuLabel>
           <HStack noWrap spacing={16} className="p-2">
             <Icons.user size={16} />
-            <span className="block truncate">{fullName}</span>
+            <span className="block truncate">{user?.email}</span>
           </HStack>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
@@ -39,7 +39,13 @@ const AvatarDropdown: FCC = ({ children }) => {
           <DropdownMenuItem>
             <Link href={ROUTE.PROFILE} className="flex items-center gap-2 p-2">
               <Icons.contact />
-              <span>Profile</span>
+              <span>My Profile</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href={ROUTE.MY_ORDER} className="flex items-center gap-2 p-2">
+              <Icons.receipt />
+              <span>My Orders</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>

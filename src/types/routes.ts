@@ -13,6 +13,7 @@ export const ROUTE = {
   PUBLIHSER_MANAGEMENT: '/admin/publisher-management',
   CATEGORY_MANAGEMENT: '/admin/category-management',
   AUTHOR_MANAGEMENT: '/admin/author-management',
+  MY_ORDER: '/my-order',
 } as const;
 
 export type ROUTE_KEY = keyof typeof ROUTE;

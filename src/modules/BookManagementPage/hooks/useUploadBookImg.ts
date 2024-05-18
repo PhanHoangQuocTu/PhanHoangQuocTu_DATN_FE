@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 import { uploadFile } from '@/api/file';
 import { useBookManagementStore } from '@/stores/BookManagementStore';
@@ -14,7 +15,7 @@ export const useUploadBookImg = () => {
           const data = await uploadFile(productImg);
           setUrl(data.url);
         } catch (error) {
-          console.error('Failed to upload file:', error);
+          toast.error(`Failed to upload file: ${error}`);
           setUrl('');
         }
       }

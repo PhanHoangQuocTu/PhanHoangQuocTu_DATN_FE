@@ -38,3 +38,59 @@ export interface ICartCategoryDetail {
   id: number;
   title: string;
 }
+
+export interface IGetCartByCurrentUserResponse {
+  cart: ICart;
+}
+
+export interface ICart {
+  id: number;
+  isOrdered: boolean;
+  createdAt: string;
+  updatedAt: string;
+  items: ICartItemByCurrentUser[];
+}
+
+export interface ICartItemByCurrentUser {
+  id: number;
+  quantity: number;
+  product: ICartProductByCurrentUser;
+}
+
+export interface ICartProductByCurrentUser {
+  id: number;
+  title: string;
+  description: string;
+  price: string;
+  discount: string;
+  stock: number;
+  images: string[];
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: any;
+  category: ICartCategoryByCurrentUser;
+}
+
+export interface ICartCategoryByCurrentUser {
+  id: number;
+  title: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: any;
+}
+
+export interface IUpdateCartParams {
+  cartItemId: number;
+}
+
+export interface IUpdateCartRequest {
+  quantity: number;
+}
+
+export interface IUpdateCartResponse {
+  message: string;
+}
+
+export interface IDeleteCartItemParams extends IUpdateCartParams {}
+export interface IDeleteCartItemResponse extends IUpdateCartResponse {}
