@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { HStack, Show, VStack } from '@/components/ui/Utilities';
 import { useGetCart } from '@/hooks/cart/useGetCart';
 import { prettyNumber, roundNumber } from '@/lib/common';
+import { cn } from '@/lib/utils';
 import { ROUTE } from '@/types';
 
 interface Props {
@@ -18,7 +19,7 @@ const CartSummary: React.FC<Props> = ({ className, isShowCheckoutBtn = true }) =
   const { bookPrices, totalDiscountPrice, totalPrice } = useGetCart();
 
   return (
-    <ShadowContainer className={className}>
+    <ShadowContainer className={cn('h-fit space-y-5', className)}>
       <span className="text-xl font-semibold">Summary</span>
 
       <VStack spacing={16}>

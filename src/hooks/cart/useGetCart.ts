@@ -32,11 +32,26 @@ export const useGetCart = () => {
     return prettyNumber(roundNumber(String(Number(bookPrices) - Number(totalDiscountPrice))));
   }, [bookPrices, totalDiscountPrice]);
 
+  const cartCheckout = React.useMemo(() => {
+    if (!data?.cart?.items?.length) return [];
+
+    return data?.cart?.items?.map((item) => ({
+      id: item?.product?.id,
+      product_unit_price: Number(item?.product?.price),
+      product_quanity: Number(item?.quantity),
+      title: item?.product?.title,
+      description: item?.product?.description,
+      discount: Number(item?.product?.discount),
+      images: item?.product?.images,
+    }));
+  }, [data?.cart?.items]);
+
   return {
     cart: data?.cart?.items || [],
     bookPrices,
     totalDiscountPrice,
     totalPrice,
+    cartCheckout,
     ...rest,
   };
 };

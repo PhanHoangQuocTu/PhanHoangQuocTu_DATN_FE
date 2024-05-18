@@ -29,7 +29,7 @@ const CartPage = () => {
           </ScrollArea>
         </ShadowContainer>
 
-        <CartSummary className="col-span-2 h-fit space-y-5" />
+        <CartSummary className="col-span-2" />
       </div>
     </div>
   );

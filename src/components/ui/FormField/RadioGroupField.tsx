@@ -36,7 +36,7 @@ const RadioGroupField = <T extends FieldValues>({
                 onValueChange={field.onChange}
               >
                 {data.map(({ label, value }, i) => (
-                  <label key={i} className="flex h-14 cursor-pointer items-center space-x-2.5">
+                  <label key={i} className="flex h-10 cursor-pointer items-center space-x-2.5">
                     <RadioGroupItem value={value} />
                     <p>{label}</p>
                   </label>
