@@ -3,8 +3,13 @@ import React from 'react';
 import { useGetCartByCurrentUserQuery } from '@/api/cart/queries';
 import { prettyNumber, roundNumber } from '@/lib/common';
 
+import { useAuth } from '../useAuth';
+
 export const useGetCart = () => {
-  const { data, ...rest } = useGetCartByCurrentUserQuery();
+  const { isLoggedIn } = useAuth();
+  const { data, ...rest } = useGetCartByCurrentUserQuery({
+    enabled: !!isLoggedIn,
+  });
 
   const bookPrices = React.useMemo(() => {
     if (!data?.cart?.items?.length) return prettyNumber(roundNumber('0'));

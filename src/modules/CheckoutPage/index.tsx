@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { FormWrapper } from '@/components/ui/form';
 import { HStack, VStack } from '@/components/ui/Utilities';
 import { useGetCart } from '@/hooks/cart/useGetCart';
+import { useAuth } from '@/hooks/useAuth';
 import { ROUTE } from '@/types';
 
 import CartSummary from '../CartPage/components/CartSummary';
@@ -19,8 +20,15 @@ import { PAYMENT_METHOD_VALUE } from './types/const';
 import { checkoutSchema, type checkoutType } from './types/schema';
 
 const CheckoutPage = () => {
+  const { user, isLoggedIn } = useAuth();
   const { cartCheckout } = useGetCart();
   const router = useRouter();
+
+  React.useEffect(() => {
+    if (!isLoggedIn) {
+      router.replace(ROUTE.HOME);
+    }
+  }, [isLoggedIn, router]);
 
   const form = useForm<checkoutType>({
     resolver: zodResolver(checkoutSchema),
@@ -38,7 +46,7 @@ const CheckoutPage = () => {
     onSuccess: () => {
       toast.success('Create order successfully!');
       form.reset();
-      router.replace(ROUTE.HOME);
+      router.replace(ROUTE.MY_ORDER);
     },
   });
 
@@ -73,8 +81,13 @@ const CheckoutPage = () => {
         <CheckoutDetail className="col-span-4" />
       </div>
 
-      <HStack pos={'right'}>
-        <Button type="submit">Create Order</Button>
+      <HStack pos={'apart'}>
+        <span className="text-red-500 text-xs font-semibold">
+          Note: You need to active your account before you can create an order
+        </span>
+        <Button disabled={!user?.isActice} type="submit">
+          Create Order
+        </Button>
       </HStack>
     </FormWrapper>
   );

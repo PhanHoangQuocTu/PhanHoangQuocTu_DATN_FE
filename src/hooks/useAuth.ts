@@ -19,7 +19,7 @@ export const useAuth = () => {
   const firstLetterName = React.useMemo(() => {
     if (!user) return '';
 
-    return user?.email.charAt(0).toLocaleUpperCase();
+    return user?.email?.charAt(0).toLocaleUpperCase();
   }, [user]);
 
   return {

@@ -8,6 +8,7 @@ import { useGetAddress } from '@/hooks/metadata/useGetAddress';
 import { type checkoutType } from '../types/schema';
 
 const AddressField = () => {
+  const [isBlurBox, setIsBlurBox] = React.useState(false);
   const { control, watch, setValue } = useFormContext<checkoutType>();
   const [address] = watch(['address']);
   const { predictionsOptions } = useGetAddress(address);
@@ -18,9 +19,16 @@ const AddressField = () => {
 
   return (
     <div className="relative">
-      <TextField control={control} size={'sm'} name="address" label="Address" />
+      <TextField
+        control={control}
+        size={'sm'}
+        name="address"
+        label="Address"
+        onBlur={() => setIsBlurBox(true)}
+        onFocus={() => setIsBlurBox(false)}
+      />
 
-      {!!predictionsOptions?.length && predictionsOptions?.length > 2 && (
+      {!!predictionsOptions?.length && predictionsOptions?.length > 2 && !isBlurBox && (
         <VStack
           justify={'between'}
           align={'start'}

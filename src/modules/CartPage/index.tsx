@@ -1,15 +1,28 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
+import { toast } from 'sonner';
 
 import { ShadowContainer } from '@/components/ShadowContainer';
 import { ScrollArea } from '@/components/ui/scrollArea';
 import { VStack } from '@/components/ui/Utilities';
 import { useGetCart } from '@/hooks/cart/useGetCart';
+import { useAuth } from '@/hooks/useAuth';
+import { ROUTE } from '@/types';
 
 import CartItem from './components/CartItem';
 import CartSummary from './components/CartSummary';
 
 const CartPage = () => {
   const { cart, refetch } = useGetCart();
+  const router = useRouter();
+  const { isLoggedIn } = useAuth();
+
+  React.useEffect(() => {
+    if (!isLoggedIn) {
+      toast.error('You need to login first!!!');
+      router.push(ROUTE.LOGIN);
+    }
+  }, [isLoggedIn, router]);
 
   React.useEffect(() => {
     refetch();

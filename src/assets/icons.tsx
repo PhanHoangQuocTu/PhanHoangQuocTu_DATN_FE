@@ -17,11 +17,13 @@ import {
   ImagePlus,
   Loader2,
   LogOut,
+  MapPin,
   Minus,
   Pencil,
   Plus,
   Receipt,
   RotateCw,
+  ScrollText,
   Search,
   ShoppingCart,
   Star,
@@ -63,6 +65,8 @@ const IconList = {
   arrowRight: ArrowRight,
   minus: Minus,
   receipt: Receipt,
+  mapPin: MapPin,
+  scrollText: ScrollText,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;
