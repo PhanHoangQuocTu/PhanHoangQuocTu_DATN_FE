@@ -49,3 +49,11 @@ export interface IRefreshTokenRequest {
 export interface IRefreshTokenResponse {
   accessToken: string;
 }
+
+export interface IForgotPasswordRequest {
+  email: string;
+}
+
+export interface IForgotPasswordResponse {
+  message: string;
+}

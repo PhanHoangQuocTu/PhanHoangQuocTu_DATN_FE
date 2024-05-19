@@ -1,5 +1,7 @@
 import { request } from '../axios';
 import type {
+  IForgotPasswordRequest,
+  IForgotPasswordResponse,
   ILoginRequest,
   ILoginResponse,
   IRefreshTokenRequest,
@@ -31,6 +33,16 @@ export const registerRequest = async (body: IRegisterRequest): Promise<IRegister
 export const refreshTokenRequest = async (body: IRefreshTokenRequest): Promise<IRefreshTokenResponse> => {
   const { data } = await request({
     url: '/api/v1/auth/refresh-token',
+    method: 'POST',
+    data: body,
+  });
+
+  return data;
+};
+
+export const forgotPasswordRequest = async (body: IForgotPasswordRequest): Promise<IForgotPasswordResponse> => {
+  const { data } = await request({
+    url: '/api/v1/auth/forgot-password',
     method: 'POST',
     data: body,
   });

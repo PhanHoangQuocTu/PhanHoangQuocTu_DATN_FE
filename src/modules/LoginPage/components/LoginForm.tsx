@@ -17,6 +17,7 @@ import { ROUTE } from '@/types';
 
 import { LOGIN_FORM_DEFAULT_DATA } from '../types/const';
 import { signInSchema, type SignInType } from '../types/schema';
+import ForgotPasswordDialog from './ForgotPasswordDialog';
 
 const LoginForm: React.FC = () => {
   const setAccessToken = useUserStore.use.setAccessToken();
@@ -82,9 +83,11 @@ const LoginForm: React.FC = () => {
               placeholder="Please Enter Password"
             />
 
-            <button type="button" className="text-xs font-medium w-fit self-end text-gray-400 hover:text-black">
-              Forgot Password?
-            </button>
+            <ForgotPasswordDialog>
+              <button type="button" className="text-xs font-medium w-fit self-end text-gray-400 hover:text-black">
+                Forgot Password?
+              </button>
+            </ForgotPasswordDialog>
           </VStack>
 
           <Button fullWidth type="submit" disabled={!email || !password}>

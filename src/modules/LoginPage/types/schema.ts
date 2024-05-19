@@ -18,4 +18,11 @@ export const signInSchema = z.object({
     }),
 });
 
+export const forgotPasswordSchema = z.object({
+  email: z.string().min(1, validationMessages.required()).email({
+    message: 'Please enter a valid email address.',
+  }),
+});
+
 export type SignInType = z.infer<typeof signInSchema>;
+export type ForgotPasswordType = z.infer<typeof forgotPasswordSchema>;
