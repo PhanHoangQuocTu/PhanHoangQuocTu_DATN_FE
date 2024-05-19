@@ -13,10 +13,10 @@ import { Separator } from '@/components/ui/separator';
 import { HStack, VStack } from '@/components/ui/Utilities';
 import { prettyNumber, roundNumber } from '@/lib/common';
 import { PAYMENT_METHOD_OPTIONS } from '@/modules/CheckoutPage/types/const';
-import { useMyOrderStore } from '@/stores/MyOrderStore';
+import { ORDER_STATUS_VALUE, PAYMENT_STATUS_OPTION } from '@/modules/MyOrderPage/types/const';
+import { useOrderManagementStore } from '@/stores/OrderManagementStore';
 import { type FCC } from '@/types';
 
-import { ORDER_STATUS_VALUE, PAYMENT_STATUS_OPTION } from '../../types/const';
 import OrderDialogTitle from './OrderDialogTitle';
 import { OrderInfo } from './OrderInfo';
 
@@ -26,12 +26,12 @@ interface Props {
   totalPrice: number;
   refetch: () => void;
 }
-const MyOrderDialog: FCC<Props> = ({ children, orderId, data, totalPrice, refetch }) => {
-  const myOrderDetailId = useMyOrderStore.use.myOrderDetailId();
-  const setMyOderDetailId = useMyOrderStore.use.setMyOderDetailId();
+const OrderDetailDialog: FCC<Props> = ({ children, orderId, data, totalPrice, refetch }) => {
+  const orderDetailId = useOrderManagementStore.use.orderDetailId();
+  const setOderDetailId = useOrderManagementStore.use.setOderDetailId();
 
   const handleCloseDialog = () => {
-    setMyOderDetailId('');
+    setOderDetailId('');
   };
 
   const paymentMethod = React.useMemo(() => {
@@ -76,7 +76,7 @@ const MyOrderDialog: FCC<Props> = ({ children, orderId, data, totalPrice, refetc
   const statusLabel = data?.status === ORDER_STATUS_VALUE.shipped ? 'Delivering' : data?.status;
 
   return (
-    <Dialog open={Number(myOrderDetailId) === Number(orderId)} onOpenChange={handleCloseDialog}>
+    <Dialog open={Number(orderDetailId) === Number(orderId)} onOpenChange={handleCloseDialog}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-[35rem]">
         <AlertDialogHeader className="text-2xl font-semibold">Order Detail</AlertDialogHeader>
@@ -152,11 +152,7 @@ const MyOrderDialog: FCC<Props> = ({ children, orderId, data, totalPrice, refetc
               Back
             </Button>
 
-            <Button
-              onClick={handleCancelOrder}
-              variant={'destructive'}
-              disabled={data?.status !== ORDER_STATUS_VALUE.processing}
-            >
+            <Button onClick={handleCancelOrder} variant={'destructive'}>
               Cancel Order
             </Button>
           </div>
@@ -166,4 +162,4 @@ const MyOrderDialog: FCC<Props> = ({ children, orderId, data, totalPrice, refetc
   );
 };
 
-export default MyOrderDialog;
+export default OrderDetailDialog;

@@ -252,3 +252,54 @@ export interface ICancelOrderUpdatedBy {
   isActice: boolean;
   verifyCode: any;
 }
+
+export interface IGetAllOrderParams {
+  page: number;
+  limit: number;
+  search: string;
+  status: string;
+}
+
+export interface IGetAllOrderResponse {
+  orders: IGetAllOrder[];
+  meta: IMetaPagination;
+}
+
+export interface IGetAllOrder {
+  id: number;
+  orderAt: string;
+  status: string;
+  type: string;
+  isPaid: string;
+  shippedAt: any;
+  deliveredAt: any;
+  shippingAddress: IGetAllOrderShippingAddress;
+  user: User;
+  products: IGetAllOrderProduct[];
+}
+
+export interface IGetAllOrderShippingAddress extends ICancelOrderShippingAddress {}
+
+export interface IGetAllOrderProduct {
+  id: number;
+  product_unit_price: string;
+  product_quantity: number;
+  discount: string;
+  title: string;
+  images: string[];
+  description: string;
+  product: ICancelOrderProductDetail;
+}
+
+export interface IUpdateStatusOrderParams extends ICancelOrderParams {
+  id: string;
+}
+
+export interface IUpdateStatusOrderRequest {
+  status: string;
+}
+
+export interface IUpdateStatusOrderResponse {
+  message: string;
+  status: number;
+}

@@ -4,8 +4,12 @@ import {
   type ICancelOrderResponse,
   type ICreateOrderRequest,
   type ICreateOrderResponse,
+  type IGetAllOrderParams,
+  type IGetAllOrderResponse,
   type IGetMyOrderParams,
   type IGetMyOrdersResponse,
+  type IUpdateStatusOrderParams,
+  type IUpdateStatusOrderRequest,
 } from './types';
 
 export const createOrderRequest = async (body: ICreateOrderRequest): Promise<ICreateOrderResponse> => {
@@ -33,6 +37,30 @@ export const cancelOrdersRequest = async (params: ICancelOrderParams): Promise<I
     url: `/api/v1/orders/cancel/${params.id}`,
     method: 'PUT',
     params,
+  });
+
+  return data;
+};
+
+export const getAllOrderRequest = async (params: IGetAllOrderParams): Promise<IGetAllOrderResponse> => {
+  const { data } = await request({
+    url: '/api/v1/orders',
+    method: 'GET',
+    params,
+  });
+
+  return data;
+};
+
+export const updateStatusOrdersRequest = async (req: {
+  params: IUpdateStatusOrderParams;
+  body: IUpdateStatusOrderRequest;
+}): Promise<ICancelOrderResponse> => {
+  const { data } = await request({
+    url: `/api/v1/orders/${req?.params?.id}`,
+    method: 'PUT',
+    params: req?.params,
+    data: req?.body,
   });
 
   return data;
