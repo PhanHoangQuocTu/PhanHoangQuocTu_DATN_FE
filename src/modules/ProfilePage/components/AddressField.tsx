@@ -5,11 +5,11 @@ import { TextField } from '@/components/ui/FormField';
 import { VStack } from '@/components/ui/Utilities';
 import { useGetAddress } from '@/hooks/metadata/useGetAddress';
 
-import { type checkoutType } from '../types/schema';
+import { type EditProfileType } from '../types/schema';
 
 const AddressField = () => {
   const [isBlurBox, setIsBlurBox] = React.useState(false);
-  const { control, watch, setValue } = useFormContext<checkoutType>();
+  const { control, watch, setValue } = useFormContext<EditProfileType>();
   const [address] = watch(['address']);
   const { predictionsOptions } = useGetAddress(address);
 

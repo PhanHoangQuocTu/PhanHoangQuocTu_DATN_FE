@@ -6,6 +6,8 @@ import { request } from '../axios';
 import type {
   IDeleteUserParams,
   IDeleteUserResponse,
+  IEditProfileRequest,
+  IEditProfileResponse,
   IGetAllUserParams,
   IGetAllUserResponse,
   IIsAdminParams,
@@ -49,6 +51,16 @@ export const getUserDetailRequest = async (params: IUserDetailParams): Promise<I
     url: `/api/v1/user/${params.id}`,
     method: 'GET',
     params,
+  });
+
+  return data;
+};
+
+export const editProfileRequest = async (body: IEditProfileRequest): Promise<IEditProfileResponse> => {
+  const { data } = await request({
+    url: '/api/v1/user/edit-profile',
+    method: 'PATCH',
+    data: body,
   });
 
   return data;

@@ -48,3 +48,30 @@ export interface IDeleteUserResponse {
 
 export interface IUserDetailResponse extends IUserGetAllDetail {}
 export interface IUserDetailParams extends IDeleteUserParams {}
+
+export interface IEditProfileRequest {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  dateOfBirth: string;
+  gender: string;
+  address: string;
+  email: string;
+}
+
+export interface IEditProfileResponse {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  gender: string;
+  dateOfBirth: string;
+  roles: string[];
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: any;
+  isActice: boolean;
+  verifyCode: any;
+}
