@@ -166,10 +166,89 @@ export interface IGetMyOrderProductDetail {
   updatedAt: string;
   deletedAt: any;
 }
+export interface ICancelOrderParams {
+  id: string;
+}
 
-export interface Meta {
-  limit: number;
-  totalItems: number;
-  totalPages: number;
-  currentPage: number;
+export interface ICancelOrderResponse {
+  id: number;
+  orderAt: string;
+  status: string;
+  type: string;
+  isPaid: string;
+  shippedAt: any;
+  deliveredAt: any;
+  shippingAddress: ICancelOrderShippingAddress;
+  user: User;
+  products: ICancelOrderProduct[];
+  updatedBy: ICancelOrderUpdatedBy;
+}
+
+export interface ICancelOrderShippingAddress {
+  id: number;
+  phoneNumber: string;
+  name: string;
+  address: string;
+  city: string;
+  postCode: string;
+  state: string;
+  country: string;
+}
+
+export interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  address: any;
+  gender: any;
+  dateOfBirth: any;
+  roles: string[];
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: any;
+  isActice: boolean;
+  verifyCode: any;
+}
+
+export interface ICancelOrderProduct {
+  id: number;
+  product_unit_price: string;
+  product_quantity: number;
+  discount: string;
+  title: string;
+  images: string[];
+  description: string;
+  product: ICancelOrderProductDetail;
+}
+
+export interface ICancelOrderProductDetail {
+  id: number;
+  title: string;
+  description: string;
+  price: string;
+  discount: string;
+  stock: number;
+  images: string[];
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: any;
+}
+
+export interface ICancelOrderUpdatedBy {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  address: any;
+  gender: any;
+  dateOfBirth: any;
+  roles: string[];
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: any;
+  isActice: boolean;
+  verifyCode: any;
 }

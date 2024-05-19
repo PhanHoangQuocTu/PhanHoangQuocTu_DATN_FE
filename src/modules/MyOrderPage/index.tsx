@@ -20,7 +20,7 @@ const MyOrderPage = () => {
         <span className="text-xl font-semibold">My Order</span>
         <VStack className="min-h-[100vh]">
           {orderList?.map((item) => (
-            <MyOrderItem key={item.id} data={item} />
+            <MyOrderItem key={item.id} data={item} refetch={refetch} />
           ))}
         </VStack>
 

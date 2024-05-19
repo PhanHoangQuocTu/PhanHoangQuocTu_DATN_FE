@@ -1,7 +1,9 @@
+import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import React from 'react';
+import { toast } from 'sonner';
 
-import { type IGetMyOrderDetail } from '@/api/order';
+import { cancelOrdersRequest, type IGetMyOrderDetail } from '@/api/order';
 import { Icons } from '@/assets/icons';
 import { AlertDialogFooter, AlertDialogHeader } from '@/components/ui/alert-dialog';
 import { Badge } from '@/components/ui/badge';
@@ -22,8 +24,9 @@ interface Props {
   orderId: string;
   data: IGetMyOrderDetail;
   totalPrice: number;
+  refetch: () => void;
 }
-const MyOrderDialog: FCC<Props> = ({ children, orderId, data, totalPrice }) => {
+const MyOrderDialog: FCC<Props> = ({ children, orderId, data, totalPrice, refetch }) => {
   const myOrderDetailId = useMyOrderStore.use.myOrderDetailId();
   const setMyOderDetailId = useMyOrderStore.use.setMyOderDetailId();
 
@@ -55,6 +58,20 @@ const MyOrderDialog: FCC<Props> = ({ children, orderId, data, totalPrice }) => {
         return 'error';
     }
   }, [data?.status]);
+
+  const { mutate: cancelOrder } = useMutation(cancelOrdersRequest, {
+    onSuccess: () => {
+      refetch();
+      toast.success('Cancel order successfully');
+      handleCloseDialog();
+    },
+  });
+
+  const handleCancelOrder = () => {
+    cancelOrder({
+      id: String(orderId),
+    });
+  };
 
   return (
     <Dialog open={Number(myOrderDetailId) === Number(orderId)} onOpenChange={handleCloseDialog}>
@@ -126,7 +143,11 @@ const MyOrderDialog: FCC<Props> = ({ children, orderId, data, totalPrice }) => {
               Back
             </Button>
 
-            <Button variant={'destructive'} disabled={data?.status !== ORDER_STATUS_VALUE.processing}>
+            <Button
+              onClick={handleCancelOrder}
+              variant={'destructive'}
+              disabled={data?.status !== ORDER_STATUS_VALUE.processing}
+            >
               Cancel Order
             </Button>
           </div>

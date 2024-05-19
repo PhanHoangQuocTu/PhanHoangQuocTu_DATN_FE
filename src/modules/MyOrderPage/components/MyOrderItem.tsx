@@ -15,8 +15,9 @@ import MyOrderDialog from './MyOrderDialog';
 
 interface Props {
   data: IGetMyOrderDetail;
+  refetch: () => void;
 }
-const MyOrderItem: React.FC<Props> = ({ data }) => {
+const MyOrderItem: React.FC<Props> = ({ data, refetch }) => {
   const setMyOderDetailId = useMyOrderStore.use.setMyOderDetailId();
 
   const { totalPriceList } = useGetMyOrder();
@@ -47,7 +48,7 @@ const MyOrderItem: React.FC<Props> = ({ data }) => {
       <VStack>
         <span>Order Id: {data.id}</span>
         <span>Client: {data?.shippingAddress?.name}</span>
-        <span>Price: {prettyNumber(roundNumber(String(totalPrice)))}</span>
+        <span>Price: {prettyNumber(roundNumber(String(totalPrice)))} đ</span>
 
         <HStack noWrap spacing={12}>
           <span>Status:</span>
@@ -64,7 +65,7 @@ const MyOrderItem: React.FC<Props> = ({ data }) => {
           View Detail
         </Button>
 
-        <MyOrderDialog orderId={String(data?.id)} data={data} totalPrice={totalPrice} />
+        <MyOrderDialog orderId={String(data?.id)} data={data} totalPrice={totalPrice} refetch={refetch} />
       </VStack>
     </ShadowContainer>
   );

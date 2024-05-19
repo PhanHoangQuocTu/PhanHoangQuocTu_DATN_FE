@@ -1,5 +1,7 @@
 import { request } from '../axios';
 import {
+  type ICancelOrderParams,
+  type ICancelOrderResponse,
   type ICreateOrderRequest,
   type ICreateOrderResponse,
   type IGetMyOrderParams,
@@ -20,6 +22,16 @@ export const getMyOrdersRequest = async (params: IGetMyOrderParams): Promise<IGe
   const { data } = await request({
     url: '/api/v1/orders/user/me',
     method: 'GET',
+    params,
+  });
+
+  return data;
+};
+
+export const cancelOrdersRequest = async (params: ICancelOrderParams): Promise<ICancelOrderResponse> => {
+  const { data } = await request({
+    url: `/api/v1/orders/cancel/${params.id}`,
+    method: 'PUT',
     params,
   });
 
