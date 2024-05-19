@@ -59,6 +59,10 @@ module.exports = {
         '8': '8px',
       },
       colors: {
+        vibrantOrange: '#FF5733',
+        brightGreen: '#33FF57',
+        deepBlue: '#3357FF',
+        livelyPurple: '#F333FF',
         border: {
           DEFAULT: 'hsl(var(--border))',
         },

@@ -303,3 +303,18 @@ export interface IUpdateStatusOrderResponse {
   message: string;
   status: number;
 }
+
+export interface IGetMonthlyReportParams {
+  page: number;
+  limit: number;
+}
+
+export interface IGetMonthlyReportResponse {
+  data: IMonthlyReport[];
+  meta: IMetaPagination;
+}
+
+export interface IMonthlyReport {
+  month: string;
+  totalRevenue: number;
+}

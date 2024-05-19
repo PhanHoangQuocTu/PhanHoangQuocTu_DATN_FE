@@ -1,5 +1,5 @@
 // @flow
-import { BookCopy, Contact, LayoutDashboard, ScrollText, SquareGantt, UserCheckIcon, UserPlus } from 'lucide-react';
+import { BookCopy, Contact, ScrollText, SquareGantt, UserCheckIcon, UserPlus } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
 
@@ -8,11 +8,6 @@ import { ROUTE } from '@/types';
 import { SidebarItem } from './SidebarItem';
 
 const SIDEBAR_LIST = [
-  {
-    name: 'DASHBOARD',
-    href: ROUTE.DASHBOARD,
-    icon: LayoutDashboard,
-  },
   {
     name: 'USER MANAGEMENT',
     href: ROUTE.USER_MANAGEMENT,

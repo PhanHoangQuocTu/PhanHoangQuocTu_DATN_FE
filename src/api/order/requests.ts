@@ -6,6 +6,8 @@ import {
   type ICreateOrderResponse,
   type IGetAllOrderParams,
   type IGetAllOrderResponse,
+  type IGetMonthlyReportParams,
+  type IGetMonthlyReportResponse,
   type IGetMyOrderParams,
   type IGetMyOrdersResponse,
   type IUpdateStatusOrderParams,
@@ -61,6 +63,16 @@ export const updateStatusOrdersRequest = async (req: {
     method: 'PUT',
     params: req?.params,
     data: req?.body,
+  });
+
+  return data;
+};
+
+export const getMonthlyReportRequest = async (params: IGetMonthlyReportParams): Promise<IGetMonthlyReportResponse> => {
+  const { data } = await request({
+    url: '/api/v1/orders/monthly-revenue',
+    method: 'GET',
+    params,
   });
 
   return data;

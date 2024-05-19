@@ -15,6 +15,7 @@ export const ROUTE = {
   AUTHOR_MANAGEMENT: '/admin/author-management',
   MY_ORDER: '/my-order',
   CHECKOUT: '/checkout',
+  MONTHLY_REPORTS: '/monthly-reports',
 } as const;
 
 export type ROUTE_KEY = keyof typeof ROUTE;

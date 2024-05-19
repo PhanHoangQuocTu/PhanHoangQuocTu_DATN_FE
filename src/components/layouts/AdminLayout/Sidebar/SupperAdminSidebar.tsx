@@ -1,5 +1,5 @@
 // @flow
-import { UserCog } from 'lucide-react';
+import { LayoutDashboard, Receipt } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
 
@@ -9,9 +9,14 @@ import { SidebarItem } from './SidebarItem';
 
 const SIDEBAR_SUPPER_ADMIN_LIST = [
   {
-    name: 'Admin Management',
-    href: ROUTE.LOGIN,
-    icon: UserCog,
+    name: 'DASHBOARD',
+    href: ROUTE.DASHBOARD,
+    icon: LayoutDashboard,
+  },
+  {
+    name: 'MONTHLY REPORTS',
+    href: ROUTE.MONTHLY_REPORTS,
+    icon: Receipt,
   },
 ];
 
@@ -20,16 +25,12 @@ export const SupperAdminSidebar = ({ opened }: Props) => {
   const pathname = usePathname();
 
   return (
-    <>
-      <p className="text-xs font-semibold text-gray-300">Supper Admin Settings</p>
+    <div>
+      {SIDEBAR_SUPPER_ADMIN_LIST.map(({ href, name, icon }) => {
+        const isActive = pathname.includes(href);
 
-      <div>
-        {SIDEBAR_SUPPER_ADMIN_LIST.map(({ href, name, icon }) => {
-          const isActive = pathname.includes(href);
-
-          return <SidebarItem key={href} href={href} name={name} opened={opened} icon={icon} isActive={isActive} />;
-        })}
-      </div>
-    </>
+        return <SidebarItem key={href} href={href} name={name} opened={opened} icon={icon} isActive={isActive} />;
+      })}
+    </div>
   );
 };
