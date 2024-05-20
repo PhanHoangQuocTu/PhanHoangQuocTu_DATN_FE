@@ -6,3 +6,9 @@ export default AuthorManagementPage;
 AuthorManagementPage.getLayout = (page) => {
   return <AuthorManagementLayout>{page}</AuthorManagementLayout>;
 };
+
+export async function getServerSideProps({ params }: any) {
+  return {
+    props: params,
+  };
+}

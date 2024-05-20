@@ -6,3 +6,9 @@ export default BookManagementPage;
 BookManagementPage.getLayout = (page) => {
   return <BookManagementLayout>{page}</BookManagementLayout>;
 };
+
+export async function getServerSideProps({ params }: any) {
+  return {
+    props: params,
+  };
+}
