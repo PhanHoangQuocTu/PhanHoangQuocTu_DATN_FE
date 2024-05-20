@@ -318,3 +318,15 @@ export interface IMonthlyReport {
   month: string;
   totalRevenue: number;
 }
+
+export interface IGetVnPayUrlParams {
+  returnUrlLocal: string;
+}
+
+export interface IGetVnPayUrlRequest {
+  totalAmount: number;
+}
+
+export interface IGetVnPayUrlResponse {
+  url: string;
+}

@@ -5,7 +5,7 @@ import React from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { createOrderRequest } from '@/api/order';
+import { createOrderRequest, getVnPayUrlRequest } from '@/api/order';
 import { Button } from '@/components/ui/button';
 import { FormWrapper } from '@/components/ui/form';
 import { HStack, VStack } from '@/components/ui/Utilities';
@@ -21,7 +21,8 @@ import { checkoutSchema, type checkoutType } from './types/schema';
 
 const CheckoutPage = () => {
   const { user, isLoggedIn } = useAuth();
-  const { cartCheckout } = useGetCart();
+  const { cartCheckout, totalPrice } = useGetCart();
+  console.log('🚀 ~ CheckoutPage ~ totalPrice:', totalPrice);
   const router = useRouter();
 
   React.useEffect(() => {
@@ -50,6 +51,12 @@ const CheckoutPage = () => {
     },
   });
 
+  const { mutate: getVnpayReturnUrl } = useMutation(getVnPayUrlRequest, {
+    onSuccess: (data) => {
+      console.log('🚀 ~ CheckoutPage ~ data:', data);
+    },
+  });
+
   const handleSubmit: SubmitHandler<checkoutType> = async (formData) => {
     if (formData.paymentMethod === PAYMENT_METHOD_VALUE.cash) {
       createOrder({
@@ -66,7 +73,17 @@ const CheckoutPage = () => {
         },
         orderedProducts: cartCheckout,
       });
+      return;
     }
+
+    getVnpayReturnUrl({
+      params: {
+        returnUrlLocal: '',
+      },
+      body: {
+        totalAmount: 10000,
+      },
+    });
   };
 
   return (
