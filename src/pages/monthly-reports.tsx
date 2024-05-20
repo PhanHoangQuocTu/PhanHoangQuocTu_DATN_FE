@@ -1,3 +1,3 @@
-import MonthlyReportPage from "@/modules/MonthlyReportPage";
+import MonthlyReportPage from '@/modules/MonthlyReportPage';
 
-export default MonthlyReportPage
+export default MonthlyReportPage;

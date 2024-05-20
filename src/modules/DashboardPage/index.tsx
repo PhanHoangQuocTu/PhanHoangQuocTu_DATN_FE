@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { DashboardLayout } from '@/components/layouts/DashboardLayout';
 import { useGetAllOrder } from '@/hooks/order/useGetAllOrder';
 import { useGetAllBook } from '@/hooks/product/useGetAllBook';
 import { useGetAllUser } from '@/hooks/user/useGetAllUser';
@@ -43,3 +44,7 @@ const DashboardPage: NextPageWithLayout = () => {
 };
 
 export default DashboardPage;
+
+DashboardPage.getLayout = (page) => {
+  return <DashboardLayout>{page}</DashboardLayout>;
+};
