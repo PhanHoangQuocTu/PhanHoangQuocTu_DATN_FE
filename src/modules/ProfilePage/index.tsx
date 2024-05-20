@@ -6,8 +6,10 @@ import { VStack } from '@/components/ui/Utilities';
 import { useAuth } from '@/hooks/useAuth';
 import { ROUTE } from '@/types';
 
+import ChangePassword from './components/ChangePassword';
 import EditProfile from './components/EditProfile';
 import ProfileOverview from './components/ProfileOverview';
+import { TAB_MY_PROFILE } from './types/const';
 
 const ProfilePage = () => {
   const [tab, setTab] = React.useState(TAB_MY_PROFILE[0].value);
@@ -29,27 +31,9 @@ const ProfilePage = () => {
 
       {tab === TAB_MY_PROFILE[0].value && <ProfileOverview />}
       {tab === TAB_MY_PROFILE[1].value && <EditProfile />}
+      {tab === TAB_MY_PROFILE[2].value && <ChangePassword />}
     </div>
   );
 };
 
 export default ProfilePage;
-
-export const TAB_MY_PROFILE = [
-  {
-    label: 'Profile Overview',
-    value: 'my-profile',
-  },
-  {
-    label: 'Edit Profile Details',
-    value: 'update-profile',
-  },
-  {
-    label: 'Security Settings',
-    value: 'change-password',
-  },
-  {
-    label: 'Account Activation',
-    value: 'active-account',
-  },
-];

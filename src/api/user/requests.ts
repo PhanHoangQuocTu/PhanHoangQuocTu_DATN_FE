@@ -4,6 +4,8 @@ import { env } from '@/lib/const';
 
 import { request } from '../axios';
 import type {
+  IChangePasswordRequest,
+  IChangePasswordResponse,
   IDeleteUserParams,
   IDeleteUserResponse,
   IEditProfileRequest,
@@ -60,6 +62,16 @@ export const editProfileRequest = async (body: IEditProfileRequest): Promise<IEd
   const { data } = await request({
     url: '/api/v1/user/edit-profile',
     method: 'PATCH',
+    data: body,
+  });
+
+  return data;
+};
+
+export const changePasswordRequest = async (body: IChangePasswordRequest): Promise<IChangePasswordResponse> => {
+  const { data } = await request({
+    url: '/api/v1/user/change-password',
+    method: 'POST',
     data: body,
   });
 

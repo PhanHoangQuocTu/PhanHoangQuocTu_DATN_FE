@@ -32,16 +32,16 @@ export const editProfileSchema = z.object({
 
 export const changePasswordSchema = z
   .object({
-    email: z
+    currentPassword: z
       .string()
       .min(1, {
         message: validationMessages.required(),
       })
-      .email(validationMessages.invalid('Email')),
-    phoneNumber: z.string().min(1, {
-      message: validationMessages.required(),
-    }),
-    password: z
+      .regex(REGEX_PASSWORD, {
+        message:
+          'Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character',
+      }),
+    newPassword: z
       .string()
       .min(1, {
         message: validationMessages.required(),
@@ -60,7 +60,7 @@ export const changePasswordSchema = z
           'Confirm Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character',
       }),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.newPassword === data.confirmPassword, {
     message: 'Passwords do not match',
     path: ['confirmPassword'],
   });

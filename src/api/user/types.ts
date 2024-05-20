@@ -75,3 +75,13 @@ export interface IEditProfileResponse {
   isActice: boolean;
   verifyCode: any;
 }
+
+export interface IChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export interface IChangePasswordResponse {
+  message: string;
+  code: number;
+}

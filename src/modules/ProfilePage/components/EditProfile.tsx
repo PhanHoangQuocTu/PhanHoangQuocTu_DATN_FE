@@ -16,6 +16,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { onMutateError } from '@/lib/common';
 import { useUserStore } from '@/stores';
 
+import { GENDER_OPTIONS } from '../types/const';
 import { editProfileSchema, type EditProfileType } from '../types/schema';
 import AddressField from './AddressField';
 
@@ -137,16 +138,7 @@ const EditProfile = () => {
               <SelectField
                 className="h-11 w-full"
                 control={form.control}
-                data={[
-                  {
-                    label: 'Male',
-                    value: 'Male',
-                  },
-                  {
-                    label: 'Female',
-                    value: 'Female',
-                  },
-                ]}
+                data={GENDER_OPTIONS}
                 label="Gender"
                 name="gender"
                 placeholder="Please Enter Gender"
