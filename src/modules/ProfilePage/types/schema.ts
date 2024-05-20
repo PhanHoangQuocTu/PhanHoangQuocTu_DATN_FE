@@ -65,5 +65,12 @@ export const changePasswordSchema = z
     path: ['confirmPassword'],
   });
 
+export const activeAccountSchema = z.object({
+  verifyCode: z.string().min(1, {
+    message: validationMessages.required(),
+  }),
+});
+
 export type ChangePasswordType = z.infer<typeof changePasswordSchema>;
 export type EditProfileType = z.infer<typeof editProfileSchema>;
+export type ActiveAccountType = z.infer<typeof activeAccountSchema>;

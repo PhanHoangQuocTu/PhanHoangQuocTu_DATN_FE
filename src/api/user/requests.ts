@@ -14,8 +14,11 @@ import type {
   IGetAllUserResponse,
   IIsAdminParams,
   IIsAdminResponse,
+  ISendVerifyCodeResponse,
   IUserDetailParams,
   IUserDetailResponse,
+  IVerifyAccountRequest,
+  IVerifyAccountResponse,
 } from './types';
 
 export const isAdminRequest = async (params: IIsAdminParams): Promise<IIsAdminResponse> => {
@@ -71,6 +74,25 @@ export const editProfileRequest = async (body: IEditProfileRequest): Promise<IEd
 export const changePasswordRequest = async (body: IChangePasswordRequest): Promise<IChangePasswordResponse> => {
   const { data } = await request({
     url: '/api/v1/user/change-password',
+    method: 'POST',
+    data: body,
+  });
+
+  return data;
+};
+
+export const sendVerifyCodeRequest = async (): Promise<ISendVerifyCodeResponse> => {
+  const { data } = await request({
+    url: '/api/v1/user/generate-verify-code',
+    method: 'POST',
+  });
+
+  return data;
+};
+
+export const verifyAccountRequest = async (body: IVerifyAccountRequest): Promise<IVerifyAccountResponse> => {
+  const { data } = await request({
+    url: '/api/v1/user/activate-user',
     method: 'POST',
     data: body,
   });

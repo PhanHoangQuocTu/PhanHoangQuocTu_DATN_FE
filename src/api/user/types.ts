@@ -85,3 +85,27 @@ export interface IChangePasswordResponse {
   message: string;
   code: number;
 }
+
+export interface ISendVerifyCodeResponse {
+  message: string;
+}
+export interface IVerifyAccountRequest {
+  verifyCode: string;
+}
+
+export interface IVerifyAccountResponse {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  gender: string;
+  dateOfBirth: string;
+  roles: string[];
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: any;
+  isActice: boolean;
+  verifyCode: string;
+}

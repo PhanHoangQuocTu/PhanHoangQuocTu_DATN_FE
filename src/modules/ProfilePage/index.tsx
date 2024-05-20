@@ -6,6 +6,7 @@ import { VStack } from '@/components/ui/Utilities';
 import { useAuth } from '@/hooks/useAuth';
 import { ROUTE } from '@/types';
 
+import ActiveAccount from './components/ActiveAccount';
 import ChangePassword from './components/ChangePassword';
 import EditProfile from './components/EditProfile';
 import ProfileOverview from './components/ProfileOverview';
@@ -32,6 +33,7 @@ const ProfilePage = () => {
       {tab === TAB_MY_PROFILE[0].value && <ProfileOverview />}
       {tab === TAB_MY_PROFILE[1].value && <EditProfile />}
       {tab === TAB_MY_PROFILE[2].value && <ChangePassword />}
+      {tab === TAB_MY_PROFILE[3].value && <ActiveAccount />}
     </div>
   );
 };
