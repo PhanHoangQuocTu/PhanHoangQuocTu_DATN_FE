@@ -50,3 +50,11 @@ export interface IApprovePostResponse {
   message: string;
   code: number;
 }
+
+export interface IGetAllPostByMeParams {
+  search: string;
+  page: number;
+  limit: number;
+}
+
+export interface IGetAllPostByMeResponse extends IGetAllPostResponse {}

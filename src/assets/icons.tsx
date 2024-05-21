@@ -18,6 +18,7 @@ import {
   Loader2,
   LogOut,
   MapPin,
+  MessageCircle,
   Minus,
   Pencil,
   Plus,
@@ -28,6 +29,8 @@ import {
   ShoppingCart,
   Star,
   Trash,
+  Twitch,
+  Twitter,
   Upload,
   User,
   X,
@@ -67,6 +70,9 @@ const IconList = {
   receipt: Receipt,
   mapPin: MapPin,
   scrollText: ScrollText,
+  twitter: Twitter,
+  twitch: Twitch,
+  messageCirle: MessageCircle,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;

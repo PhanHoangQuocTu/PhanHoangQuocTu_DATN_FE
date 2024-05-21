@@ -9,6 +9,7 @@ import { ROUTE } from '@/types';
 import ActiveAccount from './components/ActiveAccount';
 import ChangePassword from './components/ChangePassword';
 import EditProfile from './components/EditProfile';
+import MyPost from './components/MyPost';
 import ProfileOverview from './components/ProfileOverview';
 import { TAB_MY_PROFILE } from './types/const';
 
@@ -34,6 +35,7 @@ const ProfilePage = () => {
       {tab === TAB_MY_PROFILE[1].value && <EditProfile />}
       {tab === TAB_MY_PROFILE[2].value && <ChangePassword />}
       {tab === TAB_MY_PROFILE[3].value && <ActiveAccount />}
+      {tab === TAB_MY_PROFILE[4].value && <MyPost />}
     </div>
   );
 };

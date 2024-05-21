@@ -15,6 +15,10 @@ export const TAB_MY_PROFILE = [
     label: 'Account Activation',
     value: 'active-account',
   },
+  {
+    label: 'My Post',
+    value: 'my-post',
+  },
 ];
 
 export const GENDER_OPTIONS = [

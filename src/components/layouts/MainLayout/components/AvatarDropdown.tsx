@@ -43,6 +43,12 @@ const AvatarDropdown: FCC = ({ children }) => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
+            <Link href={ROUTE.PROFILE} className="flex items-center gap-2 p-2">
+              <Icons.twitch />
+              <span>My Post</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
             <Link href={ROUTE.MY_ORDER} className="flex items-center gap-2 p-2">
               <Icons.receipt />
               <span>My Orders</span>
