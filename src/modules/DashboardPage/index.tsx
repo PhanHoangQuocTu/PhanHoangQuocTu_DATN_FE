@@ -35,7 +35,7 @@ const DashboardPage: NextPageWithLayout = () => {
         />
         <DashboardBox
           title="Total Revenue "
-          value={`${prettyNumber(roundNumber(String(totalRevenue)))} đ`}
+          value={`${prettyNumber(roundNumber(String(totalRevenue || 0)))} đ`}
           className="col-span-1 bg-gradient-to-br from-[#38ef7d] to-[#11998e]"
         />
       </div>

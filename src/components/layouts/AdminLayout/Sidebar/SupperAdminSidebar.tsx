@@ -1,5 +1,5 @@
 // @flow
-import { LayoutDashboard, Receipt } from 'lucide-react';
+import { LayoutDashboard, Receipt, Twitch } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
 
@@ -17,6 +17,11 @@ const SIDEBAR_SUPPER_ADMIN_LIST = [
     name: 'MONTHLY REPORTS',
     href: ROUTE.MONTHLY_REPORTS,
     icon: Receipt,
+  },
+  {
+    name: 'POST MANAGEMENT',
+    href: ROUTE.POST_MANAGEMENT,
+    icon: Twitch,
   },
 ];
 

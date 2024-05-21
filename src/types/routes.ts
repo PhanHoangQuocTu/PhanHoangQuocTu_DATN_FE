@@ -17,6 +17,8 @@ export const ROUTE = {
   CHECKOUT: '/checkout',
   MONTHLY_REPORTS: '/monthly-reports',
   VNPAY_RETURN: 'vnpay-return',
+  POST_MANAGEMENT: '/admin/post-management',
+  POST: '/post',
 } as const;
 
 export type ROUTE_KEY = keyof typeof ROUTE;
