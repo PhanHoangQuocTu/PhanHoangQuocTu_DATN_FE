@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import { toast } from 'sonner';
 
 import { Icons } from '@/assets/icons';
 import {
@@ -21,6 +22,7 @@ const AvatarDropdown: FCC = ({ children }) => {
   const logout = useUserStore.use.logout();
 
   const handleLogout = () => {
+    toast.success('Logout successfully!');
     logout();
   };
 

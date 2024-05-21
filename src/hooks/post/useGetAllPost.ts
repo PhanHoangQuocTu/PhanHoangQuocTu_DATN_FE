@@ -5,12 +5,12 @@ import { type PostManagementFilterType } from '@/modules/PostManagementPage/type
 
 import usePaging from '../usePaging';
 
-export const useGetAllPost = (limit = 10) => {
+export const useGetAllPost = (limit = 10, defaultApprove = '') => {
   const { paging, filter, onPageChange, handleFilterChange, onTotalItemsChange } = usePaging<PostManagementFilterType>(
     limit,
     {
       search: '',
-      isApprove: '',
+      isApprove: defaultApprove,
     }
   );
 

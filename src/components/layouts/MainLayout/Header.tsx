@@ -30,8 +30,13 @@ const Header = () => {
           <Link className="text-primary text-lg font-medium hover:opacity-70" href={ROUTE.HOME}>
             Home
           </Link>
+
           <Link className="text-primary text-lg font-medium hover:opacity-70" href={ROUTE.BOOKS}>
             Books
+          </Link>
+
+          <Link className="text-primary text-lg font-medium hover:opacity-70" href={ROUTE.POST}>
+            Community
           </Link>
         </HStack>
         <div className="">{isMobile ? <Sidebar /> : <Navbar />}</div>
