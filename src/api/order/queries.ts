@@ -1,6 +1,6 @@
 import { createQuery } from 'react-query-kit';
 
-import { getAllOrderRequest, getMonthlyReportRequest, getMyOrdersRequest } from './requests';
+import { getAllOrderRequest, getMonthlyReportRequest, getMyOrdersRequest, getResultVnPaRequest } from './requests';
 import {
   type IGetAllOrderParams,
   type IGetAllOrderResponse,
@@ -8,6 +8,8 @@ import {
   type IGetMonthlyReportResponse,
   type IGetMyOrderParams,
   type IGetMyOrdersResponse,
+  type IGetVNPAYReturnParams,
+  type IGetVNPAYReturnResponse,
 } from './types';
 
 export const useGetMyOrdersQuery = createQuery<IGetMyOrdersResponse, IGetMyOrderParams>({
@@ -23,4 +25,9 @@ export const useGetAllOrdersQuery = createQuery<IGetAllOrderResponse, IGetAllOrd
 export const useGetMonthlyReportQuery = createQuery<IGetMonthlyReportResponse, IGetMonthlyReportParams>({
   primaryKey: '/api/v1/orders/monthly-revenue',
   queryFn: ({ queryKey: [, params] }) => getMonthlyReportRequest(params),
+});
+
+export const useGetResultVnPaQuery = createQuery<IGetVNPAYReturnResponse, IGetVNPAYReturnParams>({
+  primaryKey: '/api/v1/orders/return_url',
+  queryFn: ({ queryKey: [, params] }) => getResultVnPaRequest(params),
 });

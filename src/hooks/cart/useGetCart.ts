@@ -37,6 +37,12 @@ export const useGetCart = () => {
     return prettyNumber(roundNumber(String(Number(bookPrices) - Number(totalDiscountPrice))));
   }, [bookPrices, totalDiscountPrice]);
 
+  const totalPriceValue = React.useMemo(() => {
+    if (!Number(bookPrices) || !Number(totalDiscountPrice)) return 0;
+
+    return Number(bookPrices) - Number(totalDiscountPrice);
+  }, [bookPrices, totalDiscountPrice]);
+
   const cartCheckout = React.useMemo(() => {
     if (!data?.cart?.items?.length) return [];
 
@@ -57,6 +63,7 @@ export const useGetCart = () => {
     totalDiscountPrice,
     totalPrice,
     cartCheckout,
+    totalPriceValue,
     ...rest,
   };
 };

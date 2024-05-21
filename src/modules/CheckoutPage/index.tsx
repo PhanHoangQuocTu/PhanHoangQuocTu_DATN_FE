@@ -11,6 +11,7 @@ import { FormWrapper } from '@/components/ui/form';
 import { HStack, VStack } from '@/components/ui/Utilities';
 import { useGetCart } from '@/hooks/cart/useGetCart';
 import { useAuth } from '@/hooks/useAuth';
+import { env } from '@/lib/const';
 import { ROUTE } from '@/types';
 
 import CartSummary from '../CartPage/components/CartSummary';
@@ -21,8 +22,7 @@ import { checkoutSchema, type checkoutType } from './types/schema';
 
 const CheckoutPage = () => {
   const { user, isLoggedIn } = useAuth();
-  const { cartCheckout, totalPrice } = useGetCart();
-  console.log('🚀 ~ CheckoutPage ~ totalPrice:', totalPrice);
+  const { cartCheckout, totalPriceValue } = useGetCart();
   const router = useRouter();
 
   React.useEffect(() => {
@@ -43,47 +43,52 @@ const CheckoutPage = () => {
     },
   });
 
-  const { mutate: createOrder } = useMutation(createOrderRequest, {
-    onSuccess: () => {
-      toast.success('Create order successfully!');
-      form.reset();
-      router.replace(ROUTE.MY_ORDER);
-    },
-  });
+  const [paymentMethod] = form.watch(['paymentMethod']);
 
   const { mutate: getVnpayReturnUrl } = useMutation(getVnPayUrlRequest, {
     onSuccess: (data) => {
-      console.log('🚀 ~ CheckoutPage ~ data:', data);
+      router.replace(data?.url);
+    },
+  });
+
+  const { mutate: createOrder } = useMutation(createOrderRequest, {
+    onSuccess: (data) => {
+      if (paymentMethod === PAYMENT_METHOD_VALUE.cash) {
+        toast.success('Create order successfully!');
+        form.reset();
+        router.replace(ROUTE.MY_ORDER);
+        return;
+      }
+
+      const returnUrl = `${env.APP_URL}/${ROUTE.VNPAY_RETURN}?orderId=${data.id}`;
+
+      getVnpayReturnUrl({
+        params: {
+          returnUrlLocal: returnUrl,
+        },
+        body: {
+          totalAmount: totalPriceValue,
+        },
+      });
     },
   });
 
   const handleSubmit: SubmitHandler<checkoutType> = async (formData) => {
-    if (formData.paymentMethod === PAYMENT_METHOD_VALUE.cash) {
-      createOrder({
-        isPaid: 'false',
-        type: formData.paymentMethod,
-        shippingAddress: {
-          name: formData.name,
-          address: formData.address,
-          city: formData.city,
-          country: 'Vietnam',
-          phoneNumber: formData.phoneNumber,
-          postCode: formData.postCode,
-          state: formData.city,
-        },
-        orderedProducts: cartCheckout,
-      });
-      return;
-    }
-
-    getVnpayReturnUrl({
-      params: {
-        returnUrlLocal: '',
+    const formWrap = {
+      isPaid: 'false',
+      type: formData.paymentMethod,
+      shippingAddress: {
+        name: formData.name,
+        address: formData.address,
+        city: formData.city,
+        country: 'Vietnam',
+        phoneNumber: formData.phoneNumber,
+        postCode: formData.postCode,
+        state: formData.city,
       },
-      body: {
-        totalAmount: 10000,
-      },
-    });
+      orderedProducts: cartCheckout,
+    };
+    createOrder(formWrap);
   };
 
   return (
@@ -102,7 +107,7 @@ const CheckoutPage = () => {
         <span className="text-red-500 text-xs font-semibold">
           Note: You need to active your account before you can create an order
         </span>
-        <Button disabled={!user?.isActice} type="submit">
+        <Button disabled={!user?.isActice || !totalPriceValue} type="submit">
           Create Order
         </Button>
       </HStack>

@@ -10,6 +10,8 @@ import {
   type IGetMonthlyReportResponse,
   type IGetMyOrderParams,
   type IGetMyOrdersResponse,
+  type IGetVNPAYReturnParams,
+  type IGetVNPAYReturnResponse,
   type IGetVnPayUrlParams,
   type IGetVnPayUrlRequest,
   type IGetVnPayUrlResponse,
@@ -86,10 +88,20 @@ export const getVnPayUrlRequest = async (req: {
   body: IGetVnPayUrlRequest;
 }): Promise<IGetVnPayUrlResponse> => {
   const { data } = await request({
-    url: '/api/v1/orders//create-checkout-vnpay',
+    url: '/api/v1/orders/create-checkout-vnpay',
     method: 'POST',
     params: req?.params,
     data: req?.body,
+  });
+
+  return data;
+};
+
+export const getResultVnPaRequest = async (params: IGetVNPAYReturnParams): Promise<IGetVNPAYReturnResponse> => {
+  const { data } = await request({
+    url: '/api/v1/orders/return_url',
+    method: 'GET',
+    params,
   });
 
   return data;

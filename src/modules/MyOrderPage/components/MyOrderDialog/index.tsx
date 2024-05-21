@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
 import { HStack, VStack } from '@/components/ui/Utilities';
 import { prettyNumber, roundNumber } from '@/lib/common';
+import { cn } from '@/lib/utils';
 import { PAYMENT_METHOD_OPTIONS } from '@/modules/CheckoutPage/types/const';
 import { useMyOrderStore } from '@/stores/MyOrderStore';
 import { type FCC } from '@/types';
@@ -99,7 +100,14 @@ const MyOrderDialog: FCC<Props> = ({ children, orderId, data, totalPrice, refetc
 
           <VStack>
             <OrderInfo title="Payment Method" data={paymentMethod} />
-            <OrderInfo title="Payment Status" data={paymentStatus} />
+            <OrderInfo
+              title="Payment Status"
+              data={paymentStatus}
+              dataClassName={cn({
+                'text-destructive': data?.isPaid === 'false',
+                'text-success': data?.isPaid === 'true',
+              })}
+            />
           </VStack>
 
           <Separator />

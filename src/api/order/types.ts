@@ -330,3 +330,81 @@ export interface IGetVnPayUrlRequest {
 export interface IGetVnPayUrlResponse {
   url: string;
 }
+
+export interface IGetVNPAYReturnParams {
+  vnp_TransactionStatus: string;
+  vnp_TransactionNo: string;
+  vnp_ResponseCode: string;
+  orderId: string;
+}
+
+export interface IGetVNPAYReturnResponse {
+  message: string;
+  status: number;
+  order: IGetVnpayReturnOrder;
+}
+
+export interface IGetVnpayReturnOrder {
+  id: number;
+  orderAt: string;
+  status: string;
+  type: string;
+  isPaid: string;
+  shippedAt: any;
+  deliveredAt: any;
+  shippingAddress: IGetVnpayReturnShippingAddress;
+  user: IGetVnpayReturnUser;
+  products: IGetVnpayReturnProduct[];
+}
+
+export interface IGetVnpayReturnShippingAddress {
+  id: number;
+  phoneNumber: string;
+  name: string;
+  address: string;
+  city: string;
+  postCode: string;
+  state: string;
+  country: string;
+}
+
+export interface IGetVnpayReturnUser {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  address: any;
+  gender: any;
+  dateOfBirth: any;
+  roles: string[];
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: any;
+  isActice: boolean;
+  verifyCode: any;
+}
+
+export interface IGetVnpayReturnProduct {
+  id: number;
+  product_unit_price: string;
+  product_quantity: number;
+  discount: string;
+  title: string;
+  images: string[];
+  description: string;
+  product: IGetVnpayReturnProductDetail;
+}
+
+export interface IGetVnpayReturnProductDetail {
+  id: number;
+  title: string;
+  description: string;
+  price: string;
+  discount: string;
+  stock: number;
+  images: string[];
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: any;
+}

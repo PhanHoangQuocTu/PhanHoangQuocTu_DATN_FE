@@ -16,6 +16,7 @@ export const ROUTE = {
   MY_ORDER: '/my-order',
   CHECKOUT: '/checkout',
   MONTHLY_REPORTS: '/monthly-reports',
+  VNPAY_RETURN: 'vnpay-return',
 } as const;
 
 export type ROUTE_KEY = keyof typeof ROUTE;
