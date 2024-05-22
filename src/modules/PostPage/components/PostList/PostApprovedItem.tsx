@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import { type IGetAllPostDetail } from '@/api/post';
@@ -7,12 +8,14 @@ import { Icons } from '@/assets/icons';
 import { ShadowContainer } from '@/components/ShadowContainer';
 import { Button } from '@/components/ui/button';
 import { HStack, VStack } from '@/components/ui/Utilities';
+import { ROUTE } from '@/types';
 
 interface Props {
   post: IGetAllPostDetail;
 }
 
 const PostApprovedItem: React.FC<Props> = ({ post }) => {
+  const router = useRouter();
   const imagePost = React.useMemo(() => {
     if (!post?.images?.length) return '';
 
@@ -53,7 +56,9 @@ const PostApprovedItem: React.FC<Props> = ({ post }) => {
               <Icons.messageCirle size={20} />
             </HStack>
 
-            <Button size={'sm'}>View Detail</Button>
+            <Button size={'sm'} onClick={() => router.push(`/${ROUTE.POST}/${post?.id}`)}>
+              View Detail
+            </Button>
           </HStack>
         </VStack>
       </HStack>

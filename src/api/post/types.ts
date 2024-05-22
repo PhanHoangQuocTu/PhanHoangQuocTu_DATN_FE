@@ -66,3 +66,10 @@ export interface ICreatePostRequest {
 }
 
 export interface IEditPostRequest extends ICreatePostRequest {}
+export interface IEditPostParams {
+  id: string;
+}
+
+export interface IDeletePostParams extends IEditPostParams {}
+export interface IGetPostByIdParams extends IEditPostParams {}
+export interface IGetPostByIdResponse extends IGetAllPostDetail {}

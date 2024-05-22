@@ -20,12 +20,14 @@ const CreatePost = () => {
   const setIsCreate = usePostStore.use.setIsCreate();
   const setIsEdit = usePostStore.use.setIsEdit();
   const setPostEditId = usePostStore.use.setPostEditId();
+  const setPostImg = usePostStore.use.setPostImg();
 
   const handleOpenCreatePostDialog = React.useCallback(() => {
     setIsCreate(true);
     setIsEdit(false);
     setPostEditId('');
-  }, [setIsCreate, setIsEdit, setPostEditId]);
+    setPostImg('');
+  }, [setIsCreate, setIsEdit, setPostEditId, setPostImg]);
 
   const avatarShow = React.useMemo(() => {
     if (isLoggedIn) {

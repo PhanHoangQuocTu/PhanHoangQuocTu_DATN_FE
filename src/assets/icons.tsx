@@ -27,6 +27,7 @@ import {
   RotateCw,
   ScrollText,
   Search,
+  Settings,
   ShoppingCart,
   Star,
   Trash,
@@ -75,6 +76,7 @@ const IconList = {
   twitch: Twitch,
   messageCirle: MessageCircle,
   file: File,
+  settings: Settings,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;

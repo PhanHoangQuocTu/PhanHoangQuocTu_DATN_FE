@@ -4,8 +4,8 @@ import React from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { editProductRequest } from '@/api/product';
-import { useGetDetailProductQuery } from '@/api/product/queries';
+import { editPostRequest } from '@/api/post';
+import { useGetAllPostByIdQuery } from '@/api/post/queries';
 import { AlertDialogFooter, AlertDialogHeader } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
@@ -21,10 +21,10 @@ import { handlePostSchema, type HandlePostType } from '../../types/schema';
 
 interface Props {
   refetch: () => void;
-  bookId: number;
+  postId: string;
 }
 
-const EditPostDialog: FCC<Props> = ({ children, refetch, bookId }) => {
+const EditPostDialog: FCC<Props> = ({ children, refetch, postId }) => {
   const postEditId = usePostStore.use.postEditId();
   const isEdit = usePostStore.use.isEdit();
   const setPostEditId = usePostStore.use.setPostEditId();
@@ -34,11 +34,11 @@ const EditPostDialog: FCC<Props> = ({ children, refetch, bookId }) => {
   const setPostImg = usePostStore.use.setPostImg();
   const { url } = useUploadPostImg();
 
-  const { data, isSuccess } = useGetDetailProductQuery({
+  const { data, isSuccess } = useGetAllPostByIdQuery({
     variables: {
-      id: bookId,
+      id: String(postId),
     },
-    enabled: !!bookId && !!postEditId && isEdit,
+    enabled: !!postEditId && isEdit,
   });
 
   const form = useForm<HandlePostType>({
@@ -53,16 +53,11 @@ const EditPostDialog: FCC<Props> = ({ children, refetch, bookId }) => {
     setPostEditId('');
     setIsEdit(false);
     setIsCreate(false);
-    setPostImg('');
-    form.reset({
-      title: '',
-      description: '',
-    });
   };
 
-  const { mutate: editProduct } = useMutation(editProductRequest, {
+  const { mutate: editPost } = useMutation(editPostRequest, {
     onSuccess: () => {
-      toast.success('Update book successfully!');
+      toast.success('Update post successfully!');
       handleCloseDialog();
       refetch();
     },
@@ -76,6 +71,13 @@ const EditPostDialog: FCC<Props> = ({ children, refetch, bookId }) => {
       description: formData.description,
       images: [bookImage],
     };
+
+    editPost({
+      body: formValue,
+      params: {
+        id: String(postId),
+      },
+    });
   };
 
   const handleChangePostImg = (file: File | null) => {
@@ -96,7 +98,7 @@ const EditPostDialog: FCC<Props> = ({ children, refetch, bookId }) => {
   }, [data, form, isSuccess, setPostImg]);
 
   return (
-    <Dialog open={+postEditId === bookId && isEdit} onOpenChange={handleCloseDialog}>
+    <Dialog open={+postEditId === Number(postId) && isEdit} onOpenChange={handleCloseDialog}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-[35rem] max-h-[30rem] overflow-auto">
         <AlertDialogHeader className="text-2xl font-semibold">Create Post</AlertDialogHeader>
