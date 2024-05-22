@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import { Icons } from '@/assets/icons';
@@ -9,10 +10,22 @@ import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { HStack } from '@/components/ui/Utilities';
 import { useAuth } from '@/hooks/useAuth';
+import { cn } from '@/lib/utils';
+import { usePostStore } from '@/stores/PostStore';
 import { ROUTE } from '@/types';
 
 const CreatePost = () => {
+  const router = useRouter();
   const { isLoggedIn, firstLetterName } = useAuth();
+  const setIsCreate = usePostStore.use.setIsCreate();
+  const setIsEdit = usePostStore.use.setIsEdit();
+  const setPostEditId = usePostStore.use.setPostEditId();
+
+  const handleOpenCreatePostDialog = React.useCallback(() => {
+    setIsCreate(true);
+    setIsEdit(false);
+    setPostEditId('');
+  }, [setIsCreate, setIsEdit, setPostEditId]);
 
   const avatarShow = React.useMemo(() => {
     if (isLoggedIn) {
@@ -26,10 +39,12 @@ const CreatePost = () => {
     if (isLoggedIn) {
       return (
         <HStack className="pt-2" pos={'right'}>
-          <Button size={'sm'} variant={'secondary'}>
+          <Button size={'sm'} variant={'secondary'} onClick={() => router.push(ROUTE.PROFILE)}>
             My Post
           </Button>
-          <Button size={'sm'}>Create Post</Button>
+          <Button size={'sm'} onClick={handleOpenCreatePostDialog}>
+            Create Post
+          </Button>
         </HStack>
       );
     }
@@ -45,14 +60,20 @@ const CreatePost = () => {
         </span>
       </HStack>
     );
-  }, [isLoggedIn]);
+  }, [handleOpenCreatePostDialog, isLoggedIn, router]);
 
   return (
     <ShadowContainer>
       <HStack className="pb-2">
         <Avatar>{avatarShow}</Avatar>
 
-        <button className="flex-1 hover:opacity-55">
+        <button
+          className={cn('flex-1', {
+            'hover:opacity-55': isLoggedIn,
+            'pointer-events-none': !isLoggedIn,
+          })}
+          onClick={handleOpenCreatePostDialog}
+        >
           <Input
             fullWidth
             placeholder="Let's write something"

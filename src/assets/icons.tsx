@@ -13,6 +13,7 @@ import {
   Copy,
   Eye,
   EyeOff,
+  File,
   HelpCircle,
   ImagePlus,
   Loader2,
@@ -73,6 +74,7 @@ const IconList = {
   twitter: Twitter,
   twitch: Twitch,
   messageCirle: MessageCircle,
+  file: File,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;

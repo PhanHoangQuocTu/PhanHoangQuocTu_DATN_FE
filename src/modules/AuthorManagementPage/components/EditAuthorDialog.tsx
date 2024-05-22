@@ -86,7 +86,7 @@ const EditAuthorDialog: FCC<Props> = ({ children, authorId, refetch }) => {
     <Dialog open={isEdit && +authorEditId === authorId} onOpenChange={handleCloseDialog}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-[35rem]">
-        <AlertDialogHeader className="text-2xl font-semibold">Edit Category</AlertDialogHeader>
+        <AlertDialogHeader className="text-2xl font-semibold">Edit Author</AlertDialogHeader>
 
         <FormWrapper form={form} onSubmit={handleSubmit} className="space-y-2">
           <TextField size={'sm'} control={form.control} name="name" label="Name" placeholder="Name" fullWidth />

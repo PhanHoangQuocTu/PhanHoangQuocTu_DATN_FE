@@ -83,12 +83,12 @@ const CreateBookDialog: FCC<Props> = ({ children, refetch }) => {
     <Dialog open={isCreate && !bookEditId} onOpenChange={handleCloseDialog}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-[35rem] max-h-[30rem] overflow-auto">
-        <AlertDialogHeader className="text-2xl font-semibold">Create Category</AlertDialogHeader>
+        <AlertDialogHeader className="text-2xl font-semibold">Create Book</AlertDialogHeader>
 
         <FormWrapper form={form} onSubmit={handleSubmit} className="space-y-2">
           <VStack spacing={4}>
-            <InputFile className="w-full h-60" onChange={handleChangeProductImg} preview={productImg} />
             <label className="text-sm font-medium">Book Image</label>
+            <InputFile className="w-full h-60" onChange={handleChangeProductImg} preview={productImg} />
           </VStack>
           <TextField size={'sm'} control={form.control} name="title" label="Title" placeholder="Title" fullWidth />
 

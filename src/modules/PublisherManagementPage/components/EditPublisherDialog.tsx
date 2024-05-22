@@ -82,7 +82,7 @@ const EditPublisherDialog: FCC<Props> = ({ children, publisherId, refetch }) => 
     <Dialog open={isEdit && +publisherEditId === publisherId} onOpenChange={handleCloseDialog}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-[35rem]">
-        <AlertDialogHeader className="text-2xl font-semibold">Edit Category</AlertDialogHeader>
+        <AlertDialogHeader className="text-2xl font-semibold">Edit Publisher</AlertDialogHeader>
 
         <FormWrapper form={form} onSubmit={handleSubmit} className="space-y-2">
           <TextField control={form.control} name="name" label="Title" placeholder="Title" fullWidth />

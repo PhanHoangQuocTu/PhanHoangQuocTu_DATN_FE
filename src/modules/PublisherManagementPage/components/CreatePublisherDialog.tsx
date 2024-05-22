@@ -59,7 +59,7 @@ const CreatePublisherDialog: FCC<Props> = ({ children, refetch }) => {
     <Dialog open={isCreate && !publisherEditId} onOpenChange={handleCloseDialog}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-[35rem]">
-        <AlertDialogHeader className="text-2xl font-semibold">Create Category</AlertDialogHeader>
+        <AlertDialogHeader className="text-2xl font-semibold">Create Publisher</AlertDialogHeader>
 
         <FormWrapper form={form} onSubmit={handleSubmit} className="space-y-2">
           <TextField control={form.control} name="name" label="Name" placeholder="Name" fullWidth />

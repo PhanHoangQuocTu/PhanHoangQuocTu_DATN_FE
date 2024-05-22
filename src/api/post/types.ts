@@ -58,3 +58,11 @@ export interface IGetAllPostByMeParams {
 }
 
 export interface IGetAllPostByMeResponse extends IGetAllPostResponse {}
+
+export interface ICreatePostRequest {
+  title: string;
+  description: string;
+  images: string[];
+}
+
+export interface IEditPostRequest extends ICreatePostRequest {}

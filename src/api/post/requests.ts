@@ -2,6 +2,7 @@ import { request } from '../axios';
 import {
   type IApprovePostParams,
   type IApprovePostResponse,
+  type ICreatePostRequest,
   type IGetAllPostByMeParams,
   type IGetAllPostByMeResponse,
   type IGetAllPostParams,
@@ -33,6 +34,16 @@ export const getAllPostByMeRequest = async (params: IGetAllPostByMeParams): Prom
     url: '/api/v1/post/me',
     method: 'GET',
     params,
+  });
+
+  return data;
+};
+
+export const createPostRequest = async (body: ICreatePostRequest): Promise<any> => {
+  const { data } = await request({
+    url: '/api/v1/post/create',
+    method: 'POST',
+    data: body,
   });
 
   return data;
