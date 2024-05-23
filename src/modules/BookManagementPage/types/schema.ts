@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { numberRequired } from '@/lib/validations/validation.utility';
+import { numberNoRequired, numberRequired } from '@/lib/validations/validation.utility';
 
 export const bookManagementFilterSchema = z.object({
   search: z.string().trim().max(100),
@@ -14,10 +14,10 @@ export const bookManagementFilterSchema = z.object({
 });
 
 export const handleBookManagementSchema = z.object({
-  title: z.string().trim().max(100),
-  description: z.string().trim().max(1000),
+  title: z.string().trim().max(500),
+  description: z.string().trim().max(5000),
   price: numberRequired,
-  discount: numberRequired,
+  discount: numberNoRequired,
   stock: numberRequired,
   categoryId: numberRequired,
   authorId: numberRequired,

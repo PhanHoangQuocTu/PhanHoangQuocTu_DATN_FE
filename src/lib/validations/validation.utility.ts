@@ -22,6 +22,14 @@ export const numberRequired = z
     return true;
   }, 'invalid number');
 
+export const numberNoRequired = z
+  .number({ required_error: 'This is a required field' })
+  .or(z.string().transform(Number))
+  .refine((data) => {
+    if (Number.isNaN(Number(data))) return false;
+    return true;
+  }, 'invalid number');
+
 export function asStringRequired<T extends ZodTypeAny>(schema?: T) {
   return (schema ?? z.string()).refine(
     (u) => {

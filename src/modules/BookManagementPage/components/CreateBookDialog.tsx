@@ -55,6 +55,13 @@ const CreateBookDialog: FCC<Props> = ({ children, refetch }) => {
     onSuccess: () => {
       toast.success('Create book successfully!');
       handleCloseDialog();
+      form.reset({
+        title: '',
+        description: '',
+        price: 0,
+        discount: 0,
+        stock: 0,
+      });
       refetch();
     },
   });
