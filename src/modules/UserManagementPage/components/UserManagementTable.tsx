@@ -102,7 +102,7 @@ const UserManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
                     </TableCell>
 
                     <TableCell className="sticky right-0 whitespace-nowrap text-center">
-                      <HStack noWrap spacing={8}>
+                      <HStack noWrap spacing={8} pos={'center'}>
                         <DetailUserDialog userId={user?.id}>
                           <Tooltip label="Detail">
                             <button onClick={() => handleDetailUser(user?.id)}>

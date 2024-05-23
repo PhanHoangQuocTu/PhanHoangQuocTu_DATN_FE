@@ -42,7 +42,7 @@ const BookCard: React.FC<Props> = ({ id, image, name, desc, price, discount, cla
       </div>
 
       <VStack spacing={4} align={'center'}>
-        <span className="text-primary text-lg font-medium text-center">{name}</span>
+        <span className="text-primary text-lg font-medium text-center line-clamp-1">{name}</span>
 
         <p className="text-base text-gray-400 font-medium line-clamp-1	">{desc}</p>
 

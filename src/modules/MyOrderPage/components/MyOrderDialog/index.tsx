@@ -163,7 +163,7 @@ const MyOrderDialog: FCC<Props> = ({ children, orderId, data, totalPrice, refetc
             <Button
               onClick={handleCancelOrder}
               variant={'destructive'}
-              disabled={data?.status !== ORDER_STATUS_VALUE.processing}
+              disabled={data?.status !== ORDER_STATUS_VALUE.processing || data?.isPaid === 'true'}
             >
               Cancel Order
             </Button>

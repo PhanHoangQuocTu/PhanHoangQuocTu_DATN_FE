@@ -1,19 +1,32 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
+import { toast } from 'sonner';
 
 import { PaginationList } from '@/components/pagination';
 import { ShadowContainer } from '@/components/ShadowContainer';
 import { Show, VStack } from '@/components/ui/Utilities';
+import { useAuth } from '@/hooks/useAuth';
+import { ROUTE } from '@/types';
 
 import BookNoData from '../BooksPage/components/BookNoData';
 import MyOrderItem from './components/MyOrderItem';
 import { useGetMyOrder } from './hooks/useGetMyOrder';
 
 const MyOrderPage = () => {
+  const router = useRouter();
+  const { isLoggedIn } = useAuth();
   const { orderList, paging, onPageChange, refetch, isSuccess } = useGetMyOrder();
 
   React.useEffect(() => {
     refetch();
   }, [refetch]);
+
+  React.useEffect(() => {
+    if (!isLoggedIn) {
+      toast.error('You need to login first!!!');
+      router.push(ROUTE.HOME);
+    }
+  }, [isLoggedIn, router]);
 
   return (
     <div className="container py-8">
