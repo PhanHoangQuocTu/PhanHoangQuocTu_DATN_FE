@@ -10,6 +10,8 @@ import type {
   IDeleteUserResponse,
   IEditProfileRequest,
   IEditProfileResponse,
+  IFollowUserParams,
+  IFollowUserResponse,
   IGetAllUserParams,
   IGetAllUserResponse,
   IIsAdminParams,
@@ -95,6 +97,16 @@ export const verifyAccountRequest = async (body: IVerifyAccountRequest): Promise
     url: '/api/v1/user/activate-user',
     method: 'POST',
     data: body,
+  });
+
+  return data;
+};
+
+export const getUserPerDayRequest = async (params: IFollowUserParams): Promise<IFollowUserResponse> => {
+  const { data } = await request({
+    url: '/api/v1/user/new-users-count-per-day',
+    method: 'GET',
+    params,
   });
 
   return data;

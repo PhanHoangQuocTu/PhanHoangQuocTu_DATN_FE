@@ -1,7 +1,9 @@
 import { createQuery } from 'react-query-kit';
 
-import { getAllUserRequest, getUserDetailRequest, isAdminRequest } from './requests';
+import { getAllUserRequest, getUserDetailRequest, getUserPerDayRequest, isAdminRequest } from './requests';
 import {
+  type IFollowUserParams,
+  type IFollowUserResponse,
   type IGetAllUserParams,
   type IGetAllUserResponse,
   type IIsAdminParams,
@@ -23,4 +25,9 @@ export const useGetAllUserQuery = createQuery<IGetAllUserResponse, IGetAllUserPa
 export const useGetUserDetailQuery = createQuery<IUserDetailResponse, IUserDetailParams>({
   primaryKey: '/api/v1/user/:id',
   queryFn: ({ queryKey: [, params] }) => getUserDetailRequest(params),
+});
+
+export const useGetUserPerDayQuery = createQuery<IFollowUserResponse, IFollowUserParams>({
+  primaryKey: '/api/v1/user/new-users-count-per-day',
+  queryFn: ({ queryKey: [, params] }) => getUserPerDayRequest(params),
 });

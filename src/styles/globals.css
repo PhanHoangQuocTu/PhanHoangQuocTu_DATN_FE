@@ -46,7 +46,7 @@
     /** SIDEBAR SIZE */
 
     --w-sidebar: 80px;
-    --w-sidebar-expand: 300px;
+    --w-sidebar-expand: 400px;
   }
 
   .dark {

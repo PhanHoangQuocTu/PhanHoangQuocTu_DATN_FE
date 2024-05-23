@@ -3,6 +3,7 @@ import React from 'react';
 import { useGetMonthlyReportQuery } from '@/api/order/queries';
 import usePaging from '@/hooks/usePaging';
 import { type CategoryManagementFilterType } from '@/modules/CategoryManagementPage/types/schema';
+import { type IChartData } from '@/modules/DashboardPage/components/AreaChartComp';
 
 export const useGetMonthlyReport = (limit = 10) => {
   const { paging, filter, onPageChange, handleFilterChange, onTotalItemsChange } = usePaging<any>(limit, {});
@@ -37,6 +38,17 @@ export const useGetMonthlyReport = (limit = 10) => {
     }, 0);
   }, [data?.data]);
 
+  const chartData = React.useMemo(() => {
+    if (!data) return [];
+
+    return data?.data?.map((item) => {
+      return {
+        date: item?.month,
+        value: Number(item?.totalRevenue),
+      } as IChartData;
+    });
+  }, [data]);
+
   return {
     data,
     monthlyList: data?.data ?? [],
@@ -48,6 +60,7 @@ export const useGetMonthlyReport = (limit = 10) => {
     handleSearchChange,
     filter,
     totalRevenue,
+    chartData,
     ...rest,
   };
 };

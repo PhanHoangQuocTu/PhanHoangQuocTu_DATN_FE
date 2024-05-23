@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { DashboardLayout } from '@/components/layouts/DashboardLayout';
+import { ShadowContainer } from '@/components/ShadowContainer';
+import { VStack } from '@/components/ui/Utilities';
 import { useGetAllOrder } from '@/hooks/order/useGetAllOrder';
 import { useGetAllBook } from '@/hooks/product/useGetAllBook';
 import { useGetAllUser } from '@/hooks/user/useGetAllUser';
@@ -9,14 +11,16 @@ import { type NextPageWithLayout } from '@/types';
 
 import { useGetMonthlyReport } from '../MonthlyReportPage/hooks/useGetMonthlyReport';
 import DashboardBox from './components/DashboardBox';
+import RevenueChart from './components/RevenueChart';
+import UserChart from './components/UserChart';
 
 const DashboardPage: NextPageWithLayout = () => {
   const { meta: metaBook } = useGetAllBook();
   const { meta: metaUser } = useGetAllUser();
   const { meta: metaOrder } = useGetAllOrder();
-  const { totalRevenue } = useGetMonthlyReport();
+  const { totalRevenue, chartData } = useGetMonthlyReport();
   return (
-    <div>
+    <VStack>
       <div className="grid grid-cols-4 gap-3">
         <DashboardBox
           title="Total Users"
@@ -39,7 +43,21 @@ const DashboardPage: NextPageWithLayout = () => {
           className="col-span-1 bg-gradient-to-br from-[#38ef7d] to-[#11998e]"
         />
       </div>
-    </div>
+
+      <div className="grid grid-cols-2 gap-4 max-h-96">
+        <ShadowContainer className="space-y-10 col-span-1">
+          <span className="text-2xl font-semibold">User Management</span>
+
+          <UserChart />
+        </ShadowContainer>
+
+        <ShadowContainer className="space-y-10 col-span-1">
+          <span className="text-2xl font-semibold">Revenue Management</span>
+
+          <RevenueChart data={chartData} />
+        </ShadowContainer>
+      </div>
+    </VStack>
   );
 };
 

@@ -109,3 +109,14 @@ export interface IVerifyAccountResponse {
   isActice: boolean;
   verifyCode: string;
 }
+
+export interface IFollowUserParams {
+  days: number;
+}
+
+export type IFollowUserResponse = IUserCount[];
+
+export interface IUserCount {
+  date: string;
+  count: number;
+}
