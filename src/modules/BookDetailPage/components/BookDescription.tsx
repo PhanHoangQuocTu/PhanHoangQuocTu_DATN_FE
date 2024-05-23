@@ -27,7 +27,7 @@ const BookDescription: React.FC<Props> = ({ data }) => {
           <span>{data?.title}</span>
           <span>{data?.author?.name}</span>
           <span>{data?.publisher?.name}</span>
-          <span>{data?.description}</span>
+          <span className="whitespace-pre-wrap">{data?.description}</span>
         </VStack>
       </div>
     </ShadowContainer>
