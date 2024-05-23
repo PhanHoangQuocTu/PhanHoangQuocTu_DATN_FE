@@ -34,7 +34,10 @@ const BookCard: React.FC<Props> = ({ id, image, name, desc, price, discount, cla
   return (
     <VStack
       onClick={handleNavigate}
-      className={cn('w-full shadow-md hover:shadow-active hover:cursor-pointer opacity-90 rounded-md p-4', className)}
+      className={cn(
+        'w-full shadow-md h-full hover:shadow-active hover:cursor-pointer opacity-90 rounded-md p-4',
+        className
+      )}
       align={'center'}
     >
       <div className="relative w-full h-48 rounded-md overflow-hidden">
