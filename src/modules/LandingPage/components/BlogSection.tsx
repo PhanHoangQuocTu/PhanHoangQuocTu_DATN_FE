@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import { ROUTE } from '@/types';
 
 const BlogSection = () => {
-  const { postList } = useGetAllPost(3);
+  const { postList } = useGetAllPost(3, 'true');
 
   return (
     <VStack align={'center'} className="container py-16">

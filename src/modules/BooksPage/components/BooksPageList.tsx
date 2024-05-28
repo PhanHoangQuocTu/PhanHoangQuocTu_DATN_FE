@@ -28,7 +28,7 @@ const BooksPageList: React.FC<Props> = ({ data, paging, isLoading, onPageChange 
         <BookNoData />
       </Show>
 
-      <HStack className="w-full gap-x-5 gap-y-10 grid grid-cols-3 grid-rows-3">
+      <HStack className="w-full gap-x-5 gap-y-10 grid grid-cols-4 grid-rows-3">
         {data?.map((book) => {
           const imageUrl = book?.images?.length ? book?.images[0] : '';
           return (
