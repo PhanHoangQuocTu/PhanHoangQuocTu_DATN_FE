@@ -61,13 +61,19 @@ const PostItem: React.FC<Props> = ({ className, data }) => {
         )}
 
         <HStack noWrap pos={'apart'}>
-          <HStack noWrap>
-            <span>{data?.commentCount}</span>
-            <Icons.messageCirle size={16} />
+          <HStack noWrap spacing={12}>
+            <HStack noWrap align={'center'}>
+              <span className="text-sm font-medium">{data?.likeCount}</span>
+              <Icons.thumbsUp size={20} />
+            </HStack>
+            <HStack noWrap>
+              <span className="text-sm font-medium">{data?.commentCount}</span>
+              <Icons.messageCirle size={16} />
+            </HStack>
           </HStack>
 
-          <Link href={`${ROUTE.POST}/${data?.id}`}>
-            <Button>View Detail</Button>
+          <Link href={`${ROUTE.POST}/${data?.id}`} target="_blank">
+            <Button size={'sm'}>View Detail</Button>
           </Link>
         </HStack>
       </VStack>

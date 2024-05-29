@@ -12,17 +12,40 @@ export interface IGetAllPostResponse {
   meta: IMetaPagination;
 }
 
+export interface Like {
+  id: number;
+  user: IUserLike;
+}
+
+export interface IUserLike {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  gender: string;
+  dateOfBirth: string;
+  roles: string[];
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: any;
+  isActice: boolean;
+  verifyCode: any;
+}
 export interface IGetAllPostDetail {
   id: number;
   title: string;
   description: string;
-  images: any[];
+  images: string[];
   isApproved: boolean;
   commentCount: number;
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
+  likeCount: number;
   author: IGetAllPostAuthor;
+  likes: Like[];
 }
 
 export interface IGetAllPostAuthor {
@@ -73,3 +96,7 @@ export interface IEditPostParams {
 export interface IDeletePostParams extends IEditPostParams {}
 export interface IGetPostByIdParams extends IEditPostParams {}
 export interface IGetPostByIdResponse extends IGetAllPostDetail {}
+
+export interface ILikePostParams {
+  id: number;
+}

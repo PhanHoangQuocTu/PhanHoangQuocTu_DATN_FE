@@ -12,6 +12,7 @@ import {
   type IGetAllPostResponse,
   type IGetPostByIdParams,
   type IGetPostByIdResponse,
+  type ILikePostParams,
 } from './types';
 
 export const getAllPostRequest = async (params: IGetAllPostParams): Promise<IGetAllPostResponse> => {
@@ -79,6 +80,16 @@ export const getPostByIdRequest = async (params: IGetPostByIdParams): Promise<IG
   const { data } = await request({
     url: `/api/v1/post/${params?.id}`,
     method: 'GET',
+    params,
+  });
+
+  return data;
+};
+
+export const likePostRequest = async (params: ILikePostParams): Promise<IGetPostByIdResponse> => {
+  const { data } = await request({
+    url: `/api/v1/post/like/${params?.id}`,
+    method: 'POST',
     params,
   });
 

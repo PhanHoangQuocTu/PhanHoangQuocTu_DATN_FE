@@ -25,7 +25,12 @@ const PostApprovedItem: React.FC<Props> = ({ post }) => {
   const renderImage = React.useMemo(() => {
     if (!imagePost)
       return (
-        <HStack noWrap className="w-40 h-40 min-w-40 border border-border rounded-md" pos={'center'} align={'center'}>
+        <HStack
+          noWrap
+          className="w-40 min-h-full min-w-40 border border-border rounded-md"
+          pos={'center'}
+          align={'center'}
+        >
           <Icons.file size={40} />
         </HStack>
       );
@@ -51,9 +56,16 @@ const PostApprovedItem: React.FC<Props> = ({ post }) => {
           </VStack>
 
           <HStack noWrap pos={'apart'}>
-            <HStack noWrap>
-              <span className="text-xs font-medium">{post?.commentCount}</span>
-              <Icons.messageCirle size={20} />
+            <HStack noWrap align={'center'} spacing={12}>
+              <HStack noWrap align={'center'}>
+                <span className="text-sm font-medium">{post?.likeCount}</span>
+                <Icons.thumbsUp size={20} />
+              </HStack>
+
+              <HStack noWrap align={'center'}>
+                <span className="text-sm font-medium">{post?.commentCount}</span>
+                <Icons.messageCirle size={20} />
+              </HStack>
             </HStack>
 
             <Button size={'sm'} onClick={() => router.push(`/${ROUTE.POST}/${post?.id}`)}>

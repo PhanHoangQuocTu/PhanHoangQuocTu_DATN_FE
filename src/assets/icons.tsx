@@ -30,6 +30,7 @@ import {
   Settings,
   ShoppingCart,
   Star,
+  ThumbsUp,
   Trash,
   Twitch,
   Twitter,
@@ -77,6 +78,7 @@ const IconList = {
   messageCirle: MessageCircle,
   file: File,
   settings: Settings,
+  thumbsUp: ThumbsUp,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;

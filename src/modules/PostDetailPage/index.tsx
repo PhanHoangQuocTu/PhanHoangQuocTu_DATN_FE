@@ -53,7 +53,7 @@ const PostDetailPage = () => {
       <ShadowContainer className="space-y-5">
         <PostAuthorInfo data={data} />
 
-        <PostInfo data={data} />
+        <PostInfo data={data} refetch={refetch} />
       </ShadowContainer>
 
       <Show when={isLoggedIn && data?.isApproved}>
