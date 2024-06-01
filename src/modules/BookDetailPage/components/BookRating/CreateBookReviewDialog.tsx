@@ -11,14 +11,17 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { FormWrapper } from '@/components/ui/form';
 import { SelectField, TextAreaField } from '@/components/ui/FormField';
-import { useGetReviewByBookId } from '@/hooks/review/useGetReviewByBookId';
 import { useIntersectionStore } from '@/stores';
 import { type FCC } from '@/types';
 
 import { DEFAULT_FORM_REVIEW, RATING_OPTIONS } from '../../types/const';
 import { createBookReviewSchema, type CreateBookReviewType } from '../../types/schema';
 
-const CreateBookReviewDialog: FCC = ({ children }) => {
+interface Props {
+  refetch: () => void;
+}
+
+const CreateBookReviewDialog: FCC<Props> = ({ children, refetch }) => {
   const params = useParams();
   const { bookId } = params;
   const targetInView = useIntersectionStore.use.targetInView();
@@ -27,8 +30,6 @@ const CreateBookReviewDialog: FCC = ({ children }) => {
     resolver: zodResolver(createBookReviewSchema),
     defaultValues: DEFAULT_FORM_REVIEW,
   });
-
-  const { refetch } = useGetReviewByBookId();
 
   const handleCloseDialog = () => {
     setTargetInView('');

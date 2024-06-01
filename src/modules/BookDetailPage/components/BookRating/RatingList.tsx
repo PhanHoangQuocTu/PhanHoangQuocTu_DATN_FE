@@ -1,13 +1,16 @@
 import React from 'react';
 
+import { type IReview } from '@/api/review';
 import { Show, VStack } from '@/components/ui/Utilities';
-import { useGetReviewByBookId } from '@/hooks/review/useGetReviewByBookId';
 
 import RatingItem from './RatingItem';
 import ReviewNoData from './ReviewNoData';
 
-const RatingList = () => {
-  const { reviewList } = useGetReviewByBookId();
+interface Props {
+  reviewList: IReview[];
+}
+
+const RatingList: React.FC<Props> = ({ reviewList }) => {
   const [reviewDeleteId, setReviewDeleteId] = React.useState('');
 
   return (
