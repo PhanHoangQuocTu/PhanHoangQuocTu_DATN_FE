@@ -16,6 +16,7 @@ import type {
   IGetAllUserResponse,
   IIsAdminParams,
   IIsAdminResponse,
+  IRestoreUserParams,
   ISendVerifyCodeResponse,
   IUserDetailParams,
   IUserDetailResponse,
@@ -106,6 +107,26 @@ export const getUserPerDayRequest = async (params: IFollowUserParams): Promise<I
   const { data } = await request({
     url: '/api/v1/user/new-users-count-per-day',
     method: 'GET',
+    params,
+  });
+
+  return data;
+};
+
+export const getAllUserDeletedRequest = async (params: IGetAllUserParams): Promise<IGetAllUserResponse> => {
+  const { data } = await request({
+    url: '/api/v1/user/deleted',
+    method: 'GET',
+    params,
+  });
+
+  return data;
+};
+
+export const restoreUserRequest = async (params: IRestoreUserParams) => {
+  const { data } = await request({
+    url: `/api/v1/user/restore/${params.id}`,
+    method: 'PATCH',
     params,
   });
 

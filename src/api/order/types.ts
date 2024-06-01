@@ -408,3 +408,13 @@ export interface IGetVnpayReturnProductDetail {
   updatedAt: string;
   deletedAt: any;
 }
+
+export interface IGetDailyRevenueResponse {
+  data: IDailyRevenue[];
+  meta: IMetaPagination;
+}
+
+export interface IDailyRevenue {
+  date: string;
+  totalRevenue: number;
+}

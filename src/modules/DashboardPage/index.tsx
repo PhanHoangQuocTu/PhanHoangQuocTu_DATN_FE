@@ -9,6 +9,7 @@ import { useGetAllUser } from '@/hooks/user/useGetAllUser';
 import { prettyNumber, roundNumber } from '@/lib/common';
 import { type NextPageWithLayout } from '@/types';
 
+import { useGetDailyReport } from '../MonthlyReportPage/hooks/useGetDailyReport';
 import { useGetMonthlyReport } from '../MonthlyReportPage/hooks/useGetMonthlyReport';
 import DashboardBox from './components/DashboardBox';
 import RevenueChart from './components/RevenueChart';
@@ -18,7 +19,9 @@ const DashboardPage: NextPageWithLayout = () => {
   const { meta: metaBook } = useGetAllBook();
   const { meta: metaUser } = useGetAllUser();
   const { meta: metaOrder } = useGetAllOrder();
-  const { totalRevenue, chartData } = useGetMonthlyReport();
+  const { totalRevenue } = useGetMonthlyReport();
+  const { chartData } = useGetDailyReport();
+
   return (
     <VStack>
       <div className="grid grid-cols-4 gap-3">

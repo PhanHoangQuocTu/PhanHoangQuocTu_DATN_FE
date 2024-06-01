@@ -6,6 +6,7 @@ import {
   type ICreateOrderResponse,
   type IGetAllOrderParams,
   type IGetAllOrderResponse,
+  type IGetDailyRevenueResponse,
   type IGetMonthlyReportParams,
   type IGetMonthlyReportResponse,
   type IGetMyOrderParams,
@@ -102,6 +103,15 @@ export const getResultVnPaRequest = async (params: IGetVNPAYReturnParams): Promi
     url: '/api/v1/orders/return_url',
     method: 'GET',
     params,
+  });
+
+  return data;
+};
+
+export const getDailyReportRequest = async (): Promise<IGetDailyRevenueResponse> => {
+  const { data } = await request({
+    url: '/api/v1/orders/daily-revenue',
+    method: 'GET',
   });
 
   return data;

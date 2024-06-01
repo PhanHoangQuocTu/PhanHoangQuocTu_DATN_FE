@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import Link from 'next/link';
 import React from 'react';
 
 import { type IGetAllPostDetail } from '@/api/post';
@@ -20,7 +21,7 @@ import { HStack, Show, VStack } from '@/components/ui/Utilities';
 import { currentNo } from '@/lib/common';
 import { cn } from '@/lib/utils';
 import { usePostManagementStore } from '@/stores/PostManagementStore';
-import { type IPaging } from '@/types';
+import { type IPaging, ROUTE } from '@/types';
 
 import PostApproveDialog from './PostApproveDialog';
 
@@ -101,19 +102,27 @@ const PostManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
 
                     <TableCell className="sticky right-0 whitespace-nowrap text-center">
                       <HStack noWrap spacing={8} pos={'center'}>
-                        <PostApproveDialog postId={post?.id} refetch={refetch}>
-                          <Tooltip label="Approve">
-                            <button
-                              disabled={post?.isApproved}
-                              className={cn({
-                                'opacity-60': post?.isApproved,
-                              })}
-                              onClick={() => handleApprovePost(String(post?.id))}
-                            >
-                              <Icons.check size={16} color="green" />
-                            </button>
-                          </Tooltip>
-                        </PostApproveDialog>
+                        <Tooltip label="Preview">
+                          <Link href={`${ROUTE.POST}/${post?.id}`} target="_blank">
+                            <Icons.eye size={16} />
+                          </Link>
+                        </Tooltip>
+
+                        <Show when={!post?.isApproved}>
+                          <PostApproveDialog postId={post?.id} refetch={refetch}>
+                            <Tooltip label="Approve">
+                              <button
+                                disabled={post?.isApproved}
+                                className={cn({
+                                  'opacity-60': post?.isApproved,
+                                })}
+                                onClick={() => handleApprovePost(String(post?.id))}
+                              >
+                                <Icons.check size={16} color="green" />
+                              </button>
+                            </Tooltip>
+                          </PostApproveDialog>
+                        </Show>
                       </HStack>
                     </TableCell>
                   </TableRow>

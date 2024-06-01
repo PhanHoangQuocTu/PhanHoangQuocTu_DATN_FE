@@ -25,8 +25,9 @@ interface Props {
   data: IGetMyOrderDetail;
   totalPrice: number;
   refetch: () => void;
+  status: string;
 }
-const OrderDetailDialog: FCC<Props> = ({ children, orderId, data, totalPrice, refetch }) => {
+const OrderDetailDialog: FCC<Props> = ({ children, orderId, data, totalPrice, refetch, status }) => {
   const orderDetailId = useOrderManagementStore.use.orderDetailId();
   const setOderDetailId = useOrderManagementStore.use.setOderDetailId();
 
@@ -152,7 +153,15 @@ const OrderDetailDialog: FCC<Props> = ({ children, orderId, data, totalPrice, re
               Back
             </Button>
 
-            <Button onClick={handleCancelOrder} variant={'destructive'}>
+            <Button
+              disabled={
+                status === ORDER_STATUS_VALUE.cancelled ||
+                status === ORDER_STATUS_VALUE.delivered ||
+                status === ORDER_STATUS_VALUE.shipped
+              }
+              onClick={handleCancelOrder}
+              variant={'destructive'}
+            >
               Cancel Order
             </Button>
           </div>

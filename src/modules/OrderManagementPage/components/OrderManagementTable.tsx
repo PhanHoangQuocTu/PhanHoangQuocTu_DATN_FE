@@ -56,21 +56,21 @@ const OrderManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPage
   });
 
   const handleUpdateStatus = (id: number, status: string) => {
-    if (status === ORDER_STATUS_VALUE.processing) {
-      updateStatusOrder({
-        body: {
-          status: ORDER_STATUS_VALUE.shipped,
-        },
-        params: {
-          id: String(id),
-        },
-      });
-      return;
-    }
+    // if (status === ORDER_STATUS_VALUE.processing) {
+    //   updateStatusOrder({
+    //     body: {
+    //       status: ORDER_STATUS_VALUE.shipped,
+    //     },
+    //     params: {
+    //       id: String(id),
+    //     },
+    //   });
+    //   return;
+    // }
 
     updateStatusOrder({
       body: {
-        status: ORDER_STATUS_VALUE.delivered,
+        status,
       },
       params: {
         id: String(id),
@@ -180,6 +180,7 @@ const OrderManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPage
                           data={order}
                           totalPrice={totalPrice()}
                           refetch={refetch}
+                          status={order?.status}
                         >
                           <Tooltip label="Detail">
                             <button onClick={() => handleDetailOrder(order?.id)}>
@@ -188,22 +189,81 @@ const OrderManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPage
                           </Tooltip>
                         </OrderDetailDialog>
 
-                        <Tooltip label="Approve">
-                          <button
-                            onClick={() => handleUpdateStatus(order?.id, order?.status)}
-                            disabled={
-                              order.status === ORDER_STATUS_VALUE.cancelled ||
-                              order.status === ORDER_STATUS_VALUE.delivered
-                            }
-                            className={cn({
-                              'opacity-50':
+                        {order?.status === ORDER_STATUS_VALUE.processing && (
+                          <Tooltip label="Shipping">
+                            <button
+                              onClick={() => handleUpdateStatus(order?.id, ORDER_STATUS_VALUE.shipped)}
+                              disabled={
                                 order.status === ORDER_STATUS_VALUE.cancelled ||
-                                order.status === ORDER_STATUS_VALUE.delivered,
-                            })}
-                          >
-                            <Icons.check size={16} />
-                          </button>
-                        </Tooltip>
+                                order.status === ORDER_STATUS_VALUE.delivered
+                              }
+                              className={cn({
+                                'opacity-50':
+                                  order.status === ORDER_STATUS_VALUE.cancelled ||
+                                  order.status === ORDER_STATUS_VALUE.delivered,
+                              })}
+                            >
+                              <Icons.truck size={16} />
+                            </button>
+                          </Tooltip>
+                        )}
+
+                        {order?.status === ORDER_STATUS_VALUE.shipped && (
+                          <Tooltip label="Delivered">
+                            <button
+                              onClick={() => handleUpdateStatus(order?.id, ORDER_STATUS_VALUE.delivered)}
+                              disabled={
+                                order.status === ORDER_STATUS_VALUE.cancelled ||
+                                order.status === ORDER_STATUS_VALUE.delivered
+                              }
+                              className={cn({
+                                'opacity-50':
+                                  order.status === ORDER_STATUS_VALUE.cancelled ||
+                                  order.status === ORDER_STATUS_VALUE.delivered,
+                              })}
+                            >
+                              <Icons.contact size={16} />
+                            </button>
+                          </Tooltip>
+                        )}
+
+                        {order?.status === ORDER_STATUS_VALUE.delivered && (
+                          <Tooltip label="Delivered">
+                            <button
+                              onClick={() => handleUpdateStatus(order?.id, ORDER_STATUS_VALUE.delivered)}
+                              disabled={
+                                order.status === ORDER_STATUS_VALUE.cancelled ||
+                                order.status === ORDER_STATUS_VALUE.delivered
+                              }
+                              className={cn({
+                                'opacity-50':
+                                  order.status === ORDER_STATUS_VALUE.cancelled ||
+                                  order.status === ORDER_STATUS_VALUE.delivered,
+                              })}
+                            >
+                              <Icons.check size={16} />
+                            </button>
+                          </Tooltip>
+                        )}
+
+                        {order?.status === ORDER_STATUS_VALUE.cancelled && (
+                          <Tooltip label="Cancelled">
+                            <button
+                              onClick={() => handleUpdateStatus(order?.id, ORDER_STATUS_VALUE.delivered)}
+                              disabled={
+                                order.status === ORDER_STATUS_VALUE.cancelled ||
+                                order.status === ORDER_STATUS_VALUE.delivered
+                              }
+                              className={cn({
+                                'opacity-50':
+                                  order.status === ORDER_STATUS_VALUE.cancelled ||
+                                  order.status === ORDER_STATUS_VALUE.delivered,
+                              })}
+                            >
+                              <Icons.x size={16} color="red" />
+                            </button>
+                          </Tooltip>
+                        )}
                       </HStack>
                     </TableCell>
                   </TableRow>

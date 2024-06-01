@@ -32,6 +32,7 @@ import {
   Star,
   ThumbsUp,
   Trash,
+  Truck,
   Twitch,
   Twitter,
   Upload,
@@ -79,6 +80,8 @@ const IconList = {
   file: File,
   settings: Settings,
   thumbsUp: ThumbsUp,
+  rotateCw: RotateCw,
+  truck: Truck,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;

@@ -120,3 +120,7 @@ export interface IUserCount {
   date: string;
   count: number;
 }
+
+export interface IRestoreUserParams {
+  id: number;
+}
