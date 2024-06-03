@@ -5,12 +5,13 @@ import { ShadowContainer } from '@/components/ShadowContainer';
 import { VStack } from '@/components/ui/Utilities';
 import { useGetAllPost } from '@/hooks/post/useGetAllPost';
 
+import PostFilter from '../PostFilter';
 import CreatePost from './CreatePost';
 import CreatePostDialog from './CreatePostDialog';
 import PostApprovedItem from './PostApprovedItem';
 
 const PostList = () => {
-  const { postList, paging, onPageChange, refetch } = useGetAllPost(4, 'true');
+  const { postList, paging, onPageChange, refetch, handleSearchChange } = useGetAllPost(4, 'true');
 
   return (
     <VStack className="col-span-2">
@@ -19,6 +20,7 @@ const PostList = () => {
       <CreatePost />
 
       <ShadowContainer className="flex-1 space-y-5">
+        <PostFilter handleSearchChange={handleSearchChange} />
         <VStack className="min-h-[60rem]">
           {postList?.map((post) => (
             <PostApprovedItem post={post} key={post.id} />

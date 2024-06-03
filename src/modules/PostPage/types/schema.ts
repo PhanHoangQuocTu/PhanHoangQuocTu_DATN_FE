@@ -7,4 +7,10 @@ export const handlePostSchema = z.object({
   description: z.string().min(1, validationMessages.required()).trim().max(5000),
 });
 
+export const postFilterSchema = z.object({
+  search: z.string().trim().max(100),
+  isApprove: z.string().optional(),
+});
+
+export type PostFilterType = z.infer<typeof postFilterSchema>;
 export type HandlePostType = z.infer<typeof handlePostSchema>;

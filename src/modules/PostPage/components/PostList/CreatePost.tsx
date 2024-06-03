@@ -83,10 +83,6 @@ const CreatePost = () => {
             className="rounded-full pointer-events-none bg-gray-100"
           />
         </button>
-
-        <Avatar>
-          <Icons.messageCirle />
-        </Avatar>
       </HStack>
 
       <Separator />
