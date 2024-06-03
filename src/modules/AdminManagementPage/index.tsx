@@ -12,7 +12,6 @@ const AdminManagementPage: NextPageWithLayout = () => {
 
   return (
     <VStack>
-      <span className="text-3xl font-semibold">Admin Management</span>
       <AdminManagementFilter handleSearchChange={handleSearchChange} />
 
       <AdminManagementTable
