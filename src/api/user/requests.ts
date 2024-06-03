@@ -97,6 +97,17 @@ export const removeRoleRequest = async (req: { params: IRemoveRoleParams; body: 
   return data;
 };
 
+export const addRoleRequest = async (req: { params: IRemoveRoleParams; body: IRemoveRoleRequest }) => {
+  const { data } = await request({
+    url: `/api/v1/user/${req.params.id}/add-role`,
+    method: 'PATCH',
+    data: req.body,
+    params: req.params,
+  });
+
+  return data;
+};
+
 export const changePasswordRequest = async (body: IChangePasswordRequest): Promise<IChangePasswordResponse> => {
   const { data } = await request({
     url: '/api/v1/user/change-password',

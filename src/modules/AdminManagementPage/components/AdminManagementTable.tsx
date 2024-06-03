@@ -45,6 +45,7 @@ const AdminManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPage
               <TableHead className="text-center">No.</TableHead>
               <TableHead className="whitespace-nowrap">Name</TableHead>
               <TableHead className="whitespace-nowrap">Email</TableHead>
+              <TableHead className="whitespace-nowrap">Phone Number</TableHead>
               <TableHead className="whitespace-nowrap text-center">Role</TableHead>
               <TableHead className="whitespace-nowrap text-center">Active</TableHead>
               <TableHead className="sticky right-0 text-center">Action</TableHead>
@@ -80,6 +81,8 @@ const AdminManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPage
                     <TableCell className="whitespace-nowrap">{fullName}</TableCell>
 
                     <TableCell className="whitespace-nowrap">{user?.email}</TableCell>
+
+                    <TableCell className="whitespace-nowrap">{user?.phoneNumber}</TableCell>
 
                     <TableCell className="whitespace-nowrap text-center">
                       <span>Admin</span>

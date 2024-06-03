@@ -37,6 +37,7 @@ import {
   Twitter,
   Upload,
   User,
+  UserCog,
   X,
 } from 'lucide-react';
 
@@ -82,6 +83,7 @@ const IconList = {
   thumbsUp: ThumbsUp,
   rotateCw: RotateCw,
   truck: Truck,
+  userCog: UserCog,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;
