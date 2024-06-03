@@ -124,3 +124,11 @@ export interface IUserCount {
 export interface IRestoreUserParams {
   id: number;
 }
+
+export interface IRemoveRoleParams {
+  id: number;
+}
+
+export interface IRemoveRoleRequest {
+  role: string;
+}

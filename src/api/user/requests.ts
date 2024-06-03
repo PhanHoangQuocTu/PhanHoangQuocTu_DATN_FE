@@ -16,6 +16,8 @@ import type {
   IGetAllUserResponse,
   IIsAdminParams,
   IIsAdminResponse,
+  IRemoveRoleParams,
+  IRemoveRoleRequest,
   IRestoreUserParams,
   ISendVerifyCodeResponse,
   IUserDetailParams,
@@ -37,6 +39,16 @@ export const isAdminRequest = async (params: IIsAdminParams): Promise<IIsAdminRe
 export const getAllUserRequest = async (params: IGetAllUserParams): Promise<IGetAllUserResponse> => {
   const { data } = await request({
     url: '/api/v1/user',
+    method: 'GET',
+    params,
+  });
+
+  return data;
+};
+
+export const getAllAdminRequest = async (params: IGetAllUserParams): Promise<IGetAllUserResponse> => {
+  const { data } = await request({
+    url: '/api/v1/user/admins',
     method: 'GET',
     params,
   });
@@ -69,6 +81,17 @@ export const editProfileRequest = async (body: IEditProfileRequest): Promise<IEd
     url: '/api/v1/user/edit-profile',
     method: 'PATCH',
     data: body,
+  });
+
+  return data;
+};
+
+export const removeRoleRequest = async (req: { params: IRemoveRoleParams; body: IRemoveRoleRequest }) => {
+  const { data } = await request({
+    url: `/api/v1/user/${req.params.id}/remove-role`,
+    method: 'PATCH',
+    data: req.body,
+    params: req.params,
   });
 
   return data;

@@ -1,6 +1,7 @@
 import { createQuery } from 'react-query-kit';
 
 import {
+  getAllAdminRequest,
   getAllUserDeletedRequest,
   getAllUserRequest,
   getUserDetailRequest,
@@ -26,6 +27,11 @@ export const useIsAdminQuery = createQuery<IIsAdminResponse, IIsAdminParams>({
 export const useGetAllUserQuery = createQuery<IGetAllUserResponse, IGetAllUserParams>({
   primaryKey: '/api/v1/user',
   queryFn: ({ queryKey: [, params] }) => getAllUserRequest(params),
+});
+
+export const useGetAllAdminQuery = createQuery<IGetAllUserResponse, IGetAllUserParams>({
+  primaryKey: '/api/v1/user/admins',
+  queryFn: ({ queryKey: [, params] }) => getAllAdminRequest(params),
 });
 
 export const useGetUserDetailQuery = createQuery<IUserDetailResponse, IUserDetailParams>({

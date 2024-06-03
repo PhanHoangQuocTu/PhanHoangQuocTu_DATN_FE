@@ -13,6 +13,7 @@ import { cn } from '@/lib/utils';
 import { useUserStore } from '@/stores';
 import { ROUTE } from '@/types';
 
+import { AdminManagement } from './AdminManagement';
 import { AdminSidebar } from './AdminSidebar';
 import { SidebarLayout } from './SidebarLayout';
 import { SupperAdminSidebar } from './SupperAdminSidebar';
@@ -59,6 +60,8 @@ const Sidebar = () => {
 
             <>
               <Separator />
+
+              <AdminManagement opened={opened} />
             </>
           </>
         </AnimatePresence>
