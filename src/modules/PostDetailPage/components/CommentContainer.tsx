@@ -9,6 +9,7 @@ interface Props {
   commentList: IGetCommentByPostIdResponse | undefined;
   refetchComment: () => void;
 }
+
 const CommentContainer: React.FC<Props> = ({ commentList, refetchComment }) => {
   return (
     <ShadowContainer>

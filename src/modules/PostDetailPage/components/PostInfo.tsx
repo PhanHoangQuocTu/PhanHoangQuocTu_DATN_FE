@@ -50,7 +50,7 @@ const PostInfo: React.FC<Props> = ({ data, refetch }) => {
     <VStack>
       <span className="text-2xl font-semibold">{data?.title}</span>
       <span className="whitespace-pre-wrap text-sm font-medium">{data?.description}</span>
-      <div className="relative w-full h-96">
+      <div className="relative w-full h-[35rem]">
         <Image src={image} alt={'post-banner'} fill unoptimized priority />
       </div>
       <HStack noWrap>

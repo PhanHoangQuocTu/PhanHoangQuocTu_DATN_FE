@@ -13,9 +13,10 @@ import { handleCommentSchema, type HandleCommentType } from '../types/schema';
 
 interface Props {
   refetch: () => void;
+  refetchPost: () => void;
 }
 
-const CommentForm: React.FC<Props> = ({ refetch }) => {
+const CommentForm: React.FC<Props> = ({ refetch, refetchPost }) => {
   const { postId } = useParams();
 
   const form = useForm<HandleCommentType>({
@@ -28,6 +29,7 @@ const CommentForm: React.FC<Props> = ({ refetch }) => {
   const { mutate: comment } = useMutation(commentPostRequest, {
     onSuccess: () => {
       refetch();
+      refetchPost();
       form.reset();
     },
   });

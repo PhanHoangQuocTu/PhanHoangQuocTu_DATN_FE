@@ -80,7 +80,7 @@ const CreatePostDialog: FCC<Props> = ({ children, refetch }) => {
         <FormWrapper form={form} onSubmit={handleSubmit} className="space-y-2">
           <VStack spacing={4}>
             <label className="text-sm font-medium">Post Image</label>
-            <InputFile className="w-full h-60" onChange={handleChangeProductImg} preview={postImg} />
+            <InputFile className="w-full h-[20rem]" onChange={handleChangeProductImg} preview={postImg} />
           </VStack>
           <TextField size={'sm'} control={form.control} name="title" label="Title" placeholder="Title" fullWidth />
 

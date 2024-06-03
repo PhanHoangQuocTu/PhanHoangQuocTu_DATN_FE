@@ -15,13 +15,15 @@ import {
 import { Tooltip } from '@/components/ui/tooltip';
 import { HStack, Show, VStack } from '@/components/ui/Utilities';
 import { useAuth } from '@/hooks/useAuth';
+import { useIsAdmin } from '@/hooks/useIsAdmin';
 import { usePostStore } from '@/stores/PostStore';
 
 interface Props {
   data: IGetPostByIdResponse | undefined;
 }
 const PostAuthorInfo: React.FC<Props> = ({ data }) => {
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn, user, accessToken } = useAuth();
+  const { isAdmin } = useIsAdmin(accessToken);
   const setPostEditId = usePostStore.use.setPostEditId();
   const setPostDeleteId = usePostStore.use.setPostDeleteId();
   const setIsCreate = usePostStore.use.setIsCreate();
@@ -48,7 +50,7 @@ const PostAuthorInfo: React.FC<Props> = ({ data }) => {
         </HStack>
       </Tooltip>
 
-      <Show when={isLoggedIn && user?.id === data?.author?.id}>
+      <Show when={(isLoggedIn && user?.id === data?.author?.id) || isAdmin}>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button>

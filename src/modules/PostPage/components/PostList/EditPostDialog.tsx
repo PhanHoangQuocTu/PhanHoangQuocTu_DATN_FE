@@ -5,7 +5,7 @@ import { type SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { editPostRequest } from '@/api/post';
-import { useGetAllPostByIdQuery } from '@/api/post/queries';
+import { useGetPostByIdQuery } from '@/api/post/queries';
 import { AlertDialogFooter, AlertDialogHeader } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
@@ -34,7 +34,7 @@ const EditPostDialog: FCC<Props> = ({ children, refetch, postId }) => {
   const setPostImg = usePostStore.use.setPostImg();
   const { url } = useUploadPostImg();
 
-  const { data, isSuccess } = useGetAllPostByIdQuery({
+  const { data, isSuccess } = useGetPostByIdQuery({
     variables: {
       id: String(postId),
     },
@@ -105,7 +105,7 @@ const EditPostDialog: FCC<Props> = ({ children, refetch, postId }) => {
 
         <FormWrapper form={form} onSubmit={handleSubmit} className="space-y-2">
           <VStack spacing={4}>
-            <InputFile className="w-full h-20" onChange={handleChangePostImg} preview={postImg} />
+            <InputFile className="w-full h-[20rem]" onChange={handleChangePostImg} preview={postImg} />
             <label className="text-sm font-medium">Post Image</label>
           </VStack>
           <TextField size={'sm'} control={form.control} name="title" label="Title" placeholder="Title" fullWidth />

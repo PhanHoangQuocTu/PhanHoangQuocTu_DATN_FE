@@ -4,7 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
 
 import { useGetCommentByPostIdQuery } from '@/api/comment/queries';
-import { useGetAllPostByIdQuery } from '@/api/post/queries';
+import { useGetPostByIdQuery } from '@/api/post/queries';
 import { ShadowContainer } from '@/components/ShadowContainer';
 import { Show } from '@/components/ui/Utilities';
 import { useAuth } from '@/hooks/useAuth';
@@ -23,7 +23,7 @@ const PostDetailPage = () => {
   const router = useRouter();
   const { isLoggedIn } = useAuth();
   const { postId } = useParams();
-  const { data, refetch, isError } = useGetAllPostByIdQuery({
+  const { data, refetch, isError } = useGetPostByIdQuery({
     variables: {
       id: String(postId),
     },
@@ -61,7 +61,7 @@ const PostDetailPage = () => {
           <CommentContainer commentList={commentList} refetchComment={refetchComment} />
         )}
 
-        <CommentForm refetch={refetchComment} />
+        <CommentForm refetch={refetchComment} refetchPost={refetch} />
       </Show>
 
       <Show when={!isLoggedIn}>

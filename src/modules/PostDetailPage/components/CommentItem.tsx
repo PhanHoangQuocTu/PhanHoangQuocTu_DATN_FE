@@ -14,10 +14,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { HStack, Show, VStack } from '@/components/ui/Utilities';
 import { useAuth } from '@/hooks/useAuth';
+import { useIsAdmin } from '@/hooks/useIsAdmin';
 
 const CommentItem = ({ data, refetch }: { data: IComment; refetch: () => void }) => {
-  const { user, isLoggedIn } = useAuth();
-
+  const { user, isLoggedIn, accessToken } = useAuth();
+  const { isAdmin } = useIsAdmin(accessToken);
   const { mutate: deleteComment } = useMutation(deleteCommentRequest, {
     onSuccess: () => {
       refetch();
@@ -42,7 +43,7 @@ const CommentItem = ({ data, refetch }: { data: IComment; refetch: () => void })
             <span className="text-xs font-medium">{format(new Date(data.createdAt), 'dd/MM/yyyy HH:mm')}</span>
           </VStack>
 
-          <Show when={isLoggedIn && user?.id === data?.author?.id}>
+          <Show when={(isLoggedIn && user?.id === data?.author?.id) || isAdmin}>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button>

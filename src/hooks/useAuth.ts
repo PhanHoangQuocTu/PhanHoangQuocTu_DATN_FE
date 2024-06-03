@@ -23,6 +23,7 @@ export const useAuth = () => {
   }, [user]);
 
   return {
+    accessToken,
     isLoggedIn: !!accessToken,
     user,
     fullName,

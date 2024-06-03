@@ -23,6 +23,7 @@ import { cn } from '@/lib/utils';
 import { usePostManagementStore } from '@/stores/PostManagementStore';
 import { type IPaging, ROUTE } from '@/types';
 
+import DeletePostDialog from './DeletePostDialog';
 import PostApproveDialog from './PostApproveDialog';
 
 interface Props {
@@ -34,9 +35,14 @@ interface Props {
 }
 const PostManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageChange, refetch }) => {
   const setPostApproveId = usePostManagementStore.use.setPostApproveId();
+  const setPostDeleteId = usePostManagementStore.use.setPostDeleteId();
 
   const handleApprovePost = (postId: string) => {
     setPostApproveId(postId);
+  };
+
+  const handleDeletePost = (postId: string) => {
+    setPostDeleteId(postId);
   };
   return (
     <VStack>
@@ -48,7 +54,8 @@ const PostManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
               <TableHead className="whitespace-nowrap">Title</TableHead>
               <TableHead className="whitespace-nowrap">Description</TableHead>
               <TableHead className="whitespace-nowrap">Author</TableHead>
-              <TableHead className="whitespace-nowrap text-center">Comment Count</TableHead>
+              <TableHead className="whitespace-nowrap text-center">Comments</TableHead>
+              <TableHead className="whitespace-nowrap text-center">Likes</TableHead>
               <TableHead className="whitespace-nowrap text-center">Status</TableHead>
               <TableHead className="whitespace-nowrap text-center">Created At</TableHead>
               <TableHead className="sticky right-0 text-center">Action</TableHead>
@@ -88,7 +95,13 @@ const PostManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
 
                     <TableCell className="whitespace-nowrap">{post?.author?.email}</TableCell>
 
-                    <TableCell className="whitespace-nowrap text-center">{post?.commentCount}</TableCell>
+                    <TableCell className="whitespace-nowrap text-center">
+                      {post?.commentCount} {post?.commentCount === 1 ? 'comment' : 'comments'}
+                    </TableCell>
+
+                    <TableCell className="whitespace-nowrap text-center">
+                      {post?.likeCount} {post?.likeCount === 1 ? 'like' : 'likes'}
+                    </TableCell>
 
                     <TableCell className="whitespace-nowrap text-center">
                       <Badge variant={isAppovedPost().variant as any} className="min-w-16 justify-center">
@@ -123,6 +136,14 @@ const PostManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
                             </Tooltip>
                           </PostApproveDialog>
                         </Show>
+
+                        <DeletePostDialog postId={post?.id} refetch={refetch}>
+                          <Tooltip label="Delete">
+                            <button onClick={() => handleDeletePost(String(post?.id))}>
+                              <Icons.x size={16} color="red" />
+                            </button>
+                          </Tooltip>
+                        </DeletePostDialog>
                       </HStack>
                     </TableCell>
                   </TableRow>

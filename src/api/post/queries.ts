@@ -20,7 +20,7 @@ export const useGetAllPostByMeQuery = createQuery<IGetAllPostByMeResponse, IGetA
   queryFn: ({ queryKey: [, params] }) => getAllPostByMeRequest(params),
 });
 
-export const useGetAllPostByIdQuery = createQuery<IGetPostByIdResponse, IGetPostByIdParams>({
+export const useGetPostByIdQuery = createQuery<IGetPostByIdResponse, IGetPostByIdParams>({
   primaryKey: 'api/v1/post/:id',
   queryFn: ({ queryKey: [, params] }) => getPostByIdRequest(params),
 });
