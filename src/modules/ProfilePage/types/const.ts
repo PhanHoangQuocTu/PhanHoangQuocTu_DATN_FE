@@ -16,7 +16,7 @@ export const TAB_MY_PROFILE = [
     value: 'active-account',
   },
   {
-    label: 'My Post',
+    label: 'My Blog',
     value: 'my-post',
   },
 ];

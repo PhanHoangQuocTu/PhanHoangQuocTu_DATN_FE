@@ -75,11 +75,11 @@ const CreatePostDialog: FCC<Props> = ({ children, refetch }) => {
     <Dialog open={isCreate && !postEditId} onOpenChange={handleCloseDialog}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-[35rem] max-h-[30rem] overflow-auto">
-        <AlertDialogHeader className="text-2xl font-semibold">Create Post</AlertDialogHeader>
+        <AlertDialogHeader className="text-2xl font-semibold">Create Blog</AlertDialogHeader>
 
         <FormWrapper form={form} onSubmit={handleSubmit} className="space-y-2">
           <VStack spacing={4}>
-            <label className="text-sm font-medium">Post Image</label>
+            <label className="text-sm font-medium">Blog Image</label>
             <InputFile className="w-full h-[20rem]" onChange={handleChangeProductImg} preview={postImg} />
           </VStack>
           <TextField size={'sm'} control={form.control} name="title" label="Title" placeholder="Title" fullWidth />

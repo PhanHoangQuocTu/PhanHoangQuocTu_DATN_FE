@@ -16,6 +16,7 @@ import {
   File,
   HelpCircle,
   ImagePlus,
+  Link,
   Loader2,
   LogOut,
   MapPin,
@@ -84,6 +85,7 @@ const IconList = {
   rotateCw: RotateCw,
   truck: Truck,
   userCog: UserCog,
+  link: Link,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;

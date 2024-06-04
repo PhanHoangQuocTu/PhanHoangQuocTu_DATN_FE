@@ -75,6 +75,7 @@ const UserManagementTable: React.FC<Props> = ({
               <TableHead className="whitespace-nowrap">Phone Number</TableHead>
               <TableHead className="whitespace-nowrap text-center">Gender</TableHead>
               <TableHead className="whitespace-nowrap text-center">Date of Birth</TableHead>
+              <TableHead className="whitespace-nowrap text-center">Role</TableHead>
               <TableHead className="whitespace-nowrap text-center">Active</TableHead>
               {isDeleted && <TableHead className="whitespace-nowrap text-center">Deleted At</TableHead>}
               <TableHead className="sticky right-0 text-center">Action</TableHead>
@@ -120,6 +121,8 @@ const UserManagementTable: React.FC<Props> = ({
                     <TableCell className="whitespace-nowrap text-center">
                       {user?.dateOfBirth && format(new Date(user?.dateOfBirth), 'dd/MM/yyyy')}
                     </TableCell>
+
+                    <TableCell className="whitespace-nowrap text-center">{isAdmin ? 'Admin' : 'User'}</TableCell>
 
                     <TableCell className="whitespace-nowrap text-center">
                       <Badge variant={getActive().variant as any} className="min-w-16 justify-center">

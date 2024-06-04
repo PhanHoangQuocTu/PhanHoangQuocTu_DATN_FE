@@ -8,6 +8,8 @@ import { Icons } from '@/assets/icons';
 import { HStack, VStack } from '@/components/ui/Utilities';
 import { useAuth } from '@/hooks/useAuth';
 
+import SharePostDialog from './SharePostDialog';
+
 interface Props {
   data: IGetPostByIdResponse | undefined;
   refetch: () => void;
@@ -47,15 +49,15 @@ const PostInfo: React.FC<Props> = ({ data, refetch }) => {
   }, [data?.likes, isLoggedIn, user?.id]);
 
   return (
-    <VStack>
+    <VStack className="w-full">
       <span className="text-2xl font-semibold">{data?.title}</span>
       <span className="whitespace-pre-wrap text-sm font-medium">{data?.description}</span>
       <div className="relative w-full h-[35rem]">
         <Image src={image} alt={'post-banner'} fill unoptimized priority />
       </div>
-      <HStack noWrap>
-        <HStack noWrap pos={'apart'}>
-          <HStack noWrap align={'center'} spacing={12}>
+      <HStack noWrap className="w-full">
+        <HStack noWrap align={'center'} pos={'apart'} className="w-full">
+          <HStack noWrap spacing={12}>
             <HStack noWrap align={'center'}>
               <span className="text-sm font-medium">{data?.likeCount}</span>
               <Icons.thumbsUp
@@ -71,6 +73,13 @@ const PostInfo: React.FC<Props> = ({ data, refetch }) => {
               <Icons.messageCirle size={20} />
             </HStack>
           </HStack>
+
+          <SharePostDialog>
+            <button className="flex gap-2 items-center">
+              <span className="text-base font-medium">Share</span>
+              <Icons.link size={24} />
+            </button>
+          </SharePostDialog>
         </HStack>
       </HStack>
     </VStack>

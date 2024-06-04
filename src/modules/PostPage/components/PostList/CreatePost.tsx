@@ -42,10 +42,10 @@ const CreatePost = () => {
       return (
         <HStack className="pt-2" pos={'right'}>
           <Button size={'sm'} variant={'secondary'} onClick={() => router.push(ROUTE.PROFILE)}>
-            My Post
+            My Blog
           </Button>
           <Button size={'sm'} onClick={handleOpenCreatePostDialog}>
-            Create Post
+            Create Blog
           </Button>
         </HStack>
       );

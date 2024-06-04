@@ -20,7 +20,7 @@ const SIDEBAR_SUPPER_ADMIN_LIST = [
     icon: Receipt,
   },
   {
-    name: 'POST MANAGEMENT',
+    name: 'BLOG MANAGEMENT',
     href: ROUTE.POST_MANAGEMENT,
     icon: Twitch,
   },

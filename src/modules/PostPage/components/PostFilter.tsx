@@ -22,14 +22,6 @@ const PostFilter: React.FC<Props> = ({ handleSearchChange }) => {
     },
   });
 
-  const handleResetForm = () => {
-    form.reset({
-      search: '',
-      isApprove: '',
-    });
-    handleSubmit({ ...form.getValues() });
-  };
-
   const handleSubmit: SubmitHandler<PostFilterType> = async (formData) => {
     handleSearchChange(formData);
   };
@@ -41,14 +33,8 @@ const PostFilter: React.FC<Props> = ({ handleSearchChange }) => {
           <TextField size={'sm'} control={form.control} label="Search" name="search" placeholder="Search by title" />
         </div>
 
-        <HStack spacing={16} pos={'right'} align={'end'}>
-          <HStack noWrap spacing={12}>
-            <Button type="button" variant="outline" onClick={handleResetForm}>
-              Clear Filter
-            </Button>
-
-            <Button type="submit">Apply Filter</Button>
-          </HStack>
+        <HStack spacing={16} align={'end'}>
+          <Button type="submit">Search</Button>
         </HStack>
       </div>
     </FormWrapper>

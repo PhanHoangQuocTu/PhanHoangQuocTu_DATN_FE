@@ -8,7 +8,7 @@ import { AdminLayout } from '../AdminLayout';
 const PostManagementLayout: FCC = ({ children }) => {
   return (
     <AdminLayout>
-      <TitlePage title="Post Management" />
+      <TitlePage title="Blog Management" />
 
       <div className="space-y-4">
         <section>{children}</section>

@@ -15,7 +15,7 @@ const MyPost = () => {
     <TransitionLayout>
       <ShadowContainer>
         <Show when={!postList?.length && isSuccess}>
-          <BookNoData emptyText={'No post'} className="py-20" />
+          <BookNoData emptyText={'No Blog'} className="py-20" />
         </Show>
 
         <VStack className="min-h-screen">
