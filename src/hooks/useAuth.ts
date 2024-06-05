@@ -13,6 +13,8 @@ export const useAuth = () => {
   const fullName = React.useMemo(() => {
     if (!user) return '';
 
+    if (!user?.firstName || !user?.lastName) return 'Annonymous';
+
     return `${user?.firstName} ${user?.lastName}`;
   }, [user]);
 
