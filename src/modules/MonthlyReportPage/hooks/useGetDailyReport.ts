@@ -29,7 +29,7 @@ export const useGetDailyReport = (limit = 10) => {
 
   const totalRevenue = React.useMemo(() => {
     return data?.data.reduce((acc, item) => {
-      return acc + Number(item.totalRevenue);
+      return acc + Number(item.revenue);
     }, 0);
   }, [data?.data]);
 
@@ -39,10 +39,27 @@ export const useGetDailyReport = (limit = 10) => {
     return data?.data?.map((item) => {
       return {
         date: item?.date,
-        value: Number(item?.totalRevenue),
+        value: Number(item?.revenue),
       } as IChartData;
     });
   }, [data]);
+
+  const calculateDailyRevenueChangePercentage = React.useMemo(() => {
+    const dailyRevenues = data?.data ?? [];
+    const revenueDataLength = dailyRevenues.length;
+
+    if (revenueDataLength === 0) return 0;
+    if (revenueDataLength === 1) return 100;
+
+    const todayRevenue = Number(dailyRevenues[revenueDataLength - 1].revenue);
+    const yesterdayRevenue = Number(dailyRevenues[revenueDataLength - 2].revenue);
+
+    if (yesterdayRevenue === 0) return 0;
+
+    const changePercentage = ((todayRevenue - yesterdayRevenue) / yesterdayRevenue) * 100;
+
+    return changePercentage;
+  }, [data?.data]);
 
   return {
     data,
@@ -53,6 +70,8 @@ export const useGetDailyReport = (limit = 10) => {
     onPageChange,
     handleFilterChange,
     handleSearchChange,
+    dailyRevenueChangePercentage: calculateDailyRevenueChangePercentage,
+
     filter,
     totalRevenue,
     chartData,

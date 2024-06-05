@@ -1,31 +1,22 @@
+import { Download } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import { QRCodeSVG } from 'qrcode.react';
 import React from 'react';
-import {
-  FacebookMessengerIcon,
-  FacebookMessengerShareButton,
-  LinkedinIcon,
-  LinkedinShareButton,
-  PinterestIcon,
-  PinterestShareButton,
-  TelegramIcon,
-  TelegramShareButton,
-  ViberIcon,
-  ViberShareButton,
-  WhatsappIcon,
-  WhatsappShareButton,
-} from 'react-share';
 
 import { Icons } from '@/assets/icons';
 import { AlertDialogHeader } from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { HStack } from '@/components/ui/Utilities';
+import { VStack } from '@/components/ui/Utilities';
 import { useCopy } from '@/hooks/useCopy';
+import { useDownload } from '@/hooks/useDownload';
 import { env } from '@/lib/const';
 import { type FCC, ROUTE } from '@/types';
 
 const SharePostDialog: FCC = ({ children }) => {
   const [copied, copy] = useCopy();
+  const { download, isLoading } = useDownload();
   const params = useParams();
   const postId = params?.postId;
 
@@ -35,37 +26,23 @@ const SharePostDialog: FCC = ({ children }) => {
     return `${env.APP_URL}/${ROUTE.POST}/${postId}`;
   }, [postId]);
 
+  const handleDownload = () => {
+    download('blog-qr-code', 'QR_postUrl.png');
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-[35rem]">
-        <AlertDialogHeader className="text-2xl font-semibold">Share this blog unique offfer:</AlertDialogHeader>
+        <AlertDialogHeader className="text-2xl font-semibold">Share this blog:</AlertDialogHeader>
 
-        <HStack noWrap>
-          <FacebookMessengerShareButton url={postUrl} redirectUri={postUrl} appId="1410039959693094">
-            <FacebookMessengerIcon />
-          </FacebookMessengerShareButton>
-
-          <LinkedinShareButton url={postUrl}>
-            <LinkedinIcon />
-          </LinkedinShareButton>
-
-          <ViberShareButton url={postUrl}>
-            <ViberIcon />
-          </ViberShareButton>
-
-          <WhatsappShareButton url={postUrl}>
-            <WhatsappIcon />
-          </WhatsappShareButton>
-
-          <PinterestShareButton media="" url={postUrl}>
-            <PinterestIcon />
-          </PinterestShareButton>
-
-          <TelegramShareButton url={postUrl}>
-            <TelegramIcon />
-          </TelegramShareButton>
-        </HStack>
+        <VStack align={'center'} spacing={4}>
+          <QRCodeSVG value={postUrl} size={256} />,
+          <Button disabled={isLoading} onClick={handleDownload} className="gap-4 cursor-pointer">
+            <span>Download QR</span>
+            <Download />
+          </Button>
+        </VStack>
         <span>Share this link</span>
         <Input
           value={postUrl}

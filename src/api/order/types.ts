@@ -416,5 +416,5 @@ export interface IGetDailyRevenueResponse {
 
 export interface IDailyRevenue {
   date: string;
-  totalRevenue: number;
+  revenue: number;
 }

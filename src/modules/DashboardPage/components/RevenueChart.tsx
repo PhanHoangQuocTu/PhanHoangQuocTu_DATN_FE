@@ -9,7 +9,7 @@ interface Props {
 const RevenueChart: React.FC<Props> = ({ data }) => {
   return (
     <div className="w-full h-full">
-      <AreaChartComp data={data} title="Revenue" roundNumberTooltip={0} tooltipSuffix={'đ'} isShowDateTooltip={false} />
+      <AreaChartComp data={data} title="Revenue" roundNumberTooltip={0} tooltipSuffix={'đ'} />
     </div>
   );
 };

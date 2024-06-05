@@ -49,6 +49,22 @@ export const useGetMonthlyReport = (limit = 10) => {
     });
   }, [data]);
 
+  const calculateDailyRevenueChangePercentage = React.useMemo(() => {
+    const dailyRevenues = data?.data ?? [];
+    const revenueDataLength = dailyRevenues.length;
+
+    if (revenueDataLength === 0) return 0;
+    if (revenueDataLength === 1) return 100;
+
+    const todayRevenue = Number(dailyRevenues[revenueDataLength - 1].totalRevenue);
+    const yesterdayRevenue = Number(dailyRevenues[revenueDataLength - 2].totalRevenue);
+
+    if (yesterdayRevenue === 0) return 0;
+
+    const changePercentage = ((todayRevenue - yesterdayRevenue) / yesterdayRevenue) * 100;
+
+    return changePercentage;
+  }, [data?.data]);
   return {
     data,
     monthlyList: data?.data ?? [],
@@ -61,6 +77,7 @@ export const useGetMonthlyReport = (limit = 10) => {
     filter,
     totalRevenue,
     chartData,
+    revenueChangePercentage: calculateDailyRevenueChangePercentage,
     ...rest,
   };
 };
