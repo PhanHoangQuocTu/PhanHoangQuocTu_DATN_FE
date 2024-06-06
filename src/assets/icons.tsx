@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronUp,
+  CircleEllipsis,
   Contact,
   Copy,
   Eye,
@@ -86,6 +87,7 @@ const IconList = {
   truck: Truck,
   userCog: UserCog,
   link: Link,
+  circleEllipsis: CircleEllipsis,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;
