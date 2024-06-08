@@ -5,7 +5,7 @@ import BookCard from '@/components/BookCard';
 import { CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { useMobile } from '@/hooks/breakpoint';
 import { useGetAllBook } from '@/hooks/product/useGetAllBook';
-import { useFundCarousel } from '@/hooks/useFundCarousel';
+import { useCommonCarousel } from '@/hooks/useCommonCarousel';
 import { cn } from '@/lib/utils';
 
 const ProductCarousel = () => {
@@ -20,7 +20,7 @@ const ProductCarousel = () => {
     onPrevButtonClick,
     onNextButtonClick,
     onDotButtonClick,
-  } = useFundCarousel();
+  } = useCommonCarousel();
 
   return (
     <div className="group relative">

@@ -2,7 +2,19 @@ import React from 'react';
 
 import { useCarousel } from '@/components/ui/carousel';
 
-export const useFundCarousel = () => {
+export const useCommonCarousel = (): {
+  api: ReturnType<typeof useCarousel>['api'] | undefined;
+  carouselRef: ReturnType<typeof useCarousel>['carouselRef'];
+  selectedIndex: number;
+  scrollSnaps: number[];
+  prevBtnDisabled: boolean;
+  nextBtnDisabled: boolean;
+  onPrevButtonClick: () => void;
+  onNextButtonClick: () => void;
+  onSelect: (emblaApi: any) => void;
+  onDotButtonClick: (index: number) => void;
+  onInit: (emblaApi: any) => void;
+} => {
   const { api, carouselRef } = useCarousel();
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([]);

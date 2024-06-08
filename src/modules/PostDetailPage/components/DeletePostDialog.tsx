@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import { toast } from 'sonner';
 
@@ -17,7 +16,7 @@ interface Props {
 const DeletePostDialog: FCC<Props> = ({ children, postId, refetch }) => {
   const setPostDeleteId = usePostStore.use.setPostDeleteId();
   const postDeleteId = usePostStore.use.postDeleteId();
-  const router = useRouter();
+
   const handleCloseDialog = () => {
     setPostDeleteId('');
   };
