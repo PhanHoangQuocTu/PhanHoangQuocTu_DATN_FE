@@ -9,6 +9,8 @@ import { ROUTE } from '@/types';
 
 import { refreshTokenRequest } from './auth';
 
+let isRefresh = false;
+
 export const request = axios.create({
   baseURL: env.API_URL,
 });
@@ -49,9 +51,13 @@ const handleError = async (error: any) => {
   const refreshToken = store?.refreshToken;
   const isLoggedIn = !!refreshToken;
 
-  if (data?.statusCode === 403 && !originalRequest?._retry && isLoggedIn) {
-    originalRequest._retry = true;
+  if (data?.statusCode === 403 && !isRefresh && isLoggedIn) {
+    isRefresh = true;
     const token = await onRefreshToken();
+
+    if (!token) {
+      isRefresh = false;
+    }
     axios.defaults.headers.Authorization = `Bearer ${token}`;
     return request(originalRequest);
   }

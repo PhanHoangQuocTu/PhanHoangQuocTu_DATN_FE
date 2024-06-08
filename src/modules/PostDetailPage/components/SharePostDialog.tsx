@@ -23,7 +23,7 @@ const SharePostDialog: FCC = ({ children }) => {
   const postUrl = React.useMemo(() => {
     if (!postId) return '';
 
-    return `${env.APP_URL}/${ROUTE.POST}/${postId}`;
+    return `${env.APP_URL}${ROUTE.POST}/${postId}`;
   }, [postId]);
 
   const handleDownload = () => {

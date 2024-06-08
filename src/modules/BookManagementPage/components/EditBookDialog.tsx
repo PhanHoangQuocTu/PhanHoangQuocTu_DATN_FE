@@ -46,7 +46,7 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
     variables: {
       id: bookId,
     },
-    enabled: !!bookId && !!bookEditId && isEdit,
+    enabled: !!bookId,
   });
 
   const form = useForm<HandleBookManagementType>({
@@ -109,11 +109,11 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
         categoryId: data?.category?.id,
       });
 
-      if (data?.images?.length > 0) {
+      if (data?.images?.length > 0 && +bookEditId === bookId) {
         setProductImg(data?.images[0]);
       }
     }
-  }, [data, form, isSuccess, setProductImg]);
+  }, [bookEditId, bookId, data, form, isSuccess, setProductImg]);
 
   return (
     <Dialog open={+bookEditId === bookId && isEdit} onOpenChange={handleCloseDialog}>

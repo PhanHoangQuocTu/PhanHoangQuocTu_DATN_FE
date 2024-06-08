@@ -55,7 +55,8 @@ const BookManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
               <TableHead className="text-center">No.</TableHead>
               <TableHead className="whitespace-nowrap">Title</TableHead>
               <TableHead className="whitespace-nowrap">Description</TableHead>
-              <TableHead className="whitespace-nowrap">Price</TableHead>
+              <TableHead className="whitespace-nowrap text-right">Price</TableHead>
+              <TableHead className="whitespace-nowrap text-right">Discount</TableHead>
               <TableHead className="whitespace-nowrap text-center">Stock</TableHead>
               <TableHead className="whitespace-nowrap">Author</TableHead>
               <TableHead className="whitespace-nowrap">Category</TableHead>
@@ -81,12 +82,23 @@ const BookManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPageC
                     <TableCell className="whitespace-nowrap">
                       <p className="max-w-96 truncate">{book?.description}</p>
                     </TableCell>
-                    <TableCell className="whitespace-nowrap">{prettyNumber(roundNumber(book?.price))} đ</TableCell>
+                    <TableCell className="whitespace-nowrap text-right">
+                      {prettyNumber(roundNumber(book?.price))} đ
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap text-right">
+                      {prettyNumber(roundNumber(book?.discount))} %
+                    </TableCell>
                     <TableCell className="whitespace-nowrap text-center">{book?.stock}</TableCell>
-                    <TableCell className="whitespace-nowrap">{book?.author && book?.author?.name}</TableCell>
-                    <TableCell className="whitespace-nowrap">{book?.category && book?.category?.title}</TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      {book?.author ? book?.author?.name : 'Not Available'}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      {book?.category ? book?.category?.title : 'Not Available'}
+                    </TableCell>
 
-                    <TableCell className="whitespace-nowrap">{book?.publisher && book?.publisher?.name}</TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      {book?.publisher ? book?.publisher?.name : 'Not Available'}
+                    </TableCell>
 
                     <TableCell className="whitespace-nowrap text-center">
                       {format(new Date(book?.createdAt), 'dd/MM/yyyy')}

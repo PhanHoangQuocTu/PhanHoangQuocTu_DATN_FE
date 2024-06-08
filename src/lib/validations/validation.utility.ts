@@ -11,16 +11,16 @@ export function asOptionalField<T extends ZodTypeAny>(schema: T) {
 }
 
 export const numberRequired = z
-  .number({ required_error: 'This is a required field' })
+  .number()
   .or(z.string().transform(Number))
-  .refine((data: any) => {
-    if (!data || data === '') return false;
-    return true;
-  }, 'This is a required field')
   .refine((data) => {
     if (Number.isNaN(Number(data))) return false;
     return true;
-  }, 'invalid number');
+  }, 'invalid number')
+  .refine((data: any) => {
+    if (!data || data === '') return false;
+    return true;
+  }, 'This is a required field');
 
 export const numberNoRequired = z
   .number({ required_error: 'This is a required field' })

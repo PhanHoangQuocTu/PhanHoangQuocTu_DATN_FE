@@ -13,9 +13,9 @@ const LandingPage: NextPageWithLayout = () => {
   return (
     <VStack spacing={0}>
       <BannerSection />
+      <UniqueSection />
       <CarouselContainer />
       <BlogSection />
-      <UniqueSection />
     </VStack>
   );
 };

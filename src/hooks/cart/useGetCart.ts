@@ -11,25 +11,31 @@ export const useGetCart = () => {
     enabled: !!isLoggedIn,
   });
 
-  const bookPrices = React.useMemo(() => {
-    if (!data?.cart?.items?.length) return prettyNumber(roundNumber('0'));
+  const cartData = React.useMemo(() => {
+    if (!data?.cart?.items?.length) return [];
 
-    const total = data?.cart?.items?.reduce((acc, item) => {
+    return data?.cart?.items?.filter((item) => !!item?.product);
+  }, [data?.cart?.items]);
+
+  const bookPrices = React.useMemo(() => {
+    if (!cartData?.length) return prettyNumber(roundNumber('0'));
+
+    const total = cartData?.reduce((acc, item) => {
       return acc + Number(item?.product?.price) * item.quantity;
     }, 0);
 
     return total;
-  }, [data?.cart?.items]);
+  }, [cartData]);
 
   const totalDiscountPrice = React.useMemo(() => {
-    if (!data?.cart?.items?.length) return prettyNumber(roundNumber('0'));
+    if (!cartData?.length) return prettyNumber(roundNumber('0'));
 
-    const total = data?.cart?.items?.reduce((acc, item) => {
+    const total = cartData?.reduce((acc, item) => {
       return acc + ((Number(item?.product?.price) * Number(item?.product?.discount)) / 100) * item.quantity;
     }, 0);
 
     return total;
-  }, [data?.cart?.items]);
+  }, [cartData]);
 
   const totalPrice = React.useMemo(() => {
     if (!Number(bookPrices)) return prettyNumber(roundNumber('0'));
@@ -46,9 +52,9 @@ export const useGetCart = () => {
   }, [bookPrices, totalDiscountPrice]);
 
   const cartCheckout = React.useMemo(() => {
-    if (!data?.cart?.items?.length) return [];
+    if (!cartData?.length) return [];
 
-    return data?.cart?.items?.map((item) => ({
+    return cartData?.map((item) => ({
       id: item?.product?.id,
       product_unit_price: Number(item?.product?.price),
       product_quanity: Number(item?.quantity),
@@ -57,10 +63,10 @@ export const useGetCart = () => {
       discount: Number(item?.product?.discount),
       images: item?.product?.images,
     }));
-  }, [data?.cart?.items]);
+  }, [cartData]);
 
   return {
-    cart: data?.cart?.items || [],
+    cart: cartData || [],
     bookPrices,
     totalDiscountPrice,
     totalPrice,

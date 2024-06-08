@@ -99,7 +99,6 @@ const ChatComponent = ({ userId, userName }: { userId: number; userName: string 
         <h2 className="text-2xl font-bold mb-4">Chat Room</h2>
         <VStack className="p-3 max-h-96 overflow-y-auto">
           {messages.map((msg: IMessages, index: number) => {
-            console.log('🚀 ~ {messages.map ~ msg.senderId:', msg);
 
             return (
               <VStack key={index}>

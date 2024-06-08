@@ -49,12 +49,15 @@ export const useGetDailyReport = (limit = 10) => {
     const revenueDataLength = dailyRevenues.length;
 
     if (revenueDataLength === 0) return 0;
+
     if (revenueDataLength === 1) return 100;
 
     const todayRevenue = Number(dailyRevenues[revenueDataLength - 1].revenue);
     const yesterdayRevenue = Number(dailyRevenues[revenueDataLength - 2].revenue);
 
-    if (yesterdayRevenue === 0) return 0;
+    if (yesterdayRevenue === 0 && todayRevenue === 0) return 0;
+
+    if (yesterdayRevenue === 0) return 100;
 
     const changePercentage = ((todayRevenue - yesterdayRevenue) / yesterdayRevenue) * 100;
 

@@ -8,3 +8,5 @@ export const REGEX_UNSIGNED_LETTERS =
   /^[^áàảãạắằẳẵặấầẩẫậéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵđÁÀẢÃẠẮẰẲẴẶẤẦẨẪẬÉÈẺẼẸẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌỐỒỔỖỘỚỜỞỠỢÚÙỦŨỤỨỪỬỮỰÝỲỶỸỴĐ]+$/;
 
 export const REGEX_NO_WHITESPACES = /\s/;
+
+export const REGEX_PHONE = /(84|0[1-9])+([0-9]{8,9})\b/g;

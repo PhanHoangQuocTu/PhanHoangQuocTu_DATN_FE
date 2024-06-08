@@ -16,14 +16,17 @@ import {
   EyeOff,
   File,
   HelpCircle,
+  Home,
   ImagePlus,
   Link,
   Loader2,
   LogOut,
+  Mail,
   MapPin,
   MessageCircle,
   Minus,
   Pencil,
+  Phone,
   Plus,
   Receipt,
   RotateCw,
@@ -88,6 +91,9 @@ const IconList = {
   userCog: UserCog,
   link: Link,
   circleEllipsis: CircleEllipsis,
+  mail: Mail,
+  phone: Phone,
+  home: Home,
 };
 
 export const Icons = IconList as Record<keyof typeof IconList, Icon>;

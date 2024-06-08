@@ -102,12 +102,12 @@ const BookInfo: React.FC<Props> = ({ data }) => {
 
           <HStack noWrap spacing={8} className="text-xs font-medium">
             <label>Publisher:</label>
-            <span>{data?.publisher?.name}</span>
+            <span>{data?.publisher?.name || 'Not Available'}</span>
           </HStack>
 
           <HStack noWrap spacing={8} className="text-xs font-medium">
             <label>Author:</label>
-            <span>{data?.author?.name}</span>
+            <span>{data?.author?.name || 'Not Available'}</span>
           </HStack>
 
           <HStack noWrap spacing={8} className="text-xs font-medium">
@@ -141,32 +141,36 @@ const BookInfo: React.FC<Props> = ({ data }) => {
           </VStack>
         </VStack>
 
-        <FormWrapper className="flex flex-col gap-4" form={form} onSubmit={handleSubmit}>
-          <HStack noWrap spacing={16}>
-            <label>Quantity</label>
-            <NumberField
-              size={'sm'}
-              control={form.control}
-              name="quantity"
-              containerClassName="max-w-60"
-              suffix={
-                <HStack spacing={16}>
-                  <button onClick={handleDecreaseQuantity} type="button" className="hover:opacity-70">
-                    <Icons.minus size={16} />
-                  </button>
+        {data?.stock ? (
+          <FormWrapper className="flex flex-col gap-4" form={form} onSubmit={handleSubmit}>
+            <HStack noWrap spacing={16}>
+              <label>Quantity</label>
+              <NumberField
+                size={'sm'}
+                control={form.control}
+                name="quantity"
+                containerClassName="max-w-60"
+                suffix={
+                  <HStack spacing={16}>
+                    <button onClick={handleDecreaseQuantity} type="button" className="hover:opacity-70">
+                      <Icons.minus size={16} />
+                    </button>
 
-                  <button onClick={handleIncreaseQuantity} type="button" className="hover:opacity-70">
-                    <Icons.plus size={16} />
-                  </button>
-                </HStack>
-              }
-            />
-          </HStack>
+                    <button onClick={handleIncreaseQuantity} type="button" className="hover:opacity-70">
+                      <Icons.plus size={16} />
+                    </button>
+                  </HStack>
+                }
+              />
+            </HStack>
 
-          <Button type="submit" className="w-fit">
-            Add to cart
-          </Button>
-        </FormWrapper>
+            <Button type="submit" className="w-fit">
+              Add to cart
+            </Button>
+          </FormWrapper>
+        ) : (
+          <span className="bg-gray-500 text-white rounded-md px-6 py-2 text-xl font-medium w-fit"> Out of stock</span>
+        )}
       </VStack>
     </ShadowContainer>
   );

@@ -1,1 +1,1 @@
-export const LIMIT_BOOK_LIST = 9;
+export const LIMIT_BOOK_LIST = 16;

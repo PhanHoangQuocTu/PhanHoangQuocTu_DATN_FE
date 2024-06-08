@@ -1,16 +1,36 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
+import { toast } from 'sonner';
 
 import { Icons } from '@/assets/icons';
 import ChatComponent from '@/components/ChatComponent';
 import NotLoginComponent from '@/components/ChatComponent/NotLoginComponent';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useAuth } from '@/hooks/useAuth';
-import type { FCC } from '@/types';
+import { useIsAdmin } from '@/hooks/useIsAdmin';
+import { type FCC, ROUTE } from '@/types';
 
 import { Sidebar } from './Sidebar';
 
 const AdminLayout: FCC = ({ children }) => {
-  const { user, isLoggedIn } = useAuth();
+  const router = useRouter();
+  const { user, isLoggedIn, accessToken } = useAuth();
+  const { isAdmin, isSuccess } = useIsAdmin(accessToken);
+
+  const canUseDOM: boolean = !!(
+    typeof window !== 'undefined' &&
+    typeof window.document !== 'undefined' &&
+    typeof window.document.createElement !== 'undefined'
+  );
+
+  const useIsomorphicLayoutEffect = canUseDOM ? React.useLayoutEffect : React.useEffect;
+
+  useIsomorphicLayoutEffect(() => {
+    if (isSuccess && !isAdmin) {
+      router.replace(ROUTE.HOME);
+      toast.error('You do not have permission to access this page');
+    }
+  }, []);
 
   return (
     <div className="flex">

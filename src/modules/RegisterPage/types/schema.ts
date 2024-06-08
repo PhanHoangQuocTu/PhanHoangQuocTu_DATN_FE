@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { REGEX_PASSWORD } from '@/lib/regex';
+import { REGEX_PASSWORD, REGEX_PHONE } from '@/lib/regex';
 import { validationMessages } from '@/lib/validations/validation.utility';
 
 export const registerSchema = z
@@ -11,9 +11,14 @@ export const registerSchema = z
         message: validationMessages.required(),
       })
       .email(validationMessages.invalid('Email')),
-    phoneNumber: z.string().min(1, {
-      message: validationMessages.required(),
-    }),
+    phoneNumber: z
+      .string()
+      .min(1, {
+        message: validationMessages.required(),
+      })
+      .regex(REGEX_PHONE, {
+        message: 'Phone number must be in the format of 84xxxxxxxx or 0xxxxxxxx.',
+      }),
     password: z
       .string()
       .min(1, {
