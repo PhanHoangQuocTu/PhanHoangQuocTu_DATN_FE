@@ -104,12 +104,12 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
         price: Number(data?.price),
         discount: Number(data?.discount),
         stock: data?.stock,
-        authorId: data?.author?.id,
-        publisherId: data?.publisher?.id,
-        categoryId: data?.category?.id,
+        authorId: String(data?.author?.id),
+        publisherId: String(data?.publisher?.id),
+        categoryId: String(data?.category?.id),
       });
 
-      if (data?.images?.length > 0 && +bookEditId === bookId) {
+      if (data?.images?.length > 0) {
         setProductImg(data?.images[0]);
       }
     }

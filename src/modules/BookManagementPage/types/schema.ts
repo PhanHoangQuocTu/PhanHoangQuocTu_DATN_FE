@@ -19,9 +19,9 @@ export const handleBookManagementSchema = z.object({
   price: numberRequired,
   discount: numberNoRequired,
   stock: numberRequired,
-  categoryId: numberRequired,
-  authorId: numberRequired,
-  publisherId: numberRequired,
+  categoryId: z.string(),
+  authorId: z.string(),
+  publisherId: z.string(),
 });
 
 export type BookManagementFilterType = z.infer<typeof bookManagementFilterSchema>;
