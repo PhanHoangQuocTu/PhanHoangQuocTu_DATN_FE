@@ -97,7 +97,7 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
   };
 
   React.useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && +bookEditId === bookId) {
       form.reset({
         title: data?.title,
         description: data?.description,
@@ -184,7 +184,7 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
               Close
             </Button>
 
-            <Button type="submit">Create</Button>
+            <Button type="submit">Save</Button>
           </AlertDialogFooter>
         </FormWrapper>
       </DialogContent>
