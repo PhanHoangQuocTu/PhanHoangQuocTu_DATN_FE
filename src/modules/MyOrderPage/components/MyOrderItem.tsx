@@ -43,6 +43,8 @@ const MyOrderItem: React.FC<Props> = ({ data, refetch }) => {
     setMyOderDetailId(String(data?.id));
   };
 
+  const statusLabel = data?.status === ORDER_STATUS_VALUE.shipped ? 'Delivering' : data?.status;
+
   return (
     <ShadowContainer className="flex justify-between p-5">
       <VStack>
@@ -53,7 +55,7 @@ const MyOrderItem: React.FC<Props> = ({ data, refetch }) => {
         <HStack noWrap spacing={12}>
           <span>Status:</span>
           <Badge variant={statusVariant}>
-            <span className="first-letter:uppercase">{data?.status}</span>
+            <span className="first-letter:uppercase">{statusLabel}</span>
           </Badge>
         </HStack>
       </VStack>
