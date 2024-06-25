@@ -1,6 +1,6 @@
 // ChatComponent.jsx
 import { format } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import io from 'socket.io-client';
 
 import { type IUser } from '@/api/auth';
@@ -24,11 +24,18 @@ interface IMessages {
 }
 
 const ChatComponent = ({ userId, userName }: { userId: number; userName: string }) => {
-  const [socket, setSocket] = useState<any>(null);
-  const [messages, setMessages] = useState<IMessages[]>([]);
-  const [newMessage, setNewMessage] = useState<any>('');
+  const [socket, setSocket] = React.useState<any>(null);
+  const [messages, setMessages] = React.useState<IMessages[]>([]);
+  const [newMessage, setNewMessage] = React.useState<any>('');
+  const messagesEndRef = React.useRef(null);
 
-  useEffect(() => {
+  const scrollToBottom = () => {
+    if (messagesEndRef?.current) {
+      (messagesEndRef?.current as any)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  React.useEffect(() => {
     const newSocket = io(`${env.API_URL}/chat`);
 
     newSocket.emit('joinChat', { userId });
@@ -57,6 +64,14 @@ const ChatComponent = ({ userId, userName }: { userId: number; userName: string 
       newSocket.close();
     };
   }, [userId]);
+
+  React.useEffect(() => {
+    scrollToBottom();
+  }, [userId]);
+
+  React.useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const deleteMessage = (messageId: any) => {
     socket.emit('deleteMessage', { messageId });
@@ -133,6 +148,7 @@ const ChatComponent = ({ userId, userName }: { userId: number; userName: string 
               </VStack>
             );
           })}
+          <div ref={messagesEndRef} />
         </VStack>
 
         <HStack noWrap className="mt-4">

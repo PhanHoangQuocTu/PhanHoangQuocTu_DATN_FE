@@ -12,7 +12,7 @@ export const ORDER_STATUS_OPTIONS = [
   },
   {
     value: ORDER_STATUS_VALUE.shipped,
-    label: 'Shipped',
+    label: 'Delivering',
   },
   {
     value: ORDER_STATUS_VALUE.delivered,

@@ -40,9 +40,13 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
   const { authorSelectOptions } = useGetAllAuthor(limit_infinite);
   const { categorySelectOptions } = useGetAllCategory(limit_infinite);
   const { publisherSelectOptions } = useGetAllPublisher(limit_infinite);
-  const { url } = useUploadBookImg();
+  const { url, isLoading } = useUploadBookImg();
 
-  const { data, isSuccess } = useGetDetailProductQuery({
+  const {
+    data,
+    isSuccess,
+    refetch: refetchProductDetail,
+  } = useGetDetailProductQuery({
     variables: {
       id: bookId,
     },
@@ -66,6 +70,7 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
   const { mutate: editProduct } = useMutation(editProductRequest, {
     onSuccess: () => {
       toast.success('Update book successfully!');
+      refetchProductDetail();
       handleCloseDialog();
       refetch();
     },
@@ -93,7 +98,9 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
   };
 
   const handleChangeProductImg = (file: File | null) => {
-    setProductImg(file);
+    if (isEdit) {
+      setProductImg(file);
+    }
   };
 
   React.useEffect(() => {
@@ -124,7 +131,7 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
         <FormWrapper form={form} onSubmit={handleSubmit} className="space-y-2">
           <VStack spacing={4}>
             <label className="text-sm font-medium">Book Image</label>
-            <InputFile className="w-full h-20" onChange={handleChangeProductImg} preview={productImg} />
+            <InputFile className="w-full h-60" onChange={handleChangeProductImg} preview={productImg} />
           </VStack>
           <TextField size={'sm'} control={form.control} name="title" label="Title" placeholder="Title" fullWidth />
 
@@ -184,7 +191,9 @@ const EditBookDialog: FCC<Props> = ({ children, refetch, bookId }) => {
               Close
             </Button>
 
-            <Button type="submit">Save</Button>
+            <Button type="submit" loading={isLoading} disabled={isLoading}>
+              Save
+            </Button>
           </AlertDialogFooter>
         </FormWrapper>
       </DialogContent>

@@ -30,7 +30,7 @@ const AdminLayout: FCC = ({ children }) => {
       router.replace(ROUTE.HOME);
       toast.error('You do not have permission to access this page');
     }
-  }, []);
+  }, [isSuccess, isAdmin, router]);
 
   return (
     <div className="flex">

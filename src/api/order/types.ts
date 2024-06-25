@@ -141,6 +141,7 @@ export interface IGetMyOrderUser {
 export interface IGetMyOrderParams {
   page: number;
   limit: number;
+  status: string;
 }
 
 export interface IGetMyOrderProduct {

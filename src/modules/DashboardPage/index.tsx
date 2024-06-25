@@ -22,16 +22,48 @@ import RevenueChart from './components/RevenueChart';
 import UserChart from './components/UserChart';
 
 const DashboardPage: NextPageWithLayout = () => {
-  const { meta: metaBook } = useGetAllBook();
-  const { meta: metaUser } = useGetAllUser();
-  const { meta: metaAdmin } = useGetAllAdmin();
-  const { meta: metaOrder } = useGetAllOrder();
-  const { meta: metaPost } = useGetAllPost();
-  const { meta: metaCategory } = useGetAllCategory();
-  const { meta: metaPublisher } = useGetAllPublisher();
-  const { meta: metaAuthor } = useGetAllAuthor();
-  const { totalRevenue, revenueChangePercentage } = useGetMonthlyReport();
-  const { chartData, dailyRevenueChangePercentage } = useGetDailyReport();
+  const { meta: metaBook, refetch: refetchBook } = useGetAllBook();
+  const { meta: metaUser, refetch: refetchUser } = useGetAllUser();
+  const { meta: metaAdmin, refetch: refetchAdmin } = useGetAllAdmin();
+  const { meta: metaOrder, refetch: refetchOrder } = useGetAllOrder();
+  const { meta: metaPost, refetch: refetchPost } = useGetAllPost();
+  const { meta: metaCategory, refetch: refetchCategory } = useGetAllCategory();
+  const { meta: metaPublisher, refetch: refetchPublisher } = useGetAllPublisher();
+  const { meta: metaAuthor, refetch: refetchAuthor } = useGetAllAuthor();
+  const { totalRevenue, revenueChangePercentage, refetch: refetchRevenue } = useGetMonthlyReport();
+  const { chartData, dailyRevenueChangePercentage, refetch: refetchDaily } = useGetDailyReport();
+
+  const handleFetchData = React.useCallback(() => {
+    refetchBook();
+    refetchUser();
+    refetchAdmin();
+    refetchOrder();
+    refetchPost();
+    refetchCategory();
+    refetchPublisher();
+    refetchAuthor();
+    refetchRevenue();
+    refetchDaily();
+  }, [
+    refetchAdmin,
+    refetchAuthor,
+    refetchBook,
+    refetchCategory,
+    refetchDaily,
+    refetchOrder,
+    refetchPost,
+    refetchPublisher,
+    refetchRevenue,
+    refetchUser,
+  ]);
+
+  React.useEffect(() => {
+    handleFetchData();
+
+    return () => {
+      handleFetchData();
+    };
+  }, [handleFetchData]);
 
   return (
     <VStack>

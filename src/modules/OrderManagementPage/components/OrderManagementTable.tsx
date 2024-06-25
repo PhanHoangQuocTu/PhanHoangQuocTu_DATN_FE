@@ -85,6 +85,7 @@ const OrderManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPage
           <TableHeader>
             <TableRow>
               <TableHead className="text-center">No.</TableHead>
+              <TableHead className="text-center whitespace-nowrap">Order Id</TableHead>
               <TableHead className="whitespace-nowrap">Name</TableHead>
               <TableHead className="whitespace-nowrap">Phone Number</TableHead>
               <TableHead className="whitespace-nowrap text-left">Address</TableHead>
@@ -142,6 +143,8 @@ const OrderManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPage
                     <TableCell className="whitespace-nowrap text-center">
                       {currentNo(index, paging.page, paging.limit)}
                     </TableCell>
+
+                    <TableCell className="whitespace-nowrap text-center">{order?.id}</TableCell>
 
                     <TableCell className="whitespace-nowrap">{order?.shippingAddress?.name}</TableCell>
 

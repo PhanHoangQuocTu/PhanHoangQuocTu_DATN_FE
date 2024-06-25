@@ -34,10 +34,10 @@ const CreateBookDialog: FCC<Props> = ({ children, refetch }) => {
   const productImg = useBookManagementStore.use.productImg();
   const setProductImg = useBookManagementStore.use.setProductImg();
 
-  const { authorSelectOptions } = useGetAllAuthor(limit_infinite);
-  const { categorySelectOptions } = useGetAllCategory(limit_infinite);
-  const { publisherSelectOptions } = useGetAllPublisher(limit_infinite);
-  const { url } = useUploadBookImg();
+  const { authorSelectOptions, refetch: refetchAuthor } = useGetAllAuthor(limit_infinite);
+  const { categorySelectOptions, refetch: refetchCategory } = useGetAllCategory(limit_infinite);
+  const { publisherSelectOptions, refetch: refetchPublisher } = useGetAllPublisher(limit_infinite);
+  const { url, isLoading } = useUploadBookImg();
   const form = useForm<HandleBookManagementType>({
     resolver: zodResolver(handleBookManagementSchema),
     defaultValues: {
@@ -45,6 +45,18 @@ const CreateBookDialog: FCC<Props> = ({ children, refetch }) => {
       description: '',
     },
   });
+
+  const handleRefetchData = React.useCallback(() => {
+    refetchAuthor();
+    refetchCategory();
+    refetchPublisher();
+  }, [refetchAuthor, refetchCategory, refetchPublisher]);
+
+  React.useEffect(() => {
+    handleRefetchData();
+
+    return () => handleRefetchData();
+  }, [handleRefetchData]);
 
   const handleCloseDialog = () => {
     setBookEditId('');
@@ -83,7 +95,9 @@ const CreateBookDialog: FCC<Props> = ({ children, refetch }) => {
   };
 
   const handleChangeProductImg = (file: File | null) => {
-    setProductImg(file);
+    if (isCreate) {
+      setProductImg(file);
+    }
   };
 
   return (
@@ -155,7 +169,9 @@ const CreateBookDialog: FCC<Props> = ({ children, refetch }) => {
               Close
             </Button>
 
-            <Button type="submit">Create</Button>
+            <Button type="submit" loading={isLoading} disabled={isLoading}>
+              Create
+            </Button>
           </AlertDialogFooter>
         </FormWrapper>
       </DialogContent>

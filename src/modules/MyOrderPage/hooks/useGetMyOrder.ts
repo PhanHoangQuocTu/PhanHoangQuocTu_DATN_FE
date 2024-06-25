@@ -5,10 +5,13 @@ import usePaging from '@/hooks/usePaging';
 
 export const useGetMyOrder = (limit = 5) => {
   const { paging, onPageChange, handleFilterChange, onTotalItemsChange } = usePaging<any>(limit, {});
+  const [status, setStatus] = React.useState('');
+
   const { data, ...rest } = useGetMyOrdersQuery({
     variables: {
       page: paging.page,
       limit: paging.limit,
+      status,
     },
   });
 
@@ -48,6 +51,8 @@ export const useGetMyOrder = (limit = 5) => {
     onPageChange,
     handleFilterChange,
     totalPriceList,
+    setStatus,
+    statusOrder: status,
     ...rest,
   };
 };

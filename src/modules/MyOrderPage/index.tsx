@@ -3,19 +3,22 @@ import React from 'react';
 import { toast } from 'sonner';
 
 import { PaginationList } from '@/components/pagination';
+import { SelectComp } from '@/components/selectComponent';
 import { ShadowContainer } from '@/components/ShadowContainer';
-import { Show, VStack } from '@/components/ui/Utilities';
+import { HStack, Show, VStack } from '@/components/ui/Utilities';
 import { useAuth } from '@/hooks/useAuth';
+import { defaultArray } from '@/lib/common';
 import { ROUTE } from '@/types';
 
 import BookNoData from '../BooksPage/components/BookNoData';
 import MyOrderItem from './components/MyOrderItem';
 import { useGetMyOrder } from './hooks/useGetMyOrder';
+import { ORDER_STATUS_OPTIONS } from './types/const';
 
 const MyOrderPage = () => {
   const router = useRouter();
   const { isLoggedIn } = useAuth();
-  const { orderList, paging, onPageChange, refetch, isSuccess } = useGetMyOrder();
+  const { orderList, paging, onPageChange, refetch, isSuccess, setStatus, statusOrder } = useGetMyOrder();
 
   React.useEffect(() => {
     refetch();
@@ -31,7 +34,19 @@ const MyOrderPage = () => {
   return (
     <div className="container py-8">
       <ShadowContainer className="min-h-[100vh] space-y-5">
-        <span className="text-xl font-semibold">My Order</span>
+        <HStack pos={'apart'}>
+          <span className="text-xl font-semibold">My Order</span>
+
+          <div className="w-32">
+            <SelectComp
+              data={defaultArray(ORDER_STATUS_OPTIONS)}
+              onChangeValue={(v) => setStatus(v)}
+              value={statusOrder}
+              title="Status"
+              fullWidth
+            />
+          </div>
+        </HStack>
 
         <Show when={isSuccess && !orderList?.length}>
           <BookNoData emptyText="No order" className="py-20" />
