@@ -30,7 +30,7 @@ const CreatePostDialog: FCC<Props> = ({ children, refetch }) => {
   const postImg = usePostStore.use.postImg();
   const setPostImg = usePostStore.use.setPostImg();
 
-  const { url } = useUploadPostImg();
+  const { url, isLoading } = useUploadPostImg();
   const form = useForm<HandlePostType>({
     resolver: zodResolver(handlePostSchema),
     defaultValues: {
@@ -97,7 +97,9 @@ const CreatePostDialog: FCC<Props> = ({ children, refetch }) => {
               Close
             </Button>
 
-            <Button type="submit">Create</Button>
+            <Button type="submit" loading={isLoading} disabled={isLoading}>
+              Create
+            </Button>
           </AlertDialogFooter>
         </FormWrapper>
       </DialogContent>

@@ -32,7 +32,7 @@ const EditPostDialog: FCC<Props> = ({ children, refetch, postId }) => {
   const setIsEdit = usePostStore.use.setIsEdit();
   const postImg = usePostStore.use.postImg();
   const setPostImg = usePostStore.use.setPostImg();
-  const { url } = useUploadPostImg();
+  const { url, isLoading } = useUploadPostImg();
 
   const { data, isSuccess } = useGetPostByIdQuery({
     variables: {
@@ -123,7 +123,9 @@ const EditPostDialog: FCC<Props> = ({ children, refetch, postId }) => {
               Close
             </Button>
 
-            <Button type="submit">Save</Button>
+            <Button type="submit" loading={isLoading} disabled={isLoading}>
+              Save
+            </Button>
           </AlertDialogFooter>
         </FormWrapper>
       </DialogContent>
