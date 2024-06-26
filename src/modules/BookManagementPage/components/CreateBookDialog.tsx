@@ -100,6 +100,18 @@ const CreateBookDialog: FCC<Props> = ({ children, refetch }) => {
     }
   };
 
+  React.useEffect(() => {
+    if (!isCreate) {
+      form.reset({
+        title: '',
+        description: '',
+        price: 0,
+        discount: 0,
+        stock: 0,
+      });
+    }
+  }, [form, isCreate]);
+
   return (
     <Dialog open={isCreate && !bookEditId} onOpenChange={handleCloseDialog}>
       <DialogTrigger asChild>{children}</DialogTrigger>
