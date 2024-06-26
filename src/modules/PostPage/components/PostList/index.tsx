@@ -13,6 +13,14 @@ import PostApprovedItem from './PostApprovedItem';
 const PostList = () => {
   const { postList, paging, onPageChange, refetch, handleSearchChange } = useGetAllPost(4, 'true');
 
+  React.useEffect(() => {
+    refetch();
+
+    return () => {
+      refetch();
+    };
+  }, [refetch]);
+
   return (
     <VStack className="col-span-2">
       <CreatePostDialog refetch={refetch} />

@@ -45,6 +45,19 @@ const PostDetailPage = () => {
     }
   }, [isError, router]);
 
+  const handleRefetchData = React.useCallback(() => {
+    refetch();
+    refetchComment();
+  }, [refetch, refetchComment]);
+
+  React.useEffect(() => {
+    handleRefetchData();
+
+    return () => {
+      handleRefetchData();
+    };
+  }, [handleRefetchData]);
+
   return (
     <div className="container py-8 space-y-10">
       <EditPostDialog postId={String(data?.id)} refetch={refetch} />
