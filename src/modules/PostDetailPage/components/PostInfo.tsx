@@ -52,9 +52,11 @@ const PostInfo: React.FC<Props> = ({ data, refetch }) => {
     <VStack className="w-full">
       <span className="text-2xl font-semibold">{data?.title}</span>
       <span className="whitespace-pre-wrap text-sm font-medium">{data?.description}</span>
-      <div className="relative w-full h-[35rem]">
-        <Image src={image} alt={'post-banner'} fill unoptimized priority />
-      </div>
+      {image && (
+        <div className="relative w-full h-[35rem]">
+          <Image src={image} alt={'post-banner'} fill unoptimized priority />
+        </div>
+      )}
       <HStack noWrap className="w-full">
         <HStack noWrap align={'center'} pos={'apart'} className="w-full">
           <HStack noWrap spacing={12}>
