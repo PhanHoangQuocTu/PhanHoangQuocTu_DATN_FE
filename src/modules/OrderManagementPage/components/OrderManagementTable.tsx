@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/table';
 import { Tooltip } from '@/components/ui/tooltip';
 import { HStack, Show, VStack } from '@/components/ui/Utilities';
-import { currentNo, prettyNumber, roundNumber } from '@/lib/common';
+import { currentNo, onMutateError, prettyNumber, roundNumber } from '@/lib/common';
 import { cn } from '@/lib/utils';
 import { PAYMENT_METHOD_OPTIONS } from '@/modules/CheckoutPage/types/const';
 import { ORDER_STATUS_VALUE, PAYMENT_STATUS_VALUE } from '@/modules/MyOrderPage/types/const';
@@ -53,6 +53,7 @@ const OrderManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPage
       refetch();
       toast.success('Update status order successfully!');
     },
+    onError: onMutateError,
   });
 
   const handleUpdateStatus = (id: number, status: string) => {
@@ -89,13 +90,13 @@ const OrderManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPage
               <TableHead className="whitespace-nowrap">Name</TableHead>
               <TableHead className="whitespace-nowrap">Phone Number</TableHead>
               <TableHead className="whitespace-nowrap text-left">Address</TableHead>
+              <TableHead className="whitespace-nowrap text-center">Status</TableHead>
               <TableHead className="whitespace-nowrap text-left">Payment Method</TableHead>
               <TableHead className="whitespace-nowrap text-center">Payment Status</TableHead>
               <TableHead className="whitespace-nowrap text-center">Order At</TableHead>
               <TableHead className="whitespace-nowrap text-center">Order By Email</TableHead>
               <TableHead className="whitespace-nowrap text-center">Order By Phone Number</TableHead>
               <TableHead className="whitespace-nowrap text-right">Order Price</TableHead>
-              <TableHead className="whitespace-nowrap text-center">Status</TableHead>
               <TableHead className="sticky right-0 text-center">Action</TableHead>
             </TableRow>
           </TableHeader>
@@ -152,6 +153,12 @@ const OrderManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPage
 
                     <TableCell className="whitespace-nowrap text-left">{order?.shippingAddress?.address}</TableCell>
 
+                    <TableCell className="whitespace-nowrap text-center">
+                      <Badge variant={orderStatus()}>
+                        <span className="first-letter:uppercase">{statusLabel}</span>
+                      </Badge>
+                    </TableCell>
+
                     <TableCell className="whitespace-nowrap text-left">{paymentMethod()}</TableCell>
 
                     <TableCell className="whitespace-nowrap text-center">
@@ -167,13 +174,9 @@ const OrderManagementTable: React.FC<Props> = ({ data, paging, isLoading, onPage
                     <TableCell className="whitespace-nowrap text-center">{order?.user?.email}</TableCell>
 
                     <TableCell className="whitespace-nowrap text-center">{order?.user?.phoneNumber}</TableCell>
+
                     <TableCell className="whitespace-nowrap text-right">
                       {prettyNumber(roundNumber(String(totalPrice())))} đ
-                    </TableCell>
-                    <TableCell className="whitespace-nowrap text-center">
-                      <Badge variant={orderStatus()}>
-                        <span className="first-letter:uppercase">{statusLabel}</span>
-                      </Badge>
                     </TableCell>
 
                     <TableCell className="sticky right-0 whitespace-nowrap text-center">

@@ -6,8 +6,10 @@ import { type SubmitHandler, useForm } from 'react-hook-form';
 
 import { deleteCartItemRequest, type ICartProductByCurrentUser, updateCartRequest } from '@/api/cart';
 import { Icons } from '@/assets/icons';
+import { Button } from '@/components/ui/button';
 import { FormWrapper } from '@/components/ui/form';
 import { NumberField } from '@/components/ui/FormField/NumberField';
+import { Tooltip } from '@/components/ui/tooltip';
 import { HStack, VStack } from '@/components/ui/Utilities';
 import { useGetCart } from '@/hooks/cart/useGetCart';
 import { prettyNumber, roundNumber } from '@/lib/common';
@@ -74,8 +76,15 @@ const CartItem: React.FC<Props> = ({ book, quantity, id }) => {
       },
     });
   };
+
+  const handleDelete = () => {
+    deleteCartItem({
+      cartItemId: id,
+    });
+  };
+
   return (
-    <FormWrapper form={form} onSubmit={handleSubmit}>
+    <FormWrapper form={form} onSubmit={handleSubmit} className="group">
       <HStack spacing={20} noWrap className="bg-[#f9f9f9] py-3 min-h-40 px-4 rounded-md" align={'default'}>
         <div className="relative w-40 min-h-full shrink-0 rounded-md overflow-hidden">
           <Image src={bookImage} alt={bookName} fill unoptimized priority={true} />
@@ -123,6 +132,17 @@ const CartItem: React.FC<Props> = ({ book, quantity, id }) => {
                 </HStack>
               }
             />
+
+            <Tooltip label="Delete">
+              <Button
+                size={'xs'}
+                onClick={handleDelete}
+                className="group-hover:opacity-100 opacity-0 duration-150 transition-all ease-linear self-end"
+                variant={'destructive'}
+              >
+                <Icons.x />
+              </Button>
+            </Tooltip>
           </HStack>
         </VStack>
       </HStack>
