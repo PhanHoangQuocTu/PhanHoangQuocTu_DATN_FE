@@ -61,7 +61,7 @@ const CommentItem = ({ data, refetch }: { data: IComment; refetch: () => void })
           </Show>
         </HStack>
 
-        <span className="text-base">{data?.content}</span>
+        <span className="text-base whitespace-pre-wrap">{data?.content}</span>
       </VStack>
     </HStack>
   );
