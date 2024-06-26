@@ -9,7 +9,15 @@ import { useGetAllPostByMe } from '@/hooks/post/useGetAllPostByMe';
 import BookNoData from '@/modules/BooksPage/components/BookNoData';
 
 const MyPost = () => {
-  const { postList, paging, onPageChange, isSuccess } = useGetAllPostByMe(3);
+  const { postList, paging, onPageChange, isSuccess, refetch } = useGetAllPostByMe(3);
+
+  React.useEffect(() => {
+    refetch();
+
+    return () => {
+      refetch();
+    };
+  }, [refetch]);
 
   return (
     <TransitionLayout>
