@@ -19,7 +19,7 @@ interface Props {
 
 const BooksPageList: React.FC<Props> = ({ data, paging, isLoading, onPageChange }) => {
   return (
-    <HStack className="col-span-5">
+    <HStack spacing={16} className="col-span-5">
       <Show when={isLoading}>
         <BookListSkeleton totalIems={LIMIT_BOOK_LIST} />
       </Show>

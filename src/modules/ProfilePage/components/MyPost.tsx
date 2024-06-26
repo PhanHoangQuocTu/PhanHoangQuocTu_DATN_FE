@@ -21,7 +21,7 @@ const MyPost = () => {
 
   return (
     <TransitionLayout>
-      <ShadowContainer>
+      <ShadowContainer className="space-y-5">
         <Show when={!postList?.length && isSuccess}>
           <BookNoData emptyText={'No Blog'} className="py-20" />
         </Show>
